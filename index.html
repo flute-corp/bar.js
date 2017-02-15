@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="theme-color" content="#1565c0">
+
+    <title>Bar manager</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="lib/materialize/css/materialize.min.css" rel="stylesheet">
+    <link href="lib/materialize/css/material-icon.css" rel="stylesheet">
+    
+    <link href="src/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="navbar-fixed">
+  <nav class="blue darken-3">
+    <div class="nav-wrapper">
+      <a href="#!" class="left brand-logo"><i class="material-icons">&#xE544;</i><span class="hide-on-small-only">Bar</span></a>
+      
+      <div class="container">
+		<div class="row">
+			  <div class="input-field col offset-l10 offset-m8 m3 offset-s2  s7">
+				  <input type="number" placeholder="Cartes ?" required="" value="2" class="blue darken-2" id="nbCarte">
+				  <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>
+			  </div>
+			  <a class="btn-floating btn-large halfway-fab waves-effect waves-light blue" id="diviser">
+				<i class="material-icons">&#xE8EC;</i>
+			  </a>
+		  </div>
+	  </div>
+    </div>
+  </nav>
+</div>
+	<div class="container-fluid" >
+		<div class="row">
+			<form id="contentWrapper"></form>
+		</div>
+	</div>
+
+
+<script src="lib/jquery/jquery.js"></script>
+<script src="lib/materialize/js/materialize.min.js"></script>
+<script src="lib/o876/o2.js"></script>
+<script src="src/js/materializer.js"></script>
+
+<script src="src/js/main.js"></script>
+</body>
+</html>

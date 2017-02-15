@@ -1,0 +1,122 @@
+/**********************
+        Général
+***********************/
+#contentWrapper {
+	margin : 30px 0;
+}
+@keyframes highlight {
+    from    { background: #fff}
+    to      { background: #ffa726}
+}
+.aHighlight {
+    animation : highlight 1s ease-in-out infinite alternate;
+}
+
+.floatingArea {
+    position: absolute;
+    height: 40px !important;
+    right: 0px;
+    bottom: 0px;
+    transform: translateY(50%);
+    padding: 0 10px;
+    margin: auto;
+    width: 100%;
+    min-width: 140px;
+    text-align: right;
+}
+.floatingArea input[type="text"], .floatingArea input[type="number"]{
+    margin: 0 -20px;
+    width: 80px;
+    height: 39px;
+    background: rgba(255, 255, 255, 0.75);
+    text-align: center;
+    -moz-appearance:textfield;
+    -webkit-appearance: none;
+}
+.floatingArea .btn-floating {
+    margin-top: -1px;
+}
+
+/************************
+    Material
+*************************/
+body > .container-fluid {
+    transition: all 400ms;
+}
+.collapsible-body {
+	padding: 0;
+}
+nav {
+    height: auto;
+}
+nav .input-field.col {
+    top: 10px;
+    height: 44px;
+}
+nav .input-field.col label, .input-field.col i {
+    top: -10px !important;
+}
+nav ul.right > li {
+    height: 64px;
+}
+
+.tabs .indicator {
+	background: #1565c0;
+}
+.tabs .tab a:hover, .tabs .tab a.active {
+    color: #1565c0;
+}
+.tabs .tab a {
+    color: rgba(21, 101, 192, 0.7);
+}
+
+.input-field input[type="number"] {
+    display: block;
+    line-height: inherit;
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+}
+
+.input-field input[type="number"] + label {
+    left: 1rem;
+}
+
+.nav-wrapper .dropdown-button i {
+    float: left;
+}
+.nav-wrapper .row {
+    height: 64px;
+    margin-bottom: 0;
+}
+.backdrop {
+  border-radius: 0 0 50% 50%;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+form .input-field {
+    min-height: 61px;
+}
+
+.collapsible-header .btn-floating i {
+    width: inherit;
+}
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 64px;
+    line-height: 64px;
+}
+    /*.side-nav li {*/
+    /*line-height:43px;*/
+/*}*/
+/*.side-nav a {*/
+    /*line-height:43px;*/
+    /*height: 43px;*/
+/*}*/
+input.invalid + label:after {
+    transition-property : all;
+    transition-duration : .2s;
+    font-size: 0.8rem;
+}
+input.invalid + label:not(.active):after {
+    transition-property : none;
+    margin-top : -2em;
+}
