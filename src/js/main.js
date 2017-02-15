@@ -1,17 +1,31 @@
 (function($) {
-	var aCategorie = [
-		{"label":"Soft","icon":"&#xEB41;"},
-		{"label":"Binouze","icon":"&#xE544;"},
-		{"label":"Miam-miam","icon":"&#xE552;"}
-	];
-	var aArticles = [
-		{"id":0,"cat":0,"label":"Coca-cola", "desc":"Attention aux bulles !", "prix":1,"img":"coca.jpg"},
-		{"id":1,"cat":0,"label":"Jus d'orange","desc":"Quand c'est trop c'est tropico","prix":1},
-		{"id":2,"cat":0,"label":"Perrier","desc":"Un sirop dedans ?","prix":1},
-		{"id":3,"cat":2,"label":"Chips","desc":"Le roi de la pomme de terre","prix":2},
-		{"id":4,"cat":2,"label":"Saucisson","desc":"Préciser \"Hallal\" si possible","prix":1.9},
-		{"id":5,"cat":1,"label":"Grim bouteille","desc":"La bière des hommes", "prix":1.5}
-	];
+	var idCat = 0, idArt = 0;
+	var aCategorie = [];
+	var aArticles = [];
+
+    /**
+	 * La base de donnée se trouve dans database.js
+     */
+	bar.database.forEach(function(c) {
+		var oCat = {label: c.label, icon: c.icon};
+		if (!Array.isArray(c.articles)) {
+			alert('Erreur base de données : la liste d\'article de "' + oCat.label + '" n\'est pas vraiment de type Array.');
+		}
+		c.articles.forEach(function(a) {
+			aArticles.push({
+				id: idArt++,
+				cat: idCat,
+				label: a.label,
+				desc: a.desc,
+				prix: a.prix,
+				img: a.img
+			});
+		});
+		++idCat;
+		aCategorie.push(oCat);
+    });
+
+
 	
 	O2.createClass('bar.Commande', {
 		id : null,
@@ -132,7 +146,7 @@
                                     '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="card-content">' +
+                            '<div class="card-content not-too-large">' +
                                 '<span class="card-title black-text">'+ oArt.label +'</span>' +
                                 '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
                             '</div>' +

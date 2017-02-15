@@ -120,3 +120,22 @@ input.invalid + label:not(.active):after {
     transition-property : none;
     margin-top : -2em;
 }
+
+
+
+/*
+Un contenu pas trop grand et surtout la même taille pour toutes les cartes
+ */
+.card-content.not-too-large > p {
+    height: 4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-overflow-ellipsis: "...";
+}
+
+.card-content.not-too-large > span.card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-overflow-ellipsis: "...";
+}
