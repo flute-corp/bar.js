@@ -139,17 +139,22 @@
 				$el = $('<div class="col s6 m3 artCard">' +
                         '<div class="card">' +
                             '<div class="card-image">' +
-                                '<img src="src/img/'+ ( oArt.img || '404.jpg') +'">' +
+                                '<img class="activator" src="src/img/'+ ( oArt.img || '404.jpg') +'">' +
                                 '<div class="floatingArea">' +
                                     '<a class="btn-floating waves-effect waves-light orange"><i class="material-icons">&#xE15B;</i></a>' +
-                                    '<input type="number" name="'+ oArt.id +'" value="0"/>' +
+                                    '<input type="number" name="'+ oArt.id +'" min="0" value="0"/>' +
                                     '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
                                 '</div>' +
                             '</div>' +
+                            
                             '<div class="card-content not-too-large">' +
-                                '<span class="card-title black-text">'+ oArt.label +'</span>' +
-                                '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
+                                '<span class="card-title activator black-text truncate">'+ oArt.label +'</span>' +
+                                '<p>'+ oArt.prix +'€<i class="material-icons activator right">more_vert</i></p>' +
                             '</div>' +
+                            '<div class="card-reveal">' +
+							  '<span class="card-title grey-text text-darken-4">'+ oArt.label +'<i class="material-icons right">close</i></span>' +
+							  '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
+							'</div>' +
                         '</div>' +
                     '</div>')
                     .appendTo($aCat[oArt.cat]);
@@ -162,7 +167,10 @@
                         if ($this.hasClass('add')) {
                             $input.val(+$input.val() + 1);
                         } else {
-                            $input.val(+$input.val() - 1);
+							var val = +$input.val() - 1;
+							if (val >= 0) {
+								$input.val(+$input.val() - 1);
+							}
                         }
                     });
 			$accordion.collapsible();
@@ -193,7 +201,7 @@
 			return aTab;
 		},
 		showFacture : function(oCommande, nbCarte) {
-			var $modalContent = $('<div class="col s12">');
+			var $modalContent = $('<div class="col s12 fixed-tabs-wrapper">');
 			if (oCommande.getPrix() != 0) {
 				var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 				
@@ -228,21 +236,22 @@
 					var aCommande = self.$contentWrapper.serializeArray();
 					var mapping = [];
 					for (var o of aCommande) {
+						if (!o.value || o.value < 0) {
+							o.value = 0;
+						}
 						mapping[+o.name] = +o.value;
 					}
 					var oCommande = new bar.Commande(mapping);
 					oView.showFacture(oCommande, val);
 				});
+			$(document).on('click', 'input[type=number]', function(e) {
+				this.select();
+			});
 		}
 	});
-	
 	
 	$(function() {
 		var app = new bar.App();
 	});
-	//var com = new bar.Commande(aCommande);
-	//console.log(com.getCommande());
-	//var double = com.auPlusEquitable(2);
-	//console.log(com.getPrix(), double, double[0].getPrix(), double[1].getPrix());
-	//console.log(algo.auPlusEquitable(2));
+	
 })(jQuery);

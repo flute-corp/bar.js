@@ -12,6 +12,9 @@
     animation : highlight 1s ease-in-out infinite alternate;
 }
 
+/**********************
+     Custom input type number
+***********************/
 .floatingArea {
     position: absolute;
     height: 40px !important;
@@ -43,9 +46,8 @@
 body > .container-fluid {
     transition: all 400ms;
 }
-.collapsible-body {
-	padding: 0;
-}
+
+/* NavBar */
 nav {
     height: auto;
 }
@@ -60,6 +62,29 @@ nav ul.right > li {
     height: 64px;
 }
 
+.nav-wrapper .dropdown-button i {
+    float: left;
+}
+.nav-wrapper .row {
+    height: 64px;
+    margin-bottom: 0;
+}
+
+.input-field input[type="number"] {
+    display: block;
+    line-height: inherit;
+    padding-left: 4rem;
+    width: calc(100% - 4rem);
+}
+nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
+    height: 64px;
+    line-height: 64px;
+}
+.input-field input[type="number"] + label {
+    left: 1rem;
+}
+
+/* Tabs */
 .tabs .indicator {
 	background: #1565c0;
 }
@@ -70,72 +95,30 @@ nav ul.right > li {
     color: rgba(21, 101, 192, 0.7);
 }
 
-.input-field input[type="number"] {
-    display: block;
-    line-height: inherit;
-    padding-left: 4rem;
-    width: calc(100% - 4rem);
-}
-
-.input-field input[type="number"] + label {
-    left: 1rem;
-}
-
-.nav-wrapper .dropdown-button i {
-    float: left;
-}
-.nav-wrapper .row {
-    height: 64px;
-    margin-bottom: 0;
-}
-.backdrop {
-  border-radius: 0 0 50% 50%;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
-}
-form .input-field {
-    min-height: 61px;
-}
-
-.collapsible-header .btn-floating i {
-    width: inherit;
-}
-nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
-    height: 64px;
-    line-height: 64px;
-}
-    /*.side-nav li {*/
-    /*line-height:43px;*/
-/*}*/
-/*.side-nav a {*/
-    /*line-height:43px;*/
-    /*height: 43px;*/
-/*}*/
 input.invalid + label:after {
     transition-property : all;
     transition-duration : .2s;
     font-size: 0.8rem;
 }
+
 input.invalid + label:not(.active):after {
     transition-property : none;
     margin-top : -2em;
 }
 
-
-
-/*
-Un contenu pas trop grand et surtout la même taille pour toutes les cartes
- */
-.card-content.not-too-large > p {
-    height: 4em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-overflow-ellipsis: "...";
+.activator {
+	cursor: pointer;
 }
 
-.card-content.not-too-large > span.card-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-overflow-ellipsis: "...";
+/*
+ * Modal fixed header
+ */
+.modal .fixed-tabs-wrapper {
+	padding-top: 10px;
+}
+.modal .fixed-tabs-wrapper .tabs {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 }
