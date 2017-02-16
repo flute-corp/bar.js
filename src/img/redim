@@ -1,2 +1,0 @@
-#!/bin/sh
-mogrify -resize 400x300 -gravity center -background white -extent 400x300 *.jpg
