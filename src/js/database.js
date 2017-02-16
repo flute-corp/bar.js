@@ -20,57 +20,57 @@ O2.createObject('bar.database', [
             label: "Coca zero",
             desc: "Les bulles sont sans sucre !",
             prix: 1,
-            // img: "coca.jpg"
+            img: "coca-zero.jpg"
         }, {
             label: "Jus d'orange",
             desc: "Quand c'est trop c'est tropico.",
             prix: 1,
-            img: "jus-d-orange.jpg"
+            img: "jus-orange.jpg"
         }, {
             label: "Jus de pomme",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "C'est trognon comme boisson.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-pomme.jpg"
         }, {
             label: "Jus d'abricot",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "Sans noyau.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-abricot.jpg"
         }, {
             label: "Jus d'ananas",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "Les ananas de la belle...",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-ananas.jpg"
         }, {
             label: "Jus de pamplemousse",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "Meilleur avec du vin blanc.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-pamplemousse.jpg"
         }, {
             label: "Jus de tomate",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "La tomate est un fruit, c'est un fait.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-tomate.jpg"
         }, {
             label: "Jus de fraise",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "La boisson de charlotte.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "jus-fraise.jpg"
         }, {
             label: "Orangina",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "Secouez, sinon la pulpe, elle reste en bas.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "orangina.jpg"
         }, {
             label: "Schweppes agrum",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "What did you expect.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "schweppes-agrum.jpg"
         }, {
             label: "Limonade",
-            //desc: "Quand c'est trop c'est tropico.",
+            desc: "Bulle + citron + eau.",
             prix: 1,
-            //img: "jus-d-orange.jpg"
+            img: "limonade.jpg"
         }, {
             label: "Perrier",
             desc: "Un sirop dedans ?",
@@ -78,14 +78,19 @@ O2.createObject('bar.database', [
             img: "perrier.jpg"
         }, {
             label: "Evian",
-            //desc: "Attention aux bulles !",
+            desc: "(De quel massif montagneux ca vient çà déjà ?)",
             prix: 1,
-            //img: "coca.jpg"
+            img: "evian.jpg"
         }, {
             label: "Cristaline",
-            //desc: "Attention aux bulles !",
+            desc: "C'est clair",
             prix: 0.5,
-            //img: "coca.jpg"
+            img: "cristaline.jpg"
+        }, {
+            label: "la Seinoise",
+            desc: "Riche en urinium, et en oligo-excréments.",
+            prix: 0.5,
+            img: "seinoise.jpg"
         }]
     }, {
         label: "Binouzes",
