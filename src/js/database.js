@@ -225,26 +225,27 @@ O2.createObject('bar.database', [
             label: "Double Espresso",
             desc: "Que j'aime ta couleur...",
             prix: 1,
-            //img: "espresso.jpg"
+            img: "doubleEspresso.jpg"
         }, {
             label: "Décaféiné",
             desc: "C'est pas du café en gros ?",
             prix: 0.5,
-            //img: "espresso.jpg"
+            img: "decafeine.jpg"
         }, {
             label: "Chocolat",
             desc: "Le meilleurs c'est choky !",
             prix: 0.5,
-            //img: "espresso.jpg"
+            img: "chocolat.jpg"
         }, {
             label: "Capuccino",
             desc: "À l'italienne",
             prix: 0.5,
-            //img: "espresso.jpg"
+            img: "capuccino.jpg"
         }, {
 			label: "Thé",
 			desc: "Tea time",
-			prix: 0.5
+			prix: 0.5,
+			img: "the.jpg"
 		}]
     }
 ]);
