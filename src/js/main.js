@@ -160,11 +160,12 @@
 			for (var art = itArticle.next(); !art.done; art = itArticle.next()) {
 				while (art.value.qt) {
 					if ( (token.getPrix() + art.value.prix) > prixMoyen ) { // Si le prix est dépassé on break et on passe au suivant
-						token = _aCommandes.reduce(bar.reduce.byMethod('getPrix'));
+						break;
 					}
 					token.add(art.value.id, 1);
 					art.value.qt--;
 				}
+				token = _aCommandes.reduce(bar.reduce.byMethod('getPrix')); // Bascule sur une commande moins chargée avant de poursuivre
 			}
 			
 			this._tokenRing(aCommande, _aCommandes);
