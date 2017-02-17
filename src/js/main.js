@@ -3,6 +3,7 @@
 	var aCategorie = [];
 	var aArticles = [];
 
+	
     /**
 	 * La base de donnée se trouve dans database.js
      */
@@ -26,6 +27,26 @@
     });
 
 
+	O2.createObject('bar.reduce', {
+		byMethod : function(mth) {
+			return function(a, b) {
+				return a[mth]() <= b[mth]() ? a : b;
+			}
+		}
+	});
+	
+	O2.createObject('bar.sort', {
+		byKey : function(k) {
+			return function(a, b) {
+				if (a[k] > b[k])
+					return -1;
+				if (a[k] < b[k])
+					return 1;
+				// a doit être égal à b
+				return 0;
+			}
+		}
+	});
 	
 	O2.createClass('bar.Commande', {
 		id : null,
@@ -84,9 +105,7 @@
 			for (var el of aCommande) {
 				if (el) {
 					for (var i = 0; i < el.qt; i++) {
-						token = _aCommandes.reduce(function(a, b) {
-							return a.getPrix() < b.getPrix() ? a : b;
-						});
+						token = _aCommandes.reduce(bar.reduce.byMethod('getPrix'));
 						token.add(el.id, 1);
 					}
 				}
@@ -102,14 +121,7 @@
 			// Calcul
 			var aCommande = this.getCommande();
 			// Tri par prix
-			aCommande = aCommande.sort(function(a, b) {
-				  if (a.prix > b.prix)
-					 return -1;
-				  if (a.prix < b.prix)
-					 return 1;
-				  // a doit être égal à b
-				  return 0;
-			});
+			aCommande = aCommande.sort(bar.sort.byKey('prix'));
 			this._tokenRing(aCommande, _aCommandes);
 			return _aCommandes;
 		},
@@ -130,40 +142,28 @@
 				return +a.qt;
 			});
 			// Tri par quantité
-			aCommande = aCommande.sort(function(a, b) {
-				  if (a.qt > b.qt)
-					 return -1;
-				  if (a.qt < b.qt)
-					 return 1;
-				  // a doit être égal à b
-				  return 0;
-			});
+			aCommande = aCommande.sort(bar.sort.byKey('qt'));
 			// Itérateur éternel d'array
 			function* arrayIterator(a) {
 				yield* a;
 			}
 			// Itérateur yoyo d'array
-			function* yoyoIterator(a) {
-				yield* a;
-				if (!a.length) return;
-				yield* yoyoIterator(a.reverse());
-			}
+			//function* yoyoIterator(a) {
+			//	yield* a;
+			//	if (!a.length) return;
+			//	yield* yoyoIterator(a.reverse());
+			//}
 			var itArticle = arrayIterator(aCommande);
-			var itCommande = yoyoIterator(_aCommandes);
-			var token = itCommande.next();
+			//var itCommande = yoyoIterator(_aCommandes);
+			var token = _aCommandes.reduce(bar.reduce.byMethod('getPrix'));
 			var i = 0;
 			for (var art = itArticle.next(); !art.done; art = itArticle.next()) {
 				while (art.value.qt) {
-					if ( (token.value.getPrix() + art.value.prix) > prixMoyen ) { // Si le prix est dépassé on break et on passe au suivant
-						token = itCommande.next();
-						break;
+					if ( (token.getPrix() + art.value.prix) > prixMoyen ) { // Si le prix est dépassé on break et on passe au suivant
+						token = _aCommandes.reduce(bar.reduce.byMethod('getPrix'));
 					}
-					token.value.add(art.value.id, 1);
+					token.add(art.value.id, 1);
 					art.value.qt--;
-					if (token.value.getPrix() == prixMoyen) { // Cas du prix parfait : on touche plus !
-						token = itCommande.next();
-						break;
-					}
 				}
 			}
 			
