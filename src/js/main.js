@@ -79,19 +79,7 @@
 			}
 			return _aCommandes;
 		},
-		auPlusEquitable : function(nbCarte) {
-			var _aCommandes = this._initDivision(nbCarte);
-			// Calcul
-			var prix = this.getPrix();
-			var aCommande = this.getCommande();
-			aCommande = aCommande.sort(function(a, b) {
-				  if (a.prix > b.prix)
-					 return -1;
-				  if (a.prix < b.prix)
-					 return 1;
-				  // a doit être égal à b
-				  return 0;
-			});
+		_tokenRing : function(aCommande, _aCommandes) {
 			var token;
 			for (var el of aCommande) {
 				if (el) {
@@ -105,8 +93,83 @@
 			}
 			return _aCommandes;
 		},
+		/** Algo 1 :
+		 * 1 / Tri décroissant des articles par prix
+		 * 2 / Distribution récursive sur la carte la moins chargée
+		 */ 
+		auPlusEquitable : function(nbCarte) {
+			var _aCommandes = this._initDivision(nbCarte);
+			// Calcul
+			var aCommande = this.getCommande();
+			// Tri par prix
+			aCommande = aCommande.sort(function(a, b) {
+				  if (a.prix > b.prix)
+					 return -1;
+				  if (a.prix < b.prix)
+					 return 1;
+				  // a doit être égal à b
+				  return 0;
+			});
+			this._tokenRing(aCommande, _aCommandes);
+			return _aCommandes;
+		},
+		/** Algo 2 :
+		 * 1/ Calcul du prix moyen après division sur les cartes
+		 * 2/ Répartition d'un groupe d'article sur une carte au plus proche de la moyenne
+		 * 3/ Répartition des articles restants
+		 */
 		auPlusSimple : function(nbCarte) {
+			var _aCommandes = this._initDivision(nbCarte);
+			// Calcul
+			var prix = this.getPrix();
+			var prixMoyen = prix / nbCarte;
 			
+			var aCommande = this.getCommande();
+			// Suppression des articles qt vide
+			aCommande = aCommande.filter(function(a) {
+				return +a.qt;
+			});
+			// Tri par quantité
+			aCommande = aCommande.sort(function(a, b) {
+				  if (a.qt > b.qt)
+					 return -1;
+				  if (a.qt < b.qt)
+					 return 1;
+				  // a doit être égal à b
+				  return 0;
+			});
+			// Itérateur éternel d'array
+			function* arrayIterator(a) {
+				yield* a;
+			}
+			// Itérateur yoyo d'array
+			function* yoyoIterator(a) {
+				yield* a;
+				if (!a.length) return;
+				yield* yoyoIterator(a.reverse());
+			}
+			var itArticle = arrayIterator(aCommande);
+			var itCommande = yoyoIterator(_aCommandes);
+			var token = itCommande.next();
+			var i = 0;
+			for (var art = itArticle.next(); !art.done; art = itArticle.next()) {
+				while (art.value.qt) {
+					if ( (token.value.getPrix() + art.value.prix) > prixMoyen ) { // Si le prix est dépassé on break et on passe au suivant
+						token = itCommande.next();
+						break;
+					}
+					token.value.add(art.value.id, 1);
+					art.value.qt--;
+					if (token.value.getPrix() == prixMoyen) { // Cas du prix parfait : on touche plus !
+						token = itCommande.next();
+						break;
+					}
+				}
+			}
+			
+			this._tokenRing(aCommande, _aCommandes);
+			
+			return _aCommandes;
 		}
 	});
 	
@@ -192,27 +255,29 @@
 			}
 			return oTab;
 		},
-		_getAll$tab : function(oCommande, nbCarte) {
+		_getAll$tab : function(oCommande, nbCarte, algo) {
 			var aTab = [];
 			aTab.push(this._get$tab("S", oCommande));
-			for (var subCommande of oCommande.auPlusEquitable(nbCarte)) {
+			for (var subCommande of oCommande[algo](nbCarte)) {
 				aTab.push(this._get$tab((subCommande.id + 1), subCommande));
 			}
 			return aTab;
 		},
-		showFacture : function(oCommande, nbCarte) {
+		showFacture : function(oCommande, nbCarte, algo) {
+			algo = algo || 'auPlusEquitable';
 			var $modalContent = $('<div class="col s12 fixed-tabs-wrapper">');
 			if (oCommande.getPrix() != 0) {
 				var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 				
-				var all$tab = this._getAll$tab(oCommande, nbCarte);
+				var all$tab = this._getAll$tab(oCommande, nbCarte, algo);
 				
 				for (var oTab of all$tab) {
 					$tabsWrapper.append(oTab.$tab);
 					$modalContent.append(oTab.$content);
 				}
 			} else {
-				$modalContent.append('<h3>Votre commande est vide</h3>');
+				Materialize.toast('Votre commande est vide', 2000);
+				return;
 			}
 			Materializer.createModal({
 				content : $modalContent,
@@ -224,15 +289,18 @@
 	O2.createClass('bar.Ctrl', {
 		$nbCarte : null,
 		$diviser : null,
+		$algoSelector : null,
 		oView : null,
 		__construct : function(oView) {
 			var self = this;
 			this.oView = oView;
 			this.$contentWrapper = $('#contentWrapper');
 			this.$nbCarte = $('#nbCarte');
+			this.$algoSelector = $('#algoSelector');
 			this.$diviser = $('#diviser')
 				.on('click', function() {
 					var val = +self.$nbCarte.val();
+					var algo = self.$algoSelector.val();
 					var aCommande = self.$contentWrapper.serializeArray();
 					var mapping = [];
 					for (var o of aCommande) {
@@ -242,11 +310,12 @@
 						mapping[+o.name] = +o.value;
 					}
 					var oCommande = new bar.Commande(mapping);
-					oView.showFacture(oCommande, val);
+					oView.showFacture(oCommande, val, algo);
 				});
 			$(document).on('click', 'input[type=number]', function(e) {
 				this.select();
 			});
+			$('select').material_select();
 		}
 	});
 	
