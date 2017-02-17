@@ -195,7 +195,7 @@ O2.createObject('bar.database', [
         }, {
             label: "Saucisson",
             desc: "Préciser \"A l'ail\" si possible",
-            prix: 1.9,
+            prix: 2.9,
             img: "saucisson.jpg"
         }, {
             label: "Chorizo",
