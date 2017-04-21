@@ -3,7 +3,7 @@
 ***********************/
 #contentWrapper {
 	margin : 30px 0;
-    min-height: calc(100vh - 287px);
+    min-height: calc(100vh - 272px);
 }
 @keyframes highlight {
     from    { background: #fff}
