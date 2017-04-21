@@ -30,11 +30,11 @@
 <div class="navbar-fixed">
   <nav class="blue darken-3">
     <div class="nav-wrapper">
-      <a href="#!" class="left brand-logo"><i class="material-icons">&#xE540;</i><span class="hide-on-small-only">Bar</span></a>
+      <a href="#!" class="left brand-logo"><img src="./src/img/favicon/bar.svg" alt=""/> <span class="hide-on-small-only">Bar</span></a>
       
       <div class="container">
 		<div class="row">
-			  <div class="input-field col offset-l8 l2 offset-m5 m3 offset-s1 s4">
+			  <div class="input-field col offset-l8 l2 offset-m5 m3 offset-s2 s4">
 				  <input type="number" placeholder="Cartes ?" min="2" max="10" required="" value="2" class="blue darken-2" id="nbCarte">
 				  <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>
 			  </div>
@@ -55,12 +55,38 @@
     </div>
   </nav>
 </div>
-	<div class="container-fluid" >
+<div class="container-fluid" >
+	<div class="row">
+		<form id="contentWrapper"></form>
+	</div>
+</div>
+<footer class="page-footer blue darken-3">
+	<div class="container">
 		<div class="row">
-			<form id="contentWrapper"></form>
+			<div class="col s6">
+				<h5 class="white-text">Contribuez !</h5>
+			</div>
+			<div class="col s6">
+				<a class="btn waves-effect waves-light" target="_blank" href="https://github.com/DaedalusDev/bar.js">GitHub</a>
+			</div>
 		</div>
 	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2017 Flûte corporation
+			<a class="grey-text text-lighten-4 right help" href="#!">Besoin d'aide ?</a>
+		</div>
+	</div>
+</footer>
+<div class="splash center-align"><h1>Bar.js</h1></div>
 
+<!-- Tap Target Structure -->
+<div class="tap-target cyan" data-activates="diviser">
+	<div class="tap-target-content">
+		<h5>Vous avez terminé ?</h5>
+		<p>Choisissez un nombre de carte et cliquez-ici pour afficher l'addition</p>
+	</div>
+</div>
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/materialize/js/materialize.min.js"></script>
 <script src="lib/o876/o2.js"></script>

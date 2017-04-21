@@ -190,7 +190,7 @@
 		showHome : function() {
 			var $el, $aCat = [];
 			this.$contentWrapper.empty();
-			var $accordion = $('<ul class="collapsible" data-collapsible="accordion">')
+			var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
 				.appendTo(this.$contentWrapper);
 			for (var oCat of aCategorie) {
 				$el = $('<div class="collapsible-body col s12">');
@@ -267,6 +267,15 @@
 		showFacture : function(oCommande, nbCarte, algo) {
 			algo = algo || 'auPlusEquitable';
 			var $modalContent = $('<div class="col s12 fixed-tabs-wrapper">');
+            nbCarte = ~~nbCarte;
+			if (!nbCarte) {
+                Materialize.toast('Vous devez au moins avoir une carte', 2000);
+                return;
+			}
+            if (nbCarte < 0) {
+                Materialize.toast('Le bar ne fait pas crédit !', 2000);
+                return;
+            }
 			if (oCommande.getPrix() != 0) {
 				var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 				
@@ -317,6 +326,19 @@
 				this.select();
 			});
 			$('select').material_select();
+			$('.splash').addClass('disappear');
+
+			$('.help').on('click', function(e) {
+				e.preventDefault();
+                self.discover();
+			});
+			if (!localStorage.getItem('discovered')) {
+				this.discover();
+			}
+		},
+		discover: function() {
+            $('.tap-target').tapTarget('open');
+            localStorage.setItem('discovered',1);
 		}
 	});
 	

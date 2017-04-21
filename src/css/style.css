@@ -3,6 +3,7 @@
 ***********************/
 #contentWrapper {
 	margin : 30px 0;
+    min-height: calc(100vh - 287px);
 }
 @keyframes highlight {
     from    { background: #fff}
@@ -10,6 +11,41 @@
 }
 .aHighlight {
     animation : highlight 1s ease-in-out infinite alternate;
+}
+
+.splash {
+    position: fixed;
+    z-index: 9998;
+    top: -100px;
+    left: -100px;
+    bottom: -100px;
+    right: -100px;
+    background:  #FAFAFA url("../img/favicon/bar.svg") no-repeat fixed center/50vh;
+}
+
+@keyframes disappear {
+    0%   { opacity: 1}
+    60%  { opacity: 1}
+    100% { opacity: 0; visibility: hidden;}
+}
+
+.disappear {
+    animation : disappear 1s ease-in forwards;
+    opacity: 1;
+}
+
+.splash h1 {
+    position:absolute;
+    bottom: 20%;
+    text-align: center;
+    z-index: 9999;
+    width: 100%;
+}
+
+.brand-logo img {
+    height: 44px;
+    margin-top: 10px;
+    float: left;
 }
 
 /**********************
