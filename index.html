@@ -10,82 +10,93 @@
     <meta name="author" content="">
     <meta name="theme-color" content="#1565c0">
 
-	<link rel="icon" sizes="192x192" href="src/img/favicon/icons-192x192.png">
-	<link rel="shortcut icon" href="src/img/favicon/icons-72x72.png">
-	<link rel="apple-touch-icon" href="src/img/favicon/icons-72x72.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="src/img/favicon/icons-72x72.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="src/img/favicon/icons-144x144.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="src/img/favicon/icons-180x180.png">
-	
-    <title>Bar manager</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="src/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="src/img/favicon/manifest.json">
+    <link rel="mask-icon" href="src/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="src/img/favicon/favicon.ico">
+    <meta name="msapplication-config" content="src/img/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Bar.js</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="lib/materialize/css/materialize.min.css" rel="stylesheet">
     <link href="lib/materialize/css/material-icon.css" rel="stylesheet">
-    
+
     <link href="src/css/style.css" rel="stylesheet">
 
 </head>
 <body>
 <div class="navbar-fixed">
-  <nav class="blue darken-3">
-    <div class="nav-wrapper">
-      <a href="#!" class="left brand-logo"><img src="./src/img/favicon/bar.svg" alt=""/> <span class="hide-on-small-only">Bar</span></a>
-      
-      <div class="container">
-		<div class="row">
-			  <div class="input-field col offset-l8 l2 offset-m5 m3 offset-s2 s4">
-				  <input type="number" placeholder="Cartes ?" min="2" max="10" required="" value="2" class="blue darken-2" id="nbCarte">
-				  <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>
-			  </div>
-			  <div class="input-field col l2 m3 s4">
-				<select id="algoSelector">
-				  <option value="" disabled>Algo</option>
-				  <option value="auPlusEquitable">Token ring</option>
-				  <option value="auPlusSimple">Grouping</option>
-				</select>
-			  </div>
-			  <a class="btn-floating btn-large halfway-fab waves-effect waves-light blue" id="diviser">
-				<i class="material-icons">receipt</i>
-                  <!-- code précédent : &#xE8EC; -->
-                  <!-- autre code pas mal : "receip, done_all" -->
-			  </a>
-		  </div>
-	  </div>
-    </div>
-  </nav>
+    <nav class="blue darken-3">
+        <div class="nav-wrapper">
+            <a href="#!" class="left brand-logo"><img src="./src/img/favicon/bar.svg" alt=""/> <span
+                    class="hide-on-small-only">Bar</span></a>
+
+            <div class="container">
+                <div class="row">
+                    <div class="input-field col offset-l3 l6 offset-m3 m6 offset-s2 s6">
+                        <input type="number" placeholder="Cartes ?" min="2" max="10" required="" value="2"
+                               class="blue darken-2" id="nbCarte">
+                        <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>
+                    </div>
+                    <!--<div class="input-field col l2 m3 s4">-->
+                    <!--<select id="algoSelector">-->
+                    <!--<option value="" disabled>Algo</option>-->
+                    <!--<option value="auPlusEquitable">Token ring</option>-->
+                    <!--<option value="auPlusSimple">Grouping</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <a class="btn-floating btn-large scale-transition scale-in halfway-fab waves-effect waves-light orange" id="restore">
+                        <i class="material-icons">restore</i>
+                        <!-- code précédent : &#xE8EC; -->
+                        <!-- autre code pas mal : "receip, done_all" -->
+                    </a>
+
+                    <a class="btn-floating scale-transition scale-out halfway-fab waves-light red" id="reset"><i class="material-icons">&#xE928;</i></a>
+                    <a class="btn-floating btn-large scale-transition scale-out halfway-fab waves-effect waves-light blue" id="diviser">
+                        <i class="material-icons">receipt</i>
+                        <!-- code précédent : &#xE8EC; -->
+                        <!-- autre code pas mal : "receip, done_all" -->
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
-<div class="container-fluid" >
-	<div class="row">
-		<form id="contentWrapper"></form>
-	</div>
+<div class="container-fluid">
+    <div class="row">
+        <form id="contentWrapper"></form>
+    </div>
 </div>
 <footer class="page-footer blue darken-3">
-	<div class="container">
-		<div class="row">
-			<div class="col s6">
-				<h5 class="white-text">Contribuez !</h5>
-			</div>
-			<div class="col s6">
-				<a class="btn waves-effect waves-light" target="_blank" href="https://github.com/DaedalusDev/bar.js">GitHub</a>
-			</div>
-		</div>
-	</div>
-	<div class="footer-copyright">
-		<div class="container">
-			© 2017 Flûte corporation
-			<a class="grey-text text-lighten-4 right help" href="#!">Besoin d'aide ?</a>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col s6">
+                <h5 class="white-text">Contribuez !</h5>
+            </div>
+            <div class="col s6">
+                <a class="btn waves-effect waves-light" target="_blank" href="https://github.com/DaedalusDev/bar.js">GitHub</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2017 Flûte corporation
+            <a class="grey-text text-lighten-4 right help" href="#!">Besoin d'aide ?</a>
+        </div>
+    </div>
 </footer>
 <div class="splash center-align"><h1>Bar.js</h1></div>
 
 <!-- Tap Target Structure -->
 <div class="tap-target cyan" data-activates="diviser">
-	<div class="tap-target-content">
-		<h5>Vous avez terminé ?</h5>
-		<p>Choisissez un nombre de carte et cliquez-ici pour afficher l'addition</p>
-	</div>
+    <div class="tap-target-content">
+        <h5>Vous avez terminé ?</h5>
+        <p>Choisissez un nombre de carte et cliquez-ici pour afficher l'addition</p>
+    </div>
 </div>
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/materialize/js/materialize.min.js"></script>

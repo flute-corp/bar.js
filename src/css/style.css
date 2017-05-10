@@ -48,6 +48,19 @@
     float: left;
 }
 
+#reset {
+    right: 94px;
+}
+
+#reset i {
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 40px;
+}
+
 /**********************
      Custom input type number
 ***********************/

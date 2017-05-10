@@ -104,37 +104,37 @@ O2.createObject('bar.database', [
             label: "Grim Rouge",
             desc: "La bière des femmes",
             prix: 1.5,
-            //img: "grimbergen.jpg"
+            img: "grim-rouge.jpg"
         }, {
             label: "1664",
             desc: "Idéal avant de retourner sur le chantier",
             prix: 1.3,
-            //img: "grimbergen.jpg"
+            img: "1664-pression.jpg"
         }, {
             label: "1664 (bouteille)",
             desc: "Idéal avant de retourner sur le chantier",
             prix: 1.5,
-            //img: "grimbergen.jpg"
+            img: "1664.jpg"
         }, {
             label: "Panaché",
             desc: "Servi avec panache !",
             prix: 1.3,
-            //img: "grimbergen.jpg"
+            img: "panache.jpg"
         }, {
             label: "Monaco",
             desc: "Une peu de fruit pour les vitamines !",
             prix: 1.3,
-            //img: "grimbergen.jpg"
+            img: "monaco.jpg"
         }, {
             label: "PCB",
             desc: "Un picon ch'tit biloute !",
             prix: 1.8,
-            //img: "grimbergen.jpg"
+            img: "picon.jpg"
         }, {
             label: "Bière du mois",
             desc: "Selon arrivages",
             prix: 1.5,
-            //img: "grimbergen.jpg"
+            img: "bdm.jpg"
         }]
     }, {
         label: "Boissons alcoolisées",
@@ -143,12 +143,12 @@ O2.createObject('bar.database', [
             label: "Martini",
             desc: "Martini dry... Avec ou sans olives ?",
             prix: 1.5,
-            //img: "grimbergen.jpg"
+            img: "martini.jpg"
         }, {
             label: "Muscat",
             desc: "Une velle robe dorée",
             prix: 1.5,
-            //img: "grimbergen.jpg"
+            img: "muscat.jpg"
         }, {
             label: "Pineau",
             desc: "À commander en charentaises",
