@@ -14,7 +14,7 @@
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($('<div class="col s12">').appendTo(this.$contentWrapper));
             bar.store.categories.forEach(function(oCat) {
-                $el = $('<div class="collapsible-body col s12">');
+                $el = $('<div class="collapsible-body row">');
                 $aCat.push($el);
                 $('<li><div class="collapsible-header"><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
                     .appendTo($accordion)
@@ -229,7 +229,12 @@
             }
             Materializer.createModal({
                 content : $modalContent,
-                type : "modal-fixed-footer"
+                type : "modal-fixed-footer",
+                footer: {
+                    'Fermer' : {
+                        'classe' : 'modal-close'
+                    }
+                }
             });
             $accordion.collapsible();
         },

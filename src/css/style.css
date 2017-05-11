@@ -166,6 +166,12 @@ input.invalid + label:not(.active):after {
 }
 
 /*
+ * Collapsible
+ */
+.collapsible-body.row {
+    padding: 0;
+}
+/*
  * Modal fixed header
  */
 .modal .fixed-tabs-wrapper {
