@@ -64,10 +64,11 @@
         _makeUserAddons : function() {
             if (bar.store.users.length) {
                 var $wrapper = $('<div class="input-field col s12">');
-                var $select = $('<div class="select-wrapper">').appendTo($wrapper).append('<span class="caret">▼</span>')
-                var $input = $('<input class="select-dropdown" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($select);
-                var $ul = $('<ul id="select-user-pref" class="dropdown-content select-dropdown multiple-select-dropdown">').appendTo($select);
-                $ul.append('<li class="optgroup-option disabled"><span><input type="checkbox" disabled><label></label>Choisissez des participants...</span></li>')
+                $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
+                var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
+                var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
+                var $ul = $('<ul id="select-user-pref" class="modal-content dropdown-content">').appendTo($modalWrapper);
+                $ul.append('<li><h4>Modal Header</h4></li>')
                 bar.store.users.forEach(function(oUser, idUser) {
                     $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
                     if (Array.isArray(oUser.pref)) {
@@ -126,8 +127,9 @@
                 $input
                     .on('click', function() {
                         window.location.hash = 'quickBill';
-                    })
-                    .dropdown();
+                    });
+                $modalWrapper.modal();
+                    // .dropdown();
 
                 $(window).on('hashchange', function() {
                     if ($input.hasClass('active') && window.location.hash != '#quickBill') {

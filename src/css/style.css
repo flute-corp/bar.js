@@ -110,7 +110,7 @@ nav .input-field.col {
     top: 10px;
     height: 44px;
 }
-nav .input-field.col label, .input-field.col i {
+nav .input-field.col label {
     top: -10px !important;
 }
 nav ul.right > li {
@@ -182,4 +182,13 @@ input.invalid + label:not(.active):after {
 	top: 0;
 	left: 0;
 	right: 0;
+}
+.modal.bottom-sheet {
+    max-height: 70%;
+}
+.modal .dropdown-content {
+    position: relative;
+    opacity: 1;
+    max-height: none;
+    display: block;
 }

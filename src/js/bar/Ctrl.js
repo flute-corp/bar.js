@@ -20,7 +20,7 @@
                     self.$contentWrapper[0].reset();
                     self.$contentWrapper.trigger('change');
                     var $toast = $('<span>La commande a été vidée </span>');
-                    $('<a>Annuler</a>').appendTo($toast)
+                    $('<a class="">Annuler</a>').appendTo($toast)
                         .on('click', function() {
                             self.$contentWrapper.deserializeObject(holdForm);
                             Vel(
@@ -43,6 +43,7 @@
             this.$restore = $('#restore')
                 .on('click', function() {
                     var oHistory = bar.helper.storage.import();
+                    delete oHistory.tmp;
                     oView.showHistory(oHistory);
                 });
             this.$diviser = $('#diviser')
@@ -70,30 +71,39 @@
                 e.preventDefault();
                 self.discover();
             });
-            if (!localStorage.getItem('bar')) {
-                this.discover();
-            }
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
-                if (!$.isEmptyObject(oForm)) {
-                    self.$diviser.removeClass('scale-out').addClass('scale-in');
-                    self.$reset.removeClass('scale-out').addClass('scale-in');
-
-                    self.$restore.removeClass('scale-in').addClass('scale-out');
-                } else {
+                if ($.isEmptyObject(oForm)) {
                     self.$diviser.removeClass('scale-in').addClass('scale-out');
                     self.$reset.removeClass('scale-in').addClass('scale-out');
 
                     self.$restore.removeClass('scale-out').addClass('scale-in');
+
+                    bar.helper.storage.export({'tmp': null });
+                } else {
+                    self.$diviser.removeClass('scale-out').addClass('scale-in');
+                    self.$reset.removeClass('scale-out').addClass('scale-in');
+
+                    self.$restore.removeClass('scale-in').addClass('scale-out');
+
+                    bar.helper.storage.export({'tmp': oForm });
                 }
-            })
+            });
+
+            var oStorage = bar.helper.storage.import();
+            if (oStorage) {
+                if (oStorage.tmp) {
+                    self.$contentWrapper.deserializeObject(oStorage.tmp);
+                    Materialize.toast('Commande temporaire restaurée', 2000);
+                }
+            } else {
+                this.discover();
+            }
         },
         _serializeForm : function() {
             var oForm = this.$contentWrapper.serializeObject();
             if (oForm.cmd) {
-                oForm.cmd = oForm.cmd.filter(function(val) {
-                    return +val;
-                });
+                oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
                 if (!oForm.cmd.length) {
                     delete oForm.cmd;
                 }

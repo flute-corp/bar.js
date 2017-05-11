@@ -67,14 +67,16 @@
             'import': function() {
                 var oJson = this._getStorage();
                 var oCur;
-                for (var date in oJson) {
-                    if (oJson.hasOwnProperty(date)) {
-                        oCur =  oJson[date];
-                        if (oCur.user) {
-                            oCur.user.forEach(bar.helper.delete.null);
-                        }
-                        if (oCur.cmd) {
-                            oCur.cmd.forEach(bar.helper.delete.empty);
+                if (oJson) {
+                    for (var date in oJson) {
+                        if (oJson.hasOwnProperty(date) && oJson.date) {
+                            oCur = oJson[date];
+                            if (oCur.hasOwnProperty('user')) {
+                                oCur.user.forEach(bar.helper.delete.null);
+                            }
+                            if (oCur.hasOwnProperty('cmd')) {
+                                oCur.cmd.forEach(bar.helper.delete.empty);
+                            }
                         }
                     }
                 }

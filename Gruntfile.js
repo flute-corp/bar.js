@@ -39,7 +39,7 @@ module.exports = function(grunt) {
                 src: './src/img/favicon/bar.svg',
                 dest: './src/img/favicon/',
                 options: {
-                    iconsPath: '/src/img/favicon/',
+                    iconsPath: './src/img/favicon/',
                     html: ['*.html'],
                     design: {
                         ios: {

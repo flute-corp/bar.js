@@ -502,7 +502,7 @@
                     self.$contentWrapper[0].reset();
                     self.$contentWrapper.trigger('change');
                     var $toast = $('<span>La commande a été vidée </span>');
-                    $('<a>Annuler</a>').appendTo($toast)
+                    $('<a class="">Annuler</a>').appendTo($toast)
                         .on('click', function() {
                             self.$contentWrapper.deserializeObject(holdForm);
                             Vel(
@@ -525,6 +525,7 @@
             this.$restore = $('#restore')
                 .on('click', function() {
                     var oHistory = bar.helper.storage.import();
+                    delete oHistory.tmp;
                     oView.showHistory(oHistory);
                 });
             this.$diviser = $('#diviser')
@@ -552,30 +553,39 @@
                 e.preventDefault();
                 self.discover();
             });
-            if (!localStorage.getItem('bar')) {
-                this.discover();
-            }
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
-                if (!$.isEmptyObject(oForm)) {
-                    self.$diviser.removeClass('scale-out').addClass('scale-in');
-                    self.$reset.removeClass('scale-out').addClass('scale-in');
-
-                    self.$restore.removeClass('scale-in').addClass('scale-out');
-                } else {
+                if ($.isEmptyObject(oForm)) {
                     self.$diviser.removeClass('scale-in').addClass('scale-out');
                     self.$reset.removeClass('scale-in').addClass('scale-out');
 
                     self.$restore.removeClass('scale-out').addClass('scale-in');
+
+                    bar.helper.storage.export({'tmp': null });
+                } else {
+                    self.$diviser.removeClass('scale-out').addClass('scale-in');
+                    self.$reset.removeClass('scale-out').addClass('scale-in');
+
+                    self.$restore.removeClass('scale-in').addClass('scale-out');
+
+                    bar.helper.storage.export({'tmp': oForm });
                 }
-            })
+            });
+
+            var oStorage = bar.helper.storage.import();
+            if (oStorage) {
+                if (oStorage.tmp) {
+                    self.$contentWrapper.deserializeObject(oStorage.tmp);
+                    Materialize.toast('Commande temporaire restaurée', 2000);
+                }
+            } else {
+                this.discover();
+            }
         },
         _serializeForm : function() {
             var oForm = this.$contentWrapper.serializeObject();
             if (oForm.cmd) {
-                oForm.cmd = oForm.cmd.filter(function(val) {
-                    return +val;
-                });
+                oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
                 if (!oForm.cmd.length) {
                     delete oForm.cmd;
                 }
@@ -661,14 +671,16 @@
             'import': function() {
                 var oJson = this._getStorage();
                 var oCur;
-                for (var date in oJson) {
-                    if (oJson.hasOwnProperty(date)) {
-                        oCur =  oJson[date];
-                        if (oCur.user) {
-                            oCur.user.forEach(bar.helper.delete.null);
-                        }
-                        if (oCur.cmd) {
-                            oCur.cmd.forEach(bar.helper.delete.empty);
+                if (oJson) {
+                    for (var date in oJson) {
+                        if (oJson.hasOwnProperty(date) && oJson.date) {
+                            oCur = oJson[date];
+                            if (oCur.hasOwnProperty('user')) {
+                                oCur.user.forEach(bar.helper.delete.null);
+                            }
+                            if (oCur.hasOwnProperty('cmd')) {
+                                oCur.cmd.forEach(bar.helper.delete.empty);
+                            }
                         }
                     }
                 }
@@ -747,10 +759,11 @@
         _makeUserAddons : function() {
             if (bar.store.users.length) {
                 var $wrapper = $('<div class="input-field col s12">');
-                var $select = $('<div class="select-wrapper">').appendTo($wrapper).append('<span class="caret">▼</span>')
-                var $input = $('<input class="select-dropdown" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($select);
-                var $ul = $('<ul id="select-user-pref" class="dropdown-content select-dropdown multiple-select-dropdown">').appendTo($select);
-                $ul.append('<li class="optgroup-option disabled"><span><input type="checkbox" disabled><label></label>Choisissez des participants...</span></li>')
+                $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
+                var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
+                var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
+                var $ul = $('<ul id="select-user-pref" class="modal-content dropdown-content">').appendTo($modalWrapper);
+                $ul.append('<li><h4>Modal Header</h4></li>')
                 bar.store.users.forEach(function(oUser, idUser) {
                     $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
                     if (Array.isArray(oUser.pref)) {
@@ -809,8 +822,9 @@
                 $input
                     .on('click', function() {
                         window.location.hash = 'quickBill';
-                    })
-                    .dropdown();
+                    });
+                $modalWrapper.modal();
+                    // .dropdown();
 
                 $(window).on('hashchange', function() {
                     if ($input.hasClass('active') && window.location.hash != '#quickBill') {

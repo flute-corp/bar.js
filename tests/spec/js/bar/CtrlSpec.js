@@ -30,6 +30,7 @@ describe('bar.Ctrl', function() {
                 expect(oCtrl.$reset).toExist();
             });
             it('It reset form', function() {
+                oCtrl.$contentWrapper[0].reset();
                 var expectedForm = oCtrl.$contentWrapper.serializeArray();
                 rdmizeForm();
                 oCtrl.$reset.click();
@@ -37,9 +38,9 @@ describe('bar.Ctrl', function() {
             });
             it('It spawn toast', function() {
                 oCtrl.$reset.click();
-                var $toast = $('.toast')
+                var $toast = $('.toast');
                 expect($toast).toExist();
-                expect($toast.text()).toBe('La commande a été vidée Annuler');
+                expect($toast.last().text()).toBe('La commande a été vidée Annuler');
             });
             it('Le toast dispose de l\'option annuler', function() {
                 rdmizeForm();
