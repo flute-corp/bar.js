@@ -40,6 +40,7 @@
     text-align: center;
     z-index: 9999;
     width: 100%;
+    color: #cdcdcd;
 }
 
 .brand-logo img {
@@ -59,6 +60,11 @@
     color: #fff;
     font-size: 1.6rem;
     line-height: 40px;
+}
+
+.tap-target-wave .scale-transition.scale-in {
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 /**********************

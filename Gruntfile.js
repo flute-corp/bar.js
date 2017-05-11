@@ -1,9 +1,7 @@
 module.exports = function(grunt) {
     var aBarFiles = [
         'src/js/bar/store/*.js',
-        'src/js/bar/**/*.js',
-        '!src/js/bar/main.js',
-        'src/js/bar/main.js'
+        'src/js/bar/**/*.js'
     ];
     var aSpecFiles = [
         'tests/spec/**/*Spec.js'
@@ -42,7 +40,7 @@ module.exports = function(grunt) {
                 dest: './src/img/favicon/',
                 options: {
                     iconsPath: '/src/img/favicon/',
-                    html: ['index.html'],
+                    html: ['*.html'],
                     design: {
                         ios: {
                             pictureAspect: 'backgroundAndMargin',
@@ -113,12 +111,14 @@ module.exports = function(grunt) {
                 options: {
                     vendor: [
                         'lib/jquery/jquery.js',
+                        'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
                         'lib/materialize/js/materialize.min.js',
+                        'src/js/materializer.js',
                         'lib/o876/o2.js'
                     ],
                     styles: 'src/css/style.css',
                     specs: aSpecFiles,
-                    // helpers: 'tests/spec/helper.js',
+                    helpers: 'tests/spec/helper.js',
                     keepRunner : true,
                     //helpers: 'test/spec/*.js'
                 }

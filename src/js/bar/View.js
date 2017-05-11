@@ -12,7 +12,7 @@
             var $el, $aCat = [];
             this._makeUserAddons();
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
-                .appendTo(this.$contentWrapper);
+                .appendTo($('<div class="col s12">').appendTo(this.$contentWrapper));
             bar.store.categories.forEach(function(oCat) {
                 $el = $('<div class="collapsible-body col s12">');
                 $aCat.push($el);
@@ -147,9 +147,11 @@
             var self = this;
             var aTab = [];
             aTab.push(this._get$tab("S", oCommande));
-            oCommande[algo](nbCarte).forEach(function(subCommande) {
-                aTab.push(self._get$tab((subCommande.id + 1), subCommande));
-            });
+            if (nbCarte > 1) {
+                oCommande[algo](nbCarte).forEach(function (subCommande) {
+                    aTab.push(self._get$tab((subCommande.id + 1), subCommande));
+                });
+            }
             return aTab;
         },
         showFacture : function(oCommande, nbCarte, algo) {

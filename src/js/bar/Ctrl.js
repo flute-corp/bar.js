@@ -10,6 +10,7 @@
         oView : null,
         __construct : function(oView) {
             var self = this;
+            if (!oView) { return; }
             this.oView = oView;
             this.$contentWrapper = $('#contentWrapper');
             // Reset
@@ -52,9 +53,16 @@
                     oCommande = new bar.Commande(oCommande);
                     oView.showFacture(oCommande, val);
                 });
-            $(document).on('click', 'input[type=number]', function(e) {
-                this.select();
-            });
+            $('input[type=number]')
+                .on('click', function() {
+                    this.select();
+                })
+                .on('change', function() {
+                    if (+$(this).val() < 0) {
+                        Materialize.toast('Le bar ne fait pas crédit !', 2000);
+                        $(this).val(0);
+                    }
+                });
             $('select').material_select();
             $('.splash').addClass('disappear');
 
@@ -62,7 +70,7 @@
                 e.preventDefault();
                 self.discover();
             });
-            if (!localStorage.getItem('discovered')) {
+            if (!localStorage.getItem('bar')) {
                 this.discover();
             }
             this.$contentWrapper.on('change', function() {
@@ -93,8 +101,13 @@
             return oForm;
         },
         discover: function() {
-            $('.tap-target').tapTarget('open');
-            localStorage.setItem('discovered',1);
+            var id;
+            if (this.$diviser.hasClass('scale-in')) {
+                id = 'diviser';
+            } else {
+                id = 'restore';
+            }
+            $('.tap-target[data-activates="'+ id +'"]').tapTarget('open');
         }
     });
 })(jQuery, O2);

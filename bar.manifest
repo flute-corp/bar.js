@@ -1,0 +1,13 @@
+CACHE:
+./lib/jquery/jquery.js
+./lib/materialize/js/materialize.min.js
+./lib/materialize/css/materialize.min.css
+./lib/materialize/css/material-icon.css
+./lib/materialize/font/material-design-icons/material.woff
+./lib/materialize/fonts/roboto/Roboto-Regular.woff2
+./lib/o876/o2.js
+./src/js/materializer.js
+./src/js/bar.min.js
+./src/js/main.js
+./src/css/style.css
+./src/img/favicon/bar.svg
