@@ -176,7 +176,6 @@ module.exports = function(grunt) {
     grunt.registerTask('monitor', ["concurrent:monitor"]);
     grunt.registerTask('release', [
         "concat:dev",
-        "realFavicon",
         "uglify:dist"
     ]);
     grunt.registerTask('dev', [
