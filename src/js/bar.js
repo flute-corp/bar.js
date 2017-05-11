@@ -806,7 +806,17 @@
                     $li.removeClass('active');
                 });
                 $wrapper.appendTo(this.$contentWrapper);
-                $input.dropdown();
+                $input
+                    .on('click', function() {
+                        window.location.hash = 'quickBill';
+                    })
+                    .dropdown();
+
+                $(window).on('hashchange', function() {
+                    if ($input.hasClass('active') && window.location.hash != '#quickBill') {
+                        $input.dropdown('close');
+                    }
+                });
             }
         },
         _get$tab : function(title, oCommande) {
