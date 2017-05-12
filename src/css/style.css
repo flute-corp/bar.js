@@ -186,9 +186,47 @@ input.invalid + label:not(.active):after {
 .modal.bottom-sheet {
     max-height: 70%;
 }
-.modal .dropdown-content {
-    position: relative;
-    opacity: 1;
-    max-height: none;
+.modal-list {
+    margin: 0;
+}
+.modal-list li {
+    clear: both;
+    color: rgba(0,0,0,0.87);
+    cursor: pointer;
+    min-height: 50px;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: left;
+    text-transform: none;
+}
+.modal-list li:not(.optgroup):hover, .modal-list li.active {
+    background-color: #eee;
+}
+.modal-list li a, .modal-list li span {
+    font-size: 16px;
+    color: #26a69a;
     display: block;
+    line-height: 22px;
+    padding: 14px 16px;
+}
+.modal-list [type="checkbox"] + label {
+    top: 1px;
+    left: 0;
+    height: 18px;
+}
+.modal-list .optgroup {
+    border-top: 1px solid #eee;
+    background-color: transparent;
+}
+.modal-list .optgroup > span {
+    color: rgba(0,0,0,0.4);
+}
+.modal-list li.optgroup ~ li.optgroup-option {
+    padding-left: 1rem;
+}
+.modal-content .collapsible-body {
+    padding: 0.5rem;
+}
+.modal-content .collapsible-body .right-align .btn-floating {
+    margin-right: 0.5rem;
 }

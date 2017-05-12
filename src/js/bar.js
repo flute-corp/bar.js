@@ -498,7 +498,7 @@
             // Reset
             this.$reset = $('#reset')
                 .on('click', function() {
-                    var holdForm = self.$contentWrapper.serializeObject();
+                    var holdForm = self._serializeForm();
                     self.$contentWrapper[0].reset();
                     self.$contentWrapper.trigger('change');
                     var $toast = $('<span>La commande a été vidée </span>');
@@ -532,7 +532,7 @@
                 .on('click', function() {
                     var val = +self.$nbCarte.val();
                     // var algo = self.$algoSelector.val();
-                    var oCommande = self.$contentWrapper.serializeObject();
+                    var oCommande = self._serializeForm();
                     oCommande = new bar.Commande(oCommande);
                     oView.showFacture(oCommande, val);
                 });
@@ -541,10 +541,16 @@
                     this.select();
                 })
                 .on('change', function() {
-                    if (+$(this).val() < 0) {
+                    var $this = $(this);
+                    if (+$this.val() < 0) {
                         Materialize.toast('Le bar ne fait pas crédit !', 2000);
-                        $(this).val(0);
+                        $this.val(0);
                     }
+                    var $cBody = $this.closest('.collapsible-body');
+                    var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
+                        return a + (+v.value);
+                    }, 0);
+                    $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
                 });
             $('select').material_select();
             $('.splash').addClass('disappear');
@@ -555,6 +561,12 @@
             });
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
+                if (oForm.cmd) {
+                    oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
+                    if (!oForm.cmd.length) {
+                        delete oForm.cmd;
+                    }
+                }
                 if ($.isEmptyObject(oForm)) {
                     self.$diviser.removeClass('scale-in').addClass('scale-out');
                     self.$reset.removeClass('scale-in').addClass('scale-out');
@@ -568,7 +580,7 @@
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
 
-                    bar.helper.storage.export({'tmp': oForm });
+                    bar.helper.storage.export({'tmp': self._serializeForm() });
                 }
             });
 
@@ -584,12 +596,6 @@
         },
         _serializeForm : function() {
             var oForm = this.$contentWrapper.serializeObject();
-            if (oForm.cmd) {
-                oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
-                if (!oForm.cmd.length) {
-                    delete oForm.cmd;
-                }
-            }
             return oForm;
         },
         discover: function() {
@@ -689,6 +695,11 @@
             'export': function(oData) {
                 var oStorage = this._getStorage();
                 $.extend(true, oStorage, oData);
+                for (var k in oStorage) {
+                    if (!oStorage[k]) {
+                        delete oStorage[k];
+                    }
+                }
                 this._setStorage(oStorage);
             }
         }
@@ -711,7 +722,7 @@
             bar.store.categories.forEach(function(oCat) {
                 $el = $('<div class="collapsible-body row">');
                 $aCat.push($el);
-                $('<li><div class="collapsible-header"><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
+                $('<li><div class="collapsible-header"><span class="badge"></span><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
                     .appendTo($accordion)
                     .append($el);
             });
@@ -752,7 +763,7 @@
                             $input.val(+$input.val() - 1);
                         }
                     }
-                    $this.trigger('change');
+                    $input.trigger('change');
                 });
             $accordion.collapsible();
         },
@@ -762,14 +773,15 @@
                 $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
                 var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
                 var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
-                var $ul = $('<ul id="select-user-pref" class="modal-content dropdown-content">').appendTo($modalWrapper);
-                $ul.append('<li><h4>Modal Header</h4></li>')
+                var $modalContent = $('<div class="modal-content">').appendTo($modalWrapper);
+                var $ul = $('<ul class="modal-list">').appendTo($modalContent);
                 bar.store.users.forEach(function(oUser, idUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
+                    var optGroupLi = $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
+                    var optGroupUl = $('<ul>').appendTo(optGroupLi);
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
-                                $('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo($ul);
+                                $('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo(optGroupUl);
                             }
                         });
                     }
@@ -796,10 +808,8 @@
                         var $parent = $this.closest('li');
                         if ($this.prop('checked')) {
                             $parent.addClass('active');
-                            var $el = $()
-                                .add($parent.prevUntil('.optgroup', '.active'))
-                                .add($parent.nextUntil('.optgroup', '.active'));
-                            $el.trigger('click');
+                            $parent.siblings('.active')
+                                    .trigger('click');
                         } else {
                             $parent.removeClass('active');
                         }
@@ -811,7 +821,7 @@
                         var value = '';
                         for (var v in articles) {
                             if (value) value += ', ';
-                            value += articles[v] == 1 ? v : articles[v]+' '+v;
+                            value += articles[v]+' '+v;
                         }
                         $input.val(value || "Choisissez des participants...");
                     });
@@ -824,11 +834,10 @@
                         window.location.hash = 'quickBill';
                     });
                 $modalWrapper.modal();
-                    // .dropdown();
 
                 $(window).on('hashchange', function() {
-                    if ($input.hasClass('active') && window.location.hash != '#quickBill') {
-                        $input.dropdown('close');
+                    if ($modalWrapper.hasClass('open') && window.location.hash != '#quickBill') {
+                        $modalWrapper.modal('close');
                     }
                 });
             }
@@ -927,6 +936,7 @@
             Materializer.createModal({
                 content : $modalContent,
                 type : "modal-fixed-footer",
+                header: "Historique",
                 footer: {
                     'Fermer' : {
                         'classe' : 'modal-close'
@@ -938,9 +948,9 @@
         _get$accordion : function (date, oForm) {
             var self = this;
             var $body = $('<div class="collapsible-body col s12">');
-            var date = new Date(date);
-            date = date.toFrench();
-            var headerText = date;
+            var sDate = new Date(date);
+            sDate = sDate.toFrench();
+            var headerText = sDate;
             if (oForm.user && oForm.user.length) {
                 var filteredUser = oForm.user.filter(bar.helper.filter.null);
                 if (filteredUser.length) {
@@ -948,7 +958,9 @@
                     var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
                     $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>')
                     oForm.user.forEach(function(v, i) {
-                        $habitue.append('<tr><td>'+ bar.store.users[i].name +'</td><td>'+ bar.store.articles[v].label +'</td></tr>')
+                        if (v != null) {
+                            $habitue.append('<tr><td>' + bar.store.users[i].name + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
+                        }
                     });
                 }
             }
@@ -958,20 +970,47 @@
                     headerText += ' - ' + filteredCmd.length + ' complément' + bar.helper.pluralize(filteredCmd);
                     var $complement = $('<table class="striped bordered highlight">').appendTo($body);
                     $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>')
-                    oForm.cmd.forEach(function (v, i) {
+                    filteredCmd.forEach(function (v, i) {
                         $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>')
                     });
                 }
             }
-            var $footer = $('<div class="right-align">').appendTo($body);
-            $('<a class="waves-effect waves-light btn green">Restaurer <i class="material-icons right">&#xE889;</i></a>')
+            var $footer = $('<div class="right-align">').prependTo($body);
+            // Supprimer
+            $('<a class="btn btn-floating waves-effect waves-light btn red"><i class="material-icons right">&#xE92B;</i></a>')
+                .appendTo($footer)
+                .on('click', function() {
+                    var $li = $(this).closest('li.active');
+                    var $collapsible = $li.closest('.collapsible');
+                    $collapsible.collapsible('close', $collapsible.find('li').index($li));
+                    Vel(
+                        $li,
+                        {
+                            "opacity": 0,
+                            marginLeft: '-50%',
+                            height: 0
+                        },
+                        {
+                            duration: 375,
+                            easing: 'easeOutExpo',
+                            queue: false,
+                            delay: 375,
+                            complete: function() { $li.addClass('hide'); }
+                        }
+                    );
+                    var json = {};
+                    json[date] = null;
+                    bar.helper.storage.export(json);
+                });
+            // Restaurer
+            $('<a class="btn btn-floating waves-effect waves-light btn green"><i class="material-icons right">&#xE889;</i></a>')
                 .appendTo($footer)
                 .on('click', function() {
                     self.$contentWrapper.deserializeObject(oForm);
                     $(this).closest('.modal').modal('close');
                     Materialize.toast('Restauration terminée !', 2000);
                 });
-            var $el = $('<li><div class="collapsible-header"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
+            var $el = $('<li><div class="collapsible-header truncate"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
                 .append($body);
 
             return $el;

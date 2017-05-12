@@ -16,7 +16,7 @@
             // Reset
             this.$reset = $('#reset')
                 .on('click', function() {
-                    var holdForm = self.$contentWrapper.serializeObject();
+                    var holdForm = self._serializeForm();
                     self.$contentWrapper[0].reset();
                     self.$contentWrapper.trigger('change');
                     var $toast = $('<span>La commande a été vidée </span>');
@@ -50,7 +50,7 @@
                 .on('click', function() {
                     var val = +self.$nbCarte.val();
                     // var algo = self.$algoSelector.val();
-                    var oCommande = self.$contentWrapper.serializeObject();
+                    var oCommande = self._serializeForm();
                     oCommande = new bar.Commande(oCommande);
                     oView.showFacture(oCommande, val);
                 });
@@ -59,10 +59,16 @@
                     this.select();
                 })
                 .on('change', function() {
-                    if (+$(this).val() < 0) {
+                    var $this = $(this);
+                    if (+$this.val() < 0) {
                         Materialize.toast('Le bar ne fait pas crédit !', 2000);
-                        $(this).val(0);
+                        $this.val(0);
                     }
+                    var $cBody = $this.closest('.collapsible-body');
+                    var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
+                        return a + (+v.value);
+                    }, 0);
+                    $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
                 });
             $('select').material_select();
             $('.splash').addClass('disappear');
@@ -73,6 +79,12 @@
             });
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
+                if (oForm.cmd) {
+                    oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
+                    if (!oForm.cmd.length) {
+                        delete oForm.cmd;
+                    }
+                }
                 if ($.isEmptyObject(oForm)) {
                     self.$diviser.removeClass('scale-in').addClass('scale-out');
                     self.$reset.removeClass('scale-in').addClass('scale-out');
@@ -86,7 +98,7 @@
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
 
-                    bar.helper.storage.export({'tmp': oForm });
+                    bar.helper.storage.export({'tmp': self._serializeForm() });
                 }
             });
 
@@ -102,12 +114,6 @@
         },
         _serializeForm : function() {
             var oForm = this.$contentWrapper.serializeObject();
-            if (oForm.cmd) {
-                oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
-                if (!oForm.cmd.length) {
-                    delete oForm.cmd;
-                }
-            }
             return oForm;
         },
         discover: function() {
