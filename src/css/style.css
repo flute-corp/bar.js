@@ -230,3 +230,13 @@ input.invalid + label:not(.active):after {
 .modal-content .collapsible-body .right-align .btn-floating {
     margin-right: 0.5rem;
 }
+
+/*Toast*/
+
+.toast .btn-flat {
+    padding: 0 0.5rem;
+    height: 1.5em;
+    line-height: 1.5em;
+    font-size: 1.1rem;
+    font-weight: bold;
+}

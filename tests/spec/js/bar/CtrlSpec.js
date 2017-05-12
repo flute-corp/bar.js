@@ -40,7 +40,7 @@ describe('bar.Ctrl', function() {
                 oCtrl.$reset.click();
                 var $toast = $('.toast');
                 expect($toast).toExist();
-                expect($toast.last().text()).toBe('La commande a été vidée Annuler');
+                expect($toast.last().text()).toBe('La commande a été vidéeAnnuler');
             });
             it('Le toast dispose de l\'option annuler', function() {
                 rdmizeForm();

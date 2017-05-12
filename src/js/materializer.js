@@ -55,6 +55,46 @@ var Materializer = (function($) {
             "content" : $msg});
     }
 
+    function toast(options) {
+        var defaults = {
+            toast : {
+                message : '',
+                displayLength: null,
+                className: '',
+                completeCallback: null
+            },
+            btn : []
+        };
+        var options = $.extend(true, {}, defaults, options);
+        var $toast = $('<span>'+ options.toast.message +'</span>');
+        var defaultBtn = {
+            label: '???',
+            color: 'white',
+            click: null
+        };
+        options.btn.forEach(function(v) {
+            var btn = $.extend({}, defaultBtn, v);
+            $('<a class="waves-effect waves-light btn-flat right '+ btn.color+'-text">'+ btn.label +'</a>').appendTo($toast)
+                .on('click', function(e) {
+                    if (btn.click && typeof btn.click == 'function') {
+                        btn.click.call(this, e);
+                    }
+                    Vel(
+                        $(this).closest('.toast'),
+                        {
+                            "opacity": 0,
+                            marginTop: '-40px'
+                        },
+                        {
+                            duration: 375,
+                            easing: 'easeOutExpo',
+                            queue: false
+                        }
+                    );
+                });
+        });
+        Materialize.toast($toast, options.toast.displayLength, options.toast.className, options.toast.completeCallback);
+    }
     var curModal = 0;
     function createModal(options) {
         var optionsDefault = {
@@ -238,7 +278,7 @@ var Materializer = (function($) {
             $el = $this.find('[name="'+ key +'"]');
             switch ($el.attr('type')) {
                 case 'checkbox':
-                    $el.filter(function() { return this.value == val; }).prop('checked', true);
+                    $el = $el.filter(function() { return this.value == val; }).prop('checked', true);
                     break;
                 default:
                     $el.val(val);
@@ -377,6 +417,7 @@ var Materializer = (function($) {
         ajax : ajax,
         getJSON : getJSON,
         createModal : createModal,
-        createOverlay : createOverlay
+        createOverlay : createOverlay,
+        toast       : toast
     };
 })(jQuery);

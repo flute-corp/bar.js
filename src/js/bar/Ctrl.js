@@ -19,24 +19,21 @@
                     var holdForm = self._serializeForm();
                     self.$contentWrapper[0].reset();
                     self.$contentWrapper.trigger('change');
-                    var $toast = $('<span>La commande a été vidée </span>');
-                    $('<a class="">Annuler</a>').appendTo($toast)
-                        .on('click', function() {
-                            self.$contentWrapper.deserializeObject(holdForm);
-                            Vel(
-                                $(this).closest('.toast'),
-                                {
-                                    "opacity": 0,
-                                    marginTop: '-40px'
-                                },
-                                {
-                                    duration: 375,
-                                    easing: 'easeOutExpo',
-                                    queue: false
+                    self.$contentWrapper.find('input').trigger('change');
+                    Materializer.toast({
+                        toast : {
+                            message : 'La commande a été vidée'
+                        },
+                        btn : [
+                            {
+                                label: 'Annuler',
+                                color: 'red',
+                                click: function() {
+                                    self.$contentWrapper.deserializeObject(holdForm);
                                 }
-                            );
-                        });
-                    Materialize.toast($toast, 4000);
+                            }
+                        ]
+                    });
                 });
             this.$nbCarte = $('#nbCarte');
             // this.$algoSelector = $('#algoSelector');
