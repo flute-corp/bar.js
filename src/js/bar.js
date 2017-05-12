@@ -776,12 +776,11 @@
                 var $modalContent = $('<div class="modal-content">').appendTo($modalWrapper);
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
                 bar.store.users.forEach(function(oUser, idUser) {
-                    var optGroupLi = $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
-                    var optGroupUl = $('<ul>').appendTo(optGroupLi);
+                    $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
-                                $('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo(optGroupUl);
+                                $('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo($ul);
                             }
                         });
                     }
@@ -791,6 +790,7 @@
                 $li.on('click', function(e) {
                     var $this = $(this);
                     e.stopPropagation();
+                    e.preventDefault();
                     if ($this.is('.optgroup-option:not(.disabled)')) {
                         var $checkbox = $this.find('input[type="checkbox"]');
                         var checked = $checkbox.prop('checked', function (i, v) {
@@ -808,8 +808,10 @@
                         var $parent = $this.closest('li');
                         if ($this.prop('checked')) {
                             $parent.addClass('active');
-                            $parent.siblings('.active')
-                                    .trigger('click');
+                            var $el = $()
+                                .add($parent.prevUntil('.optgroup', '.active'))
+                                .add($parent.nextUntil('.optgroup', '.active'));
+                            $el.trigger('click');
                         } else {
                             $parent.removeClass('active');
                         }
