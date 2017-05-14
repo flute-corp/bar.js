@@ -4,15 +4,73 @@ module.exports = function(grunt) {
         'src/js/bar/**/*.js'
     ];
     var aSpecFiles = [
-        'tests/spec/**/*Spec.js'
+        'tests/specs/**/*Spec.js'
     ];
     grunt.initConfig({
+        //  Copy
+        copy: {
+            index : {
+                src: 'index.html', dest: 'index_dev.html'
+            },
+            fixture: {
+                src: 'index.html', dest: './tests/fixtures/fixture.html'
+            }
+        },
+        replace: {
+            index_dev: { // Does not edit README.md
+                src: 'index_dev.html',
+                overwrite: true,
+                replacements: [
+                    // {
+                    //     from: 'bar.min.js',
+                    //     to: 'bar.js'
+                    // },
+                    {
+                        from: ' manifest="bar.manifest"',
+                        to: ''
+                    }
+                ]
+            },
+            fixture: {
+                src: './tests/fixtures/fixture.html',
+                overwrite: true,
+                replacements: [
+                    {
+                        from: /<!DOCTYPE html>[\s\S]*<\/head>/gi,
+                        to: ''
+                    },
+                    {
+                        from: /<script[\s\S]*script>/gi,
+                        to: ''
+                    },
+                    {
+                        from: '</html>',
+                        to: ''
+                    },
+                    {
+                        from: /^(?=\n)$|^\s*|\s*$|\n\n+/gm,
+                        to: ''
+                    }
+                ]
+            }
+        },
+        // injector
+        injector: {
+            options: {
+                prefix: '.'
+            },
+            index_dev: {
+                files: {
+                    'index_dev.html': aBarFiles
+                }
+            }
+        },
         //  Concat
         concat: {
             options: {
                 separator: ';'
             },
-            dev: {
+            js: {
                 // the files to concatenate
                 src: aBarFiles,
                 // the location of the resulting JS file
@@ -105,9 +163,7 @@ module.exports = function(grunt) {
         //  Jasmine
         jasmine: {
             components: {
-                src: [
-                    'src/js/bar.js'
-                ],
+                src: aBarFiles,
                 options: {
                     vendor: [
                         'lib/jquery/jquery.js',
@@ -118,8 +174,8 @@ module.exports = function(grunt) {
                     ],
                     styles: 'src/css/style.css',
                     specs: aSpecFiles,
-                    helpers: 'tests/spec/helper.js',
-                    keepRunner : true,
+                    helpers: 'tests/helper.js',
+                    keepRunner : true
                     //helpers: 'test/spec/*.js'
                 }
             }
@@ -165,24 +221,33 @@ module.exports = function(grunt) {
 
     // load the tasks
     grunt.loadNpmTasks('grunt-contrib-watch');
-    // grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-text-replace');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-real-favicon');
+    grunt.loadNpmTasks('grunt-injector');
 
     // define the tasks
-    grunt.registerTask('monitor', ["concurrent:monitor"]);
+    grunt.registerTask('monitor', ["dev-start", "concurrent:monitor"]);
     grunt.registerTask('release', [
-        "concat:dev",
+        "concat:js",
         "uglify:dist"
     ]);
+    grunt.registerTask('dev-start', [
+        "copy:index",
+        "replace:index_dev",
+        "injector:index_dev"
+    ]);
     grunt.registerTask('dev', [
-        "concat:dev",
+        "concat:js",
         "tests"
     ]);
     grunt.registerTask('tests', [
+        "copy:fixture",
+        "replace:fixture",
         "jasmine"
     ]);
 };

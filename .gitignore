@@ -37,4 +37,7 @@ jspm_packages
 .node_repl_history
 # IDE and dev components
 .idea
+coverage
+clover
 _SpecRunner.html
+index_dev.html

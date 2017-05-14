@@ -59,7 +59,7 @@ var Materializer = (function($) {
         var defaults = {
             toast : {
                 message : '',
-                displayLength: null,
+                displayLength: 2000,
                 className: '',
                 completeCallback: null
             },
