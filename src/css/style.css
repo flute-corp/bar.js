@@ -73,8 +73,8 @@
 .floatingArea {
     position: absolute;
     height: 40px !important;
-    right: 0px;
-    bottom: 0px;
+    right: 0;
+    bottom: 0;
     transform: translateY(50%);
     padding: 0 10px;
     margin: auto;
@@ -239,4 +239,7 @@ input.invalid + label:not(.active):after {
     line-height: 1.5em;
     font-size: 1.1rem;
     font-weight: bold;
+}
+.toast .btn-flat:hover {
+    background: rgba(158,158,158,0.2);
 }

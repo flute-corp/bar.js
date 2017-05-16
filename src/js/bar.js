@@ -616,6 +616,9 @@
             if (Array.isArray(el)) {
                 return el.length > 1 ? 's' : '';
             }
+            if (typeof el === 'string') {
+                return el +"s";
+            }
             return +el > 1 ? 's' : '';
         },
         "delete": {
@@ -625,7 +628,10 @@
                 }
             },
             "zero": function (v, i, a) {
-                if (v.toString() !== '0') {
+                if (v === null || v === undefined) {
+                    return;
+                }
+                if (v.toString() === '0') {
                     delete a[i];
                 }
             },

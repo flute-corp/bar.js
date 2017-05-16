@@ -1,42 +1,42 @@
 var Materializer = (function($) {
-
+    var $progress = $('#AjaxInProgress');
     function ajax(url, options) {
-        $('#AjaxInProgress').show();
+        $progress.show();
         return $.ajax(url, options).error(ajaxError.bind(this)).always(function() {
-            $('#AjaxInProgress').hide('slow');
+            $progress.hide('slow');
         });
     }
 
     function getJSON(url, options, success) {
-        $('#AjaxInProgress').show();
+        $progress.show();
         return $.getJSON(url, options, success).error(ajaxError.bind(this)).always(function() {
-            $('#AjaxInProgress').hide('slow');
+            $progress.hide('slow');
         });
     }
 
-    function ajaxError(xhr, textStatus, errorThrown) {
-        $('#AjaxInProgress').hide('slow');
+    function ajaxError(xhr) {
+        $progress.hide('slow');
         function parseException(exception) {
-            var html = $.map(exception, function(value, index) {
+            return $.map(exception, function(value, index) {
                 if ($.isPlainObject(value) || $.isArray(value)) {
                     return parseException(value) +'<br/>';
                 } else {
                     return index +' : '+ value +'<br/>';
                 }
             });
-            return html;
         }
         var data = xhr.responseText;
-        var $msg = $('<div>').append("<strong>Code status :</strong>").append("<span> " + xhr.status + "</span>").append("<br/>").append("<strong>Réponse :</strong>").append("<span> " + xhr.statusText + "</span>").append("<br/>");
+        var $msg = $('<div>').append("<strong>Code status :</strong>").append("<span> " + xhr.status + "</span>").append("<br/>").append("<strong>Réponse :</strong>").append("<span>" + xhr.statusText + "</span>").append("<br/>");
         if (data) {
             if (data.match(/<(.+)>/)) { // détection du HTML
                 var $dom = $(data);
                 var $symfonyException = $('.sf-reset', $dom);
                 var $css = $($dom).find('link');
+                var symfonyException;
                 if ($symfonyException[0]) {
-                    var symfonyException = $('<div>').append($css).append($symfonyException).html();
+                    symfonyException = $('<div>').append($css).append($symfonyException).html();
                 } else {
-                    var symfonyException = $.parseHTML(data)
+                    symfonyException = $.parseHTML(data)
                 }
                 $msg.append("<strong>Réponse de serveur :</strong><br/>").append(symfonyException);
             } else {
@@ -65,14 +65,14 @@ var Materializer = (function($) {
             },
             btn : []
         };
-        var options = $.extend(true, {}, defaults, options);
-        var $toast = $('<span>'+ options.toast.message +'</span>');
+        var config = $.extend(true, {}, defaults, options);
+        var $toast = $('<span>'+ config.toast.message +'</span>');
         var defaultBtn = {
             label: '???',
             color: 'white',
             click: null
         };
-        options.btn.forEach(function(v) {
+        config.btn.forEach(function(v) {
             var btn = $.extend({}, defaultBtn, v);
             $('<a class="waves-effect waves-light btn-flat right '+ btn.color+'-text">'+ btn.label +'</a>').appendTo($toast)
                 .on('click', function(e) {
@@ -93,7 +93,7 @@ var Materializer = (function($) {
                     );
                 });
         });
-        Materialize.toast($toast, options.toast.displayLength, options.toast.className, options.toast.completeCallback);
+        Materialize.toast($toast, config.toast.displayLength, config.toast.className, config.toast.completeCallback);
     }
     var curModal = 0;
     function createModal(options) {
@@ -156,8 +156,8 @@ var Materializer = (function($) {
         });
         return $overlay;
     }
-    $(function() {
-        var appName = document.title;
+    // $(function() {
+        // var appName = document.title;
 //        $(window).on('hashchange', function(e) {
 //            methodAjax(this.location.hash);
 //            document.title = appName + ' - ' + this.location.hash;
@@ -171,7 +171,7 @@ var Materializer = (function($) {
 //        if (this.location.hash) {
 //            methodAjax(this.location.hash);
 //        }
-    });
+//     });
 
     /**
      * Function serializeObject
