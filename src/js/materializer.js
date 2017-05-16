@@ -59,14 +59,14 @@ var Materializer = (function($) {
         var defaults = {
             toast : {
                 message : '',
-                displayLength: 2000,
+                // displayLength: 2000,
                 className: '',
                 completeCallback: null
             },
             btn : []
         };
         var config = $.extend(true, {}, defaults, options);
-        var $toast = $('<span>'+ config.toast.message +'</span>');
+        var $toast = $('<div>'+ config.toast.message +'</div>');
         var defaultBtn = {
             label: '???',
             color: 'white',
