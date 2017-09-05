@@ -15,6 +15,7 @@
         {name:'Loïc', pref: [16, 0]},
         {name:'Damien', pref: [16, 0]},
         {name:'Laurent F.', pref: [16, 0]},
-        {name:'Rémi F.', pref: [16, 0]}
+        {name:'Rémi F.', pref: [16, 0]},
+        {name:'Mathieu', pref: [16]}
     ]);
 })(O2);
