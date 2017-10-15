@@ -15,7 +15,7 @@
             "id": 2,
             "cat": 0,
             "label": "Coca zero",
-            "desc": "Les bulles sont sans sucre !",
+            "desc": "Les bulles sont sans sucre mais avec le goût !",
             "prix": 1,
             "img": "coca-zero.jpg"
         },
