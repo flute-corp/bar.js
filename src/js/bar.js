@@ -2,317 +2,374 @@
     /**
      * @property bar.store.articles
      */
-    O2.createObject('bar.store.articles', [
-        {
-            "id": 0,
+    O2.createObject('bar.store.articles', {
+        1: {
+            "id": 1,
             "cat": 0,
             "label": "Coca-cola",
             "desc": "Attention aux bulles !",
             "prix": 1,
             "img": "coca.jpg"
-        }, {
-            "id": 1,
+        },
+        2: {
+            "id": 2,
             "cat": 0,
             "label": "Coca zero",
             "desc": "Les bulles sont sans sucre !",
             "prix": 1,
             "img": "coca-zero.jpg"
-        }, {
-            "id": 2,
+        },
+        3: {
+            "id": 3,
             "cat": 0,
             "label": "Jus d'orange",
             "desc": "Quand c'est trop c'est tropico.",
             "prix": 1,
             "img": "jus-orange.jpg"
-        }, {
-            "id": 3,
+        },
+        4: {
+            "id": 4,
             "cat": 0,
             "label": "Jus de pomme",
             "desc": "C'est trognon comme boisson.",
             "prix": 1,
             "img": "jus-pomme.jpg"
-        }, {
-            "id": 4,
+        },
+        5: {
+            "id": 5,
             "cat": 0,
             "label": "Jus d'abricot",
             "desc": "Sans noyau.",
             "prix": 1,
             "img": "jus-abricot.jpg"
-        }, {
-            "id": 5,
+        },
+        6: {
+            "id": 6,
             "cat": 0,
             "label": "Jus d'ananas",
             "desc": "Les ananas de la belle...",
             "prix": 1,
             "img": "jus-ananas.jpg"
-        }, {
-            "id": 6,
+        },
+        7: {
+            "id": 7,
             "cat": 0,
             "label": "Jus de pamplemousse",
             "desc": "Meilleur avec du vin blanc.",
             "prix": 1,
             "img": "jus-pamplemousse.jpg"
-        }, {
-            "id": 7,
+        },
+        8: {
+            "id": 8,
             "cat": 0,
             "label": "Jus de tomate",
             "desc": "La tomate est un fruit, c'est un fait.",
             "prix": 1,
             "img": "jus-tomate.jpg"
-        }, {
-            "id": 8,
+        },
+        9: {
+            "id": 9,
             "cat": 0,
             "label": "Jus de fraise",
             "desc": "La boisson de charlotte.",
             "prix": 1,
             "img": "jus-fraise.jpg"
-        }, {
-            "id": 9,
+        },
+        10: {
+            "id": 10,
             "cat": 0,
             "label": "Orangina",
             "desc": "Secouez, sinon la pulpe, elle reste en bas.",
             "prix": 1,
             "img": "orangina.jpg"
-        }, {
-            "id": 10,
+        },
+        11: {
+            "id": 11,
             "cat": 0,
             "label": "Schweppes agrum",
             "desc": "What did you expect.",
             "prix": 1,
             "img": "schweppes-agrum.jpg"
-        }, {
-            "id": 11,
+        },
+        12: {
+            "id": 12,
             "cat": 0,
             "label": "Limonade",
             "desc": "Bulle + citron + eau.",
             "prix": 1,
             "img": "limonade.jpg"
-        }, {
-            "id": 12,
+        },
+        13: {
+            "id": 13,
             "cat": 0,
             "label": "Perrier",
             "desc": "Un sirop dedans ?",
             "prix": 1,
             "img": "perrier.jpg"
-        }, {
-            "id": 13,
+        },
+        14: {
+            "id": 14,
             "cat": 0,
             "label": "Evian",
             "desc": "(De quel massif montagneux ca vient çà déjà ?)",
             "prix": 1,
             "img": "evian.jpg"
-        }, {
-            "id": 14,
+        },
+        15: {
+            "id": 15,
             "cat": 0,
             "label": "Cristaline",
             "desc": "C'est clair",
             "prix": 0.5,
             "img": "cristaline.jpg"
-        }, {
-            "id": 15,
+        },
+        16: {
+            "id": 16,
             "cat": 0,
             "label": "la Seinoise",
             "desc": "Riche en urinium, et en oligo-excréments.",
             "prix": 0.5,
             "img": "seinoise.jpg"
-        }, {
-            "id": 16,
+        },
+        17: {
+            "id": 17,
             "cat": 1,
             "label": "Grim (bouteille)",
             "desc": "La bière des hommes",
             "prix": 1.5,
             "img": "grimbergen.jpg"
-        }, {
-            "id": 17,
+        },
+        18: {
+            "id": 18,
             "cat": 1,
             "label": "Grim Rouge",
             "desc": "La bière des femmes",
             "prix": 1.5,
             "img": "grim-rouge.jpg"
-        }, {
-            "id": 18,
+        },
+        19: {
+            "id": 19,
             "cat": 1,
             "label": "1664",
             "desc": "Idéal avant de retourner sur le chantier",
             "prix": 1.3,
             "img": "1664-pression.jpg"
-        }, {
-            "id": 19,
+        },
+        20: {
+            "id": 20,
             "cat": 1,
             "label": "1664 (bouteille)",
             "desc": "Idéal avant de retourner sur le chantier",
             "prix": 1.5,
             "img": "1664.jpg"
-        }, {
-            "id": 20,
+        },
+        21: {
+            "id": 21,
             "cat": 1,
             "label": "Panaché",
             "desc": "Servi avec panache !",
             "prix": 1.3,
             "img": "panache.jpg"
-        }, {
-            "id": 21,
+        },
+        22: {
+            "id": 22,
             "cat": 1,
             "label": "Monaco",
             "desc": "Une peu de fruit pour les vitamines !",
             "prix": 1.3,
             "img": "monaco.jpg"
-        }, {
-            "id": 22,
+        },
+        23: {
+            "id": 23,
             "cat": 1,
             "label": "PCB",
             "desc": "Un picon ch'tit biloute !",
             "prix": 1.8,
             "img": "picon.jpg"
-        }, {
-            "id": 23,
+        },
+        24: {
+            "id": 24,
             "cat": 1,
             "label": "Bière du mois",
             "desc": "Selon arrivages",
             "prix": 1.5,
             "img": "bdm.jpg"
-        }, {
-            "id": 24,
+        },
+        25: {
+            "id": 25,
             "cat": 2,
             "label": "Martini",
             "desc": "Martini dry... Avec ou sans olives ?",
             "prix": 1.5,
             "img": "martini.jpg"
-        }, {
-            "id": 25,
+        },
+        26: {
+            "id": 26,
             "cat": 2,
             "label": "Muscat",
             "desc": "Une velle robe dorée",
             "prix": 1.5,
             "img": "muscat.jpg"
-        }, {"id": 26, "cat": 2, "label": "Pineau", "desc": "À commander en charentaises", "prix": 1.5}, {
-            "id": 27,
+        },
+        27: {
+            "id": 27, "cat": 2, "label": "Pineau", "desc": "À commander en charentaises", "prix": 1.5
+        },
+        28: {
+            "id": 28,
             "cat": 2,
             "label": "Rosé pamplemousse",
             "desc": "Teneur en fruit non garantie",
             "prix": 1.4
-        }, {"id": 28, "cat": 2, "label": "Vin blanc", "desc": "Belle robe dorée", "prix": 1.4}, {
-            "id": 29,
+        },
+        29: {
+            "id": 29, "cat": 2, "label": "Vin blanc", "desc": "Belle robe dorée", "prix": 1.4
+        },
+        30: {
+            "id": 30,
             "cat": 2,
             "label": "Vin mousseux",
             "desc": "Le vin qui pique !",
             "prix": 1.4
-        }, {"id": 30, "cat": 2, "label": "Cidre (75cl)", "desc": "Mangez des pommes !", "prix": 5}, {
-            "id": 31,
+        },
+        31: {
+            "id": 31, "cat": 2, "label": "Cidre (75cl)", "desc": "Mangez des pommes !", "prix": 5
+        },
+        32: {
+            "id": 32,
             "cat": 2,
             "label": "Kir vin blanc",
             "prix": 1.5
-        }, {"id": 32, "cat": 2, "label": "Kir royal", "desc": "Mure ou cassis ?", "prix": 1.5}, {
-            "id": 33,
+        },
+        33: {
+            "id": 33, "cat": 2, "label": "Kir royal", "desc": "Mure ou cassis ?", "prix": 1.5
+        },
+        34: {
+            "id": 34,
             "cat": 3,
             "label": "Chips",
             "desc": "Le roi de la pomme de terre",
             "prix": 2,
             "img": "chips.jpg"
-        }, {
-            "id": 34,
+        },
+        35: {
+            "id": 35,
             "cat": 3,
             "label": "Saucisson",
             "desc": "Préciser \"A l'ail\" si possible",
             "prix": 2.9,
             "img": "saucisson.jpg"
-        }, {"id": 35, "cat": 3, "label": "Chorizo", "desc": "Aux épices", "prix": 2.9}, {
-            "id": 36,
+        },
+        36: {
+            "id": 36, "cat": 3, "label": "Chorizo", "desc": "Aux épices", "prix": 2.9
+        },
+        37: {
+            "id": 37,
             "cat": 3,
             "label": "Olives",
             "desc": "Fraichement cueillies dans le bocal",
             "prix": 2
-        }, {
-            "id": 37,
+        },
+        38: {
+            "id": 38,
             "cat": 3,
             "label": "Carre filet",
             "desc": "Aucune idée mais c'est sur la carte....",
             "prix": 3.5
-        }, {
-            "id": 38,
+        },
+        39: {
+            "id": 39,
             "cat": 4,
             "label": "Espresso",
             "desc": "Du bon nectar.",
             "prix": 0.5,
             "img": "espresso.jpg"
-        }, {
-            "id": 39,
+        },
+        40: {
+            "id": 40,
             "cat": 4,
             "label": "Double Espresso",
             "desc": "Que j'aime ta couleur...",
             "prix": 1,
             "img": "doubleEspresso.jpg"
-        }, {
-            "id": 40,
+        },
+        41: {
+            "id": 41,
             "cat": 4,
             "label": "Décaféiné",
             "desc": "C'est pas du café en gros ?",
             "prix": 0.5,
             "img": "decafeine.jpg"
-        }, {
-            "id": 41,
+        },
+        42: {
+            "id": 42,
             "cat": 4,
             "label": "Chocolat",
             "desc": "Le meilleurs c'est choky !",
             "prix": 0.5,
             "img": "chocolat.jpg"
-        }, {
-            "id": 42,
+        },
+        43: {
+            "id": 43,
             "cat": 4,
             "label": "Capuccino",
             "desc": "À l'italienne",
             "prix": 0.5,
             "img": "capuccino.jpg"
-        }, {
-            "id": 43,
+        },
+        44: {
+            "id": 44,
             "cat": 4,
             "label": "Thé",
             "desc": "Tea time",
             "prix": 0.5,
             "img": "the.jpg"
         }
-    ]);
+    });
 })(O2);;(function (O2) {
     /**
      * @property bar.store.categories
      */
-    O2.createObject('bar.store.categories', [
-        {
+    O2.createObject('bar.store.categories', {
+        1: {
             "label": "Soft",
             "icon": "&#xEB41;"
-        }, {
+        },
+        2: {
             "label": "Binouzes",
             "icon": "&#xE544;"
-        }, {
+        },
+        3: {
             "label": "Boissons alcoolisées",
             "icon": "&#xE540;"
-        }, {
+        },
+        4: {
             "label": "Miam-miam",
             "icon": "&#xE552;"
-        }, {
+        },
+        5: {
             "label": "Boissons Chaudes",
             "icon": "&#xE541;"
         }
-    ]);
+    });
 })(O2);;(function (O2) {
     /**
      * @property bar.store.users
      */
-    O2.createObject('bar.store.users', [
-        {name:'Daedalus', pref: [16]},
-        {name:'Neo', pref: [16, 0, 8]},
-        {name:'Priguns', pref: [16, 0]},
-        {name:'Reebox', pref: [2]},
-        {name:'Ralphy', pref: [16, 0]},
-        {name:'Briscoto', pref: [16, 0]},
-        {name:'Alex', pref: [16, 0]},
-        {name:'Max', pref: [12]},
-        {name:'Sam', pref: [16, 0]},
-        {name:'Loïc', pref: [16, 0]},
-        {name:'Damien', pref: [16, 0]},
-        {name:'Laurent F.', pref: [16, 0]},
-        {name:'Rémi F.', pref: [16, 0]}
-    ]);
+    O2.createObject('bar.store.users', {
+        1: {label: 'Daedalus', pref: [17]},
+        2: {label: 'Neo', pref: [17, 1, 9]},
+        3: {label: 'Priguns', pref: [17, 1]},
+        4: {label: 'Reebox', pref: [2]},
+        5: {label: 'Ralphy', pref: [17, 1]},
+        6: {label: 'Briscoto', pref: [17, 1]},
+        7: {label: 'Alex', pref: [17, 1]},
+        8: {label: 'Max', pref: [12]},
+        9: {label: 'Sam', pref: [17, 1]},
+        10: {label: 'Loïc', pref: [17, 1]},
+        11: {label: 'Damien', pref: [17, 1]},
+        12: {label: 'Laurent F.', pref: [17, 1]},
+        13: {label: 'Rémi F.', pref: [17, 1]}
+    });
 })(O2);
 ;(function ($, O2) {
     /**
@@ -335,23 +392,27 @@
         id : null,
         _commande : null,
         _oCommande : null,
+        prix: 0,
         __construct : function(oCommande) {
             var self = this;
-            this._commande = [];
+            this._commande = {};
             this._oCommande = {};
-            for (var i = 0; i < bar.store.articles.length; i++) {
-                this._commande[i] = 0;
-            }
-            if (typeof oCommande != 'undefined' && $.isPlainObject(oCommande)) {
+            // for (var i = 0; i < bar.store.articles.length; i++) {
+            //     this._commande[i] = 0;
+            // }
+            if (typeof oCommande !== 'undefined' && $.isPlainObject(oCommande)) {
                 this._oCommande = oCommande;
                 if (oCommande.cmd) {
-                    oCommande.cmd.forEach(function(v, i) {
-                        self._commande[i] += +v;
+                    $.each(oCommande.cmd, function(i, v) {
+                        var val = +v;
+                        if (val) {
+                            self.add(i, v);
+                        }
                     });
                 }
                 if (oCommande.user) {
                     oCommande.user.forEach(function(v) {
-                        ++self._commande[v];
+                        self.add(v, 1);
                     })
                 }
             }
@@ -362,27 +423,31 @@
             } else {
                 this._commande[idArticle] = qt;
             }
+            this.prix += bar.store.articles[idArticle].prix * qt;
             return this;
         },
         getCommande : function() {
-            var _aCommande = $.extend(true, [], bar.store.articles);
-            aCommande = this._commande.map(function(v, i) {
-                _aCommande[i]['qt'] = v;
-                return _aCommande[i];
+            return $.map(this._commande, function(v, i) {
+                if (bar.store.articles[i]) {
+                    var art = $.extend({}, bar.store.articles[i]);
+                    art['qt'] = v;
+                    return art;
+                }
+                return null;
             });
-            return aCommande;
         },
         getPrix : function() {
-            var prix = 0;
-            if (this._commande.length != 0) {
-                prix = this._commande.reduce(function(a, b, i) {
-                    if (b) {
-                        a += bar.store.articles[i]['prix'] * b;
-                    }
-                    return a;
-                });
-            }
-            return Math.round((prix*100)) / 100;
+            return Math.round((this.prix*100)) / 100;
+            // var prix = 0;
+            // if (this._commande.length !== 0) {
+            //     prix = this._commande.reduce(function(a, b, i) {
+            //         if (b) {
+            //             a += bar.store.articles[i]['prix'] * b;
+            //         }
+            //         return a;
+            //     }, prix);
+            // }
+            // return Math.round((prix*100)) / 100;
         },
         toLocalStorage : function () {
             var date = new Date().toJSON();
@@ -391,7 +456,7 @@
             bar.helper.storage.export(oJson);
         },
         _initDivision : function(nbCarte) {
-            if (typeof nbCarte == 'undefined') {
+            if (typeof nbCarte === 'undefined') {
                 throw 'Un nombre de carte est requis';
             }
             var _aCommandes = [], c;
@@ -407,13 +472,14 @@
             aCommande.forEach(function(el) {
                 if (el) {
                     for (var i = 0; i < el.qt; i++) {
-                        token = _aCommandes.reduce(bar.helper.reduce.byMethod('getPrix'));
+                        token = _aCommandes.reduce(bar.helper.reduce.byKey('prix'));
                         token.add(el.id, 1);
                     }
                 }
             });
             return _aCommandes;
         },
+
         /** Algo 1 :
          * 1 / Tri décroissant des articles par prix
          * 2 / Distribution récursive sur la carte la moins chargée
@@ -426,7 +492,7 @@
             aCommande = aCommande.sort(bar.helper.sort.byKey('prix'));
             this._tokenRing(aCommande, _aCommandes);
             return _aCommandes;
-        },
+        }
         /** Algo 2 :
          * 1/ Calcul du prix moyen après division sur les cartes
          * 2/ Répartition d'un groupe d'article sur une carte au plus proche de la moyenne
@@ -480,7 +546,8 @@
      * @property bar.config
      */
     O2.createObject('bar.config', {
-        STORAGE_KEY: 'bar'
+        STORAGE_KEY: 'bar',
+        API_URL: (window.location.hostname === 'localhost' ? 'http://localhost/bar.php/web/app_dev.php/' : 'http://bar.nexk.fr/api/')
     });
 })(jQuery, O2);;(function ($, O2) {
     /**
@@ -535,24 +602,6 @@
                     oCommande = new bar.Commande(oCommande);
                     oView.showFacture(oCommande, val);
                 });
-            $('input[type=number]')
-                .on('click', function() {
-                    this.select();
-                })
-                .on('change', function() {
-                    var $this = $(this);
-                    if (+$this.val() < 0) {
-                        Materialize.toast('Le bar ne fait pas crédit !', 2000);
-                        $this.val(0);
-                    }
-                    var $cBody = $this.closest('.collapsible-body');
-                    var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
-                        return a + (+v.value);
-                    }, 0);
-                    $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
-                });
-            $('select').material_select();
-            $('.splash').addClass('disappear');
 
             $('.help').on('click', function(e) {
                 e.preventDefault();
@@ -583,19 +632,59 @@
                 }
             });
 
-            var oStorage = bar.helper.storage.import();
-            if (oStorage) {
-                if (oStorage.tmp) {
-                    self.$contentWrapper.deserializeObject(oStorage.tmp);
-                    Materialize.toast('Commande temporaire restaurée', 2000);
-                }
-            } else {
-                this.discover();
-            }
+            this.init();
+        },
+        init: function () {
+            var self = this;
+            Materializer.ajax(bar.config.API_URL)
+                .done(function (data) {
+                    bar.store = data;
+                    Materializer.ajax(bar.config.API_URL +'login')
+                        .done(function (data) {
+                            if (data) {
+                                console.log(data);
+                            } else {
+
+                            }
+                        });
+                })
+                .always(function () {
+                    self.oView.showHome();
+                    self.oView.makeUserAddons();
+
+                    $('input[type="number"]')
+                        .on('click', function() {
+                            this.select();
+                        })
+                        .on('change', function() {
+                            var $this = $(this);
+                            if (+$this.val() < 0) {
+                                Materialize.toast('Le bar ne fait pas crédit !', 2000);
+                                $this.val(0);
+                            }
+                            var $cBody = $this.closest('.collapsible-body');
+                            var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
+                                return a + (+v.value);
+                            }, 0);
+                            $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
+                        });
+                    $('select').material_select();
+
+                    var oStorage = bar.helper.storage.import();
+                    if (oStorage) {
+                        if (oStorage.tmp) {
+                            self.$contentWrapper.deserializeObject(oStorage.tmp);
+                            Materialize.toast('Commande temporaire restaurée', 2000);
+                        }
+                    } else {
+                        this.discover();
+                    }
+                    self.$contentWrapper.materializeLayout();
+                    $('.splash').addClass('disappear');
+                });
         },
         _serializeForm : function() {
-            var oForm = this.$contentWrapper.serializeObject();
-            return oForm;
+            return this.$contentWrapper.serializeObject();
         },
         discover: function() {
             var id;
@@ -669,6 +758,11 @@
                 return function(a, b) {
                     return a[mth]() <= b[mth]() ? a : b;
                 }
+            },
+            byKey : function(k) {
+                return function(a, b) {
+                    return a[k] <= b[k] ? a : b;
+                }
             }
         },
         "storage": {
@@ -717,21 +811,19 @@
         $contentWrapper : null,
         __construct : function() {
             this.$contentWrapper = $('#contentWrapper');
-            this.showHome();
         },
         showHome : function() {
             var $el, $aCat = [];
-            this._makeUserAddons();
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($('<div class="col s12">').appendTo(this.$contentWrapper));
-            bar.store.categories.forEach(function(oCat) {
+            $.each(bar.store.categories, function(i, oCat) {
                 $el = $('<div class="collapsible-body row">');
                 $aCat.push($el);
                 $('<li><div class="collapsible-header"><span class="badge"></span><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
                     .appendTo($accordion)
                     .append($el);
             });
-            bar.store.articles.forEach(function(oArt) {
+            $.each(bar.store.articles, function(i, oArt) {
                 $el = $('<div class="col s6 m3 artCard">' +
                     '<div class="card">' +
                     '<div class="card-image">' +
@@ -772,16 +864,16 @@
                 });
             $accordion.collapsible();
         },
-        _makeUserAddons : function() {
-            if (bar.store.users.length) {
+        makeUserAddons : function() {
+            if ($.isPlainObject(bar.store.users)) {
                 var $wrapper = $('<div class="input-field col s12">');
                 $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
                 var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
                 var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
                 var $modalContent = $('<div class="modal-content">').appendTo($modalWrapper);
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
-                bar.store.users.forEach(function(oUser, idUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
+                $.each(bar.store.users, function(idUser, oUser) {
+                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul);
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
@@ -790,8 +882,8 @@
                         });
                     }
                 });
-                $wrapper.append('<label>QuickBill</label>')
-                var $li = $ul.find('li')
+                $wrapper.append('<label class="active">QuickBill</label>');
+                var $li = $ul.find('li');
                 $li.on('click', function(e) {
                     var $this = $(this);
                     e.stopPropagation();
@@ -809,7 +901,7 @@
                     .find('input[type="checkbox"]')
                     .on('change', function() {
                         var articles = {};
-                        $this = $(this);
+                        var $this = $(this);
                         var $parent = $this.closest('li');
                         if ($this.prop('checked')) {
                             $parent.addClass('active');
@@ -835,7 +927,7 @@
                 this.$contentWrapper.on('reset', function() {
                     $li.removeClass('active');
                 });
-                $wrapper.appendTo(this.$contentWrapper);
+                $wrapper.prependTo(this.$contentWrapper);
                 $input
                     .on('click', function() {
                         window.location.hash = 'quickBill';
@@ -843,7 +935,7 @@
                 $modalWrapper.modal();
 
                 $(window).on('hashchange', function() {
-                    if ($modalWrapper.hasClass('open') && window.location.hash != '#quickBill') {
+                    if ($modalWrapper.hasClass('open') && window.location.hash !== '#quickBill') {
                         $modalWrapper.modal('close');
                     }
                 });
@@ -889,7 +981,7 @@
                 Materialize.toast('Le bar ne fait pas crédit !', 2000);
                 return;
             }
-            if (oCommande.getPrix() != 0) {
+            if (oCommande.getPrix() !== 0) {
                 var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 
                 var all$tab = this._getAll$tab(oCommande, nbCarte, algo);
@@ -938,7 +1030,7 @@
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($modalContent);
             for (var date in oHistory) {
-                $accordion.prepend(this._get$accordion(date, oHistory[date]))
+                $accordion.prepend(this._get$accordion(date, oHistory[date]));
             }
             Materializer.createModal({
                 content : $modalContent,
@@ -963,10 +1055,10 @@
                 if (filteredUser.length) {
                     headerText += ' - '+ filteredUser.length +' habitué'+ bar.helper.pluralize(filteredUser);
                     var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
-                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>')
+                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
                     oForm.user.forEach(function(v, i) {
-                        if (v != null) {
-                            $habitue.append('<tr><td>' + bar.store.users[i].name + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
+                        if (v !== null) {
+                            $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
                         }
                     });
                 }
@@ -976,9 +1068,11 @@
                 if (filteredCmd.length) {
                     headerText += ' - ' + filteredCmd.length + ' complément' + bar.helper.pluralize(filteredCmd);
                     var $complement = $('<table class="striped bordered highlight">').appendTo($body);
-                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>')
+                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
                     filteredCmd.forEach(function (v, i) {
-                        $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>')
+                        if (bar.store.articles[i]) {
+                            $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
+                        }
                     });
                 }
             }
@@ -1017,10 +1111,8 @@
                     $(this).closest('.modal').modal('close');
                     Materialize.toast('Restauration terminée !', 2000);
                 });
-            var $el = $('<li><div class="collapsible-header truncate"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
+            return $('<li><div class="collapsible-header truncate"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
                 .append($body);
-
-            return $el;
         }
     });
 })(jQuery, O2);

@@ -6,23 +6,27 @@
         id : null,
         _commande : null,
         _oCommande : null,
+        prix: 0,
         __construct : function(oCommande) {
             var self = this;
-            this._commande = [];
+            this._commande = {};
             this._oCommande = {};
-            for (var i = 0; i < bar.store.articles.length; i++) {
-                this._commande[i] = 0;
-            }
-            if (typeof oCommande != 'undefined' && $.isPlainObject(oCommande)) {
+            // for (var i = 0; i < bar.store.articles.length; i++) {
+            //     this._commande[i] = 0;
+            // }
+            if (typeof oCommande !== 'undefined' && $.isPlainObject(oCommande)) {
                 this._oCommande = oCommande;
                 if (oCommande.cmd) {
-                    oCommande.cmd.forEach(function(v, i) {
-                        self._commande[i] += +v;
+                    $.each(oCommande.cmd, function(i, v) {
+                        var val = +v;
+                        if (val) {
+                            self.add(i, v);
+                        }
                     });
                 }
                 if (oCommande.user) {
                     oCommande.user.forEach(function(v) {
-                        ++self._commande[v];
+                        self.add(v, 1);
                     })
                 }
             }
@@ -33,27 +37,31 @@
             } else {
                 this._commande[idArticle] = qt;
             }
+            this.prix += bar.store.articles[idArticle].prix * qt;
             return this;
         },
         getCommande : function() {
-            var _aCommande = $.extend(true, [], bar.store.articles);
-            aCommande = this._commande.map(function(v, i) {
-                _aCommande[i]['qt'] = v;
-                return _aCommande[i];
+            return $.map(this._commande, function(v, i) {
+                if (bar.store.articles[i]) {
+                    var art = $.extend({}, bar.store.articles[i]);
+                    art['qt'] = v;
+                    return art;
+                }
+                return null;
             });
-            return aCommande;
         },
         getPrix : function() {
-            var prix = 0;
-            if (this._commande.length != 0) {
-                prix = this._commande.reduce(function(a, b, i) {
-                    if (b) {
-                        a += bar.store.articles[i]['prix'] * b;
-                    }
-                    return a;
-                });
-            }
-            return Math.round((prix*100)) / 100;
+            return Math.round((this.prix*100)) / 100;
+            // var prix = 0;
+            // if (this._commande.length !== 0) {
+            //     prix = this._commande.reduce(function(a, b, i) {
+            //         if (b) {
+            //             a += bar.store.articles[i]['prix'] * b;
+            //         }
+            //         return a;
+            //     }, prix);
+            // }
+            // return Math.round((prix*100)) / 100;
         },
         toLocalStorage : function () {
             var date = new Date().toJSON();
@@ -62,7 +70,7 @@
             bar.helper.storage.export(oJson);
         },
         _initDivision : function(nbCarte) {
-            if (typeof nbCarte == 'undefined') {
+            if (typeof nbCarte === 'undefined') {
                 throw 'Un nombre de carte est requis';
             }
             var _aCommandes = [], c;
@@ -78,13 +86,14 @@
             aCommande.forEach(function(el) {
                 if (el) {
                     for (var i = 0; i < el.qt; i++) {
-                        token = _aCommandes.reduce(bar.helper.reduce.byMethod('getPrix'));
+                        token = _aCommandes.reduce(bar.helper.reduce.byKey('prix'));
                         token.add(el.id, 1);
                     }
                 }
             });
             return _aCommandes;
         },
+
         /** Algo 1 :
          * 1 / Tri décroissant des articles par prix
          * 2 / Distribution récursive sur la carte la moins chargée
@@ -97,7 +106,7 @@
             aCommande = aCommande.sort(bar.helper.sort.byKey('prix'));
             this._tokenRing(aCommande, _aCommandes);
             return _aCommandes;
-        },
+        }
         /** Algo 2 :
          * 1/ Calcul du prix moyen après division sur les cartes
          * 2/ Répartition d'un groupe d'article sur une carte au plus proche de la moyenne

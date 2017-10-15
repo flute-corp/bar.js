@@ -6,21 +6,19 @@
         $contentWrapper : null,
         __construct : function() {
             this.$contentWrapper = $('#contentWrapper');
-            this.showHome();
         },
         showHome : function() {
             var $el, $aCat = [];
-            this._makeUserAddons();
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($('<div class="col s12">').appendTo(this.$contentWrapper));
-            bar.store.categories.forEach(function(oCat) {
+            $.each(bar.store.categories, function(i, oCat) {
                 $el = $('<div class="collapsible-body row">');
                 $aCat.push($el);
                 $('<li><div class="collapsible-header"><span class="badge"></span><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
                     .appendTo($accordion)
                     .append($el);
             });
-            bar.store.articles.forEach(function(oArt) {
+            $.each(bar.store.articles, function(i, oArt) {
                 $el = $('<div class="col s6 m3 artCard">' +
                     '<div class="card">' +
                     '<div class="card-image">' +
@@ -61,16 +59,16 @@
                 });
             $accordion.collapsible();
         },
-        _makeUserAddons : function() {
-            if (bar.store.users.length) {
+        makeUserAddons : function() {
+            if ($.isPlainObject(bar.store.users)) {
                 var $wrapper = $('<div class="input-field col s12">');
                 $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
                 var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
                 var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
                 var $modalContent = $('<div class="modal-content">').appendTo($modalWrapper);
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
-                bar.store.users.forEach(function(oUser, idUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.name || '???') +'</span></li>').appendTo($ul);
+                $.each(bar.store.users, function(idUser, oUser) {
+                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul);
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
@@ -79,8 +77,8 @@
                         });
                     }
                 });
-                $wrapper.append('<label>QuickBill</label>')
-                var $li = $ul.find('li')
+                $wrapper.append('<label class="active">QuickBill</label>');
+                var $li = $ul.find('li');
                 $li.on('click', function(e) {
                     var $this = $(this);
                     e.stopPropagation();
@@ -98,7 +96,7 @@
                     .find('input[type="checkbox"]')
                     .on('change', function() {
                         var articles = {};
-                        $this = $(this);
+                        var $this = $(this);
                         var $parent = $this.closest('li');
                         if ($this.prop('checked')) {
                             $parent.addClass('active');
@@ -124,7 +122,7 @@
                 this.$contentWrapper.on('reset', function() {
                     $li.removeClass('active');
                 });
-                $wrapper.appendTo(this.$contentWrapper);
+                $wrapper.prependTo(this.$contentWrapper);
                 $input
                     .on('click', function() {
                         window.location.hash = 'quickBill';
@@ -132,7 +130,7 @@
                 $modalWrapper.modal();
 
                 $(window).on('hashchange', function() {
-                    if ($modalWrapper.hasClass('open') && window.location.hash != '#quickBill') {
+                    if ($modalWrapper.hasClass('open') && window.location.hash !== '#quickBill') {
                         $modalWrapper.modal('close');
                     }
                 });
@@ -178,7 +176,7 @@
                 Materialize.toast('Le bar ne fait pas crédit !', 2000);
                 return;
             }
-            if (oCommande.getPrix() != 0) {
+            if (oCommande.getPrix() !== 0) {
                 var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 
                 var all$tab = this._getAll$tab(oCommande, nbCarte, algo);
@@ -227,7 +225,7 @@
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($modalContent);
             for (var date in oHistory) {
-                $accordion.prepend(this._get$accordion(date, oHistory[date]))
+                $accordion.prepend(this._get$accordion(date, oHistory[date]));
             }
             Materializer.createModal({
                 content : $modalContent,
@@ -252,10 +250,10 @@
                 if (filteredUser.length) {
                     headerText += ' - '+ filteredUser.length +' habitué'+ bar.helper.pluralize(filteredUser);
                     var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
-                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>')
+                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
                     oForm.user.forEach(function(v, i) {
-                        if (v != null) {
-                            $habitue.append('<tr><td>' + bar.store.users[i].name + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
+                        if (v !== null) {
+                            $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
                         }
                     });
                 }
@@ -265,9 +263,11 @@
                 if (filteredCmd.length) {
                     headerText += ' - ' + filteredCmd.length + ' complément' + bar.helper.pluralize(filteredCmd);
                     var $complement = $('<table class="striped bordered highlight">').appendTo($body);
-                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>')
+                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
                     filteredCmd.forEach(function (v, i) {
-                        $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>')
+                        if (bar.store.articles[i]) {
+                            $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
+                        }
                     });
                 }
             }
@@ -306,10 +306,8 @@
                     $(this).closest('.modal').modal('close');
                     Materialize.toast('Restauration terminée !', 2000);
                 });
-            var $el = $('<li><div class="collapsible-header truncate"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
+            return $('<li><div class="collapsible-header truncate"><i class="material-icons">&#xE889;</i>'+ headerText +'</div></li>')
                 .append($body);
-
-            return $el;
         }
     });
 })(jQuery, O2);

@@ -26,7 +26,8 @@
 @keyframes disappear {
     0%   { opacity: 1}
     60%  { opacity: 1}
-    100% { opacity: 0; visibility: hidden;}
+    99%  { opacity: 0; right: -100px;}
+    100% { right: auto;}
 }
 
 .disappear {
@@ -41,6 +42,7 @@
     z-index: 9999;
     width: 100%;
     color: #cdcdcd;
+    overflow: hidden;
 }
 
 .brand-logo img {

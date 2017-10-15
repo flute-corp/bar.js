@@ -60,6 +60,11 @@
                 return function(a, b) {
                     return a[mth]() <= b[mth]() ? a : b;
                 }
+            },
+            byKey : function(k) {
+                return function(a, b) {
+                    return a[k] <= b[k] ? a : b;
+                }
             }
         },
         "storage": {

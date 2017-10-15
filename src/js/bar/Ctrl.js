@@ -51,24 +51,6 @@
                     oCommande = new bar.Commande(oCommande);
                     oView.showFacture(oCommande, val);
                 });
-            $('input[type=number]')
-                .on('click', function() {
-                    this.select();
-                })
-                .on('change', function() {
-                    var $this = $(this);
-                    if (+$this.val() < 0) {
-                        Materialize.toast('Le bar ne fait pas crédit !', 2000);
-                        $this.val(0);
-                    }
-                    var $cBody = $this.closest('.collapsible-body');
-                    var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
-                        return a + (+v.value);
-                    }, 0);
-                    $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
-                });
-            $('select').material_select();
-            $('.splash').addClass('disappear');
 
             $('.help').on('click', function(e) {
                 e.preventDefault();
@@ -99,19 +81,59 @@
                 }
             });
 
-            var oStorage = bar.helper.storage.import();
-            if (oStorage) {
-                if (oStorage.tmp) {
-                    self.$contentWrapper.deserializeObject(oStorage.tmp);
-                    Materialize.toast('Commande temporaire restaurée', 2000);
-                }
-            } else {
-                this.discover();
-            }
+            this.init();
+        },
+        init: function () {
+            var self = this;
+            Materializer.ajax(bar.config.API_URL)
+                .done(function (data) {
+                    bar.store = data;
+                    Materializer.ajax(bar.config.API_URL +'login')
+                        .done(function (data) {
+                            if (data) {
+                                console.log(data);
+                            } else {
+
+                            }
+                        });
+                })
+                .always(function () {
+                    self.oView.showHome();
+                    self.oView.makeUserAddons();
+
+                    $('input[type="number"]')
+                        .on('click', function() {
+                            this.select();
+                        })
+                        .on('change', function() {
+                            var $this = $(this);
+                            if (+$this.val() < 0) {
+                                Materialize.toast('Le bar ne fait pas crédit !', 2000);
+                                $this.val(0);
+                            }
+                            var $cBody = $this.closest('.collapsible-body');
+                            var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
+                                return a + (+v.value);
+                            }, 0);
+                            $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
+                        });
+                    $('select').material_select();
+
+                    var oStorage = bar.helper.storage.import();
+                    if (oStorage) {
+                        if (oStorage.tmp) {
+                            self.$contentWrapper.deserializeObject(oStorage.tmp);
+                            Materialize.toast('Commande temporaire restaurée', 2000);
+                        }
+                    } else {
+                        this.discover();
+                    }
+                    self.$contentWrapper.materializeLayout();
+                    $('.splash').addClass('disappear');
+                });
         },
         _serializeForm : function() {
-            var oForm = this.$contentWrapper.serializeObject();
-            return oForm;
+            return this.$contentWrapper.serializeObject();
         },
         discover: function() {
             var id;
