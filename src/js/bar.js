@@ -15,7 +15,7 @@
             "id": 2,
             "cat": 0,
             "label": "Coca zero",
-            "desc": "Les bulles sont sans sucre mais avec le goût !",
+            "desc": "Les bulles sont sans sucre !",
             "prix": 1,
             "img": "coca-zero.jpg"
         },
@@ -547,7 +547,7 @@
      */
     O2.createObject('bar.config', {
         STORAGE_KEY: 'bar',
-        API_URL: (window.location.hostname === 'localhost' ? 'http://localhost/bar.php/web/app_dev.php/' : 'http://bar.nexk.fr/api/')
+        API_URL: (window.location.hostname === 'localhost' ? 'api/web/app_dev.php/' : 'api/web/')
     });
 })(jQuery, O2);;(function ($, O2) {
     /**
