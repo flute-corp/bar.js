@@ -51,11 +51,12 @@
     float: left;
 }
 
-#reset {
+#resetBtn, #loginBtn {
     right: 94px;
 }
 
-#reset i {
+
+#resetBtn i, #loginBtn i {
     width: inherit;
     display: inline-block;
     text-align: center;
@@ -180,13 +181,20 @@ input.invalid + label:not(.active):after {
 	padding-top: 10px;
 }
 .modal .fixed-tabs-wrapper .tabs {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 }
 .modal.bottom-sheet {
     max-height: 70%;
+}
+.modal.bottom-sheet.with-tabs .modal-content, .modal.bottom-sheet.with-tabs .modal-content p {
+    padding-top: 0;
+    margin-top: 0;
+}
+.modal.bottom-sheet.with-tabs .modal-content form {
+    height: 50vh;
 }
 .modal-list {
     margin: 0;

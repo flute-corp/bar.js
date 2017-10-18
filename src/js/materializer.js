@@ -115,7 +115,7 @@ var Materializer = (function($) {
         curModal++;
         var $modal = $('<div id="modal' + curModal + '" class="modal ' + settings.type + '"></div>');
         var $modalContent = $('<div class="modal-content">');
-        var $modalContentHeader = $('<h4>').append(settings.header);
+        if (settings.title) $('<h4>').append(settings.title).appendTo($modalContent);
         var $modalContentContent = $('<p>').append(settings.content);
         var $modalFooter = $('<div class="modal-footer">');
         $.each(settings.footer, function(key, button) {
@@ -128,7 +128,7 @@ var Materializer = (function($) {
             }
             $modalFooter.prepend($button);
         });
-        $modalContent.append($modalContentHeader, $modalContentContent);
+        $modalContent.append( $modalContentContent);
         $modal.append($modalContent, $modalFooter);
         $('body').append($modal);
         $modal.modal(settings);
@@ -156,22 +156,6 @@ var Materializer = (function($) {
         });
         return $overlay;
     }
-    // $(function() {
-        // var appName = document.title;
-//        $(window).on('hashchange', function(e) {
-//            methodAjax(this.location.hash);
-//            document.title = appName + ' - ' + this.location.hash;
-//            e.preventDefault();
-//        });
-//        $(document).on('submit', 'form', function(e) {
-//            action = $(this).attr('action') || window.location.hash;
-//            var prevent = methodAjax(action, this.target, this);
-//            e.preventDefault();
-//        });
-//        if (this.location.hash) {
-//            methodAjax(this.location.hash);
-//        }
-//     });
 
     /**
      * Function serializeObject
@@ -313,105 +297,6 @@ var Materializer = (function($) {
         });
         return this;
     };
-
-    /**
-     * Méthode de gestion des hamburger
-     *
-     * @return : this
-     */
-
-    (function ($) {
-        var methods = {
-            "init" : function() {
-                var $this = this;
-                if ($this.materialHamburger('isArrow')) {
-                    $this.materialHamburger('fromArrow');
-                } else {
-                    $this.materialHamburger('toArrow');
-                }
-                return this;
-            },
-            "toArrow" : function() {
-                var $this = this;
-                if (!$this.materialHamburger('isArrow')) {
-                    $this.children().removeClass('material-design-hamburger__icon--from-arrow').addClass('material-design-hamburger__icon--to-arrow');
-                }
-                return this;
-            },
-            "fromArrow" : function() {
-                var $this = this;
-                if ($this.materialHamburger('isArrow')) {
-                    $this.children().removeClass('material-design-hamburger__icon--to-arrow').addClass('material-design-hamburger__icon--from-arrow');
-                }
-                return this;
-            },
-            "isArrow" : function() {
-                var $this = this;
-                return $this.children().hasClass('material-design-hamburger__icon--to-arrow');
-            }
-        };
-         $.fn.materialHamburger = function(methodOrOptions) {
-            if ( methods[methodOrOptions] ) {
-                return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-            } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-                // Default to "init"
-                return methods.init.apply( this, arguments );
-            } else {
-                $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.materialHamburger' );
-            }
-            return this;
-         }; // Plugin end
-    }( jQuery ));
-
-    /**
-     * Méthode de gestion des fabs
-     *
-     * @return : this
-     */
-
-    (function ($) {
-        var methods = {
-            "init" : function(options) {
-                var $wrapper = this.find("fixed-action-btn")
-                if (!$wrapper[0]) {
-                    $wrapper = $('<div class="fixed-action-btn"></div>');
-                }
-                $wrapper.prependTo(this).addClass(options.orientation || 'horizontal');
-                if (options.clickToToggle) {
-                    $wrapper.addClass('click-to-toggle');
-                }
-
-                var $wrapperUl = $('<ul>').appendTo($wrapper);
-
-                for (var h in options.buttons) {
-                    var btn = options.buttons[h];
-                    var $button = $('<li data-tooltip="'+ h +'"><a class="btn-floating '+ (btn.color || 'green') +'" ><i class="material-icons">'+ (btn.icon || '&#xE3C9;') +'</i></a></li>');
-                    $wrapperUl.append($button);
-                    if (btn.callback) {
-                        btn.callback.apply(this, [$button]);
-                    }
-                }
-                this.on('mouseover',function() {
-                        $wrapper.openFAB();
-                    })
-                    .on('mouseleave', function() {
-                        $wrapper.closeFAB();
-                    });
-                return this;
-            }
-        };
-        $.fn.materialFAB = function(methodOrOptions) {
-            if ( methods[methodOrOptions] ) {
-                return methods[ methodOrOptions ].apply( this, Array.prototype.slice.call( arguments, 1 ));
-            } else if ( typeof methodOrOptions === 'object' || ! methodOrOptions ) {
-                // Default to "init"
-                return methods.init.apply( this, arguments );
-            } else {
-                $.error( 'Method ' +  methodOrOptions + ' does not exist on jQuery.materialFAB' );
-            }
-            return this;
-        }; // Plugin end
-    }( jQuery ));
 
     return {
         ajax : ajax,

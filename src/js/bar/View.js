@@ -8,18 +8,18 @@
             this.$contentWrapper = $('#contentWrapper');
         },
         showHome : function() {
-            var $el, $aCat = [];
+            var $aCat = {};
             var $accordion = $('<ul class="collapsible" data-collapsible="expandable">')
                 .appendTo($('<div class="col s12">').appendTo(this.$contentWrapper));
             $.each(bar.store.categories, function(i, oCat) {
-                $el = $('<div class="collapsible-body row">');
-                $aCat.push($el);
+                var $el = $('<div class="collapsible-body row">');
+                $aCat[oCat.id] = $el;
                 $('<li><div class="collapsible-header"><span class="badge"></span><i class="material-icons">'+ oCat.icon +'</i>'+ oCat.label +'</div></li>')
                     .appendTo($accordion)
                     .append($el);
             });
             $.each(bar.store.articles, function(i, oArt) {
-                $el = $('<div class="col s6 m3 artCard">' +
+                $('<div class="col s6 m3 artCard">' +
                     '<div class="card">' +
                     '<div class="card-image">' +
                     '<img class="activator" src="src/img/'+ ( oArt.img || '404.jpg') +'">' +
@@ -41,6 +41,7 @@
                     '</div>' +
                     '</div>')
                     .appendTo($aCat[oArt.cat]);
+
             });
             this.$contentWrapper
                 .find('.floatingArea .btn-floating')
@@ -61,24 +62,27 @@
         },
         makeUserAddons : function() {
             if ($.isPlainObject(bar.store.users)) {
-                var $wrapper = $('<div class="input-field col s12">');
+                if (this.$userAddons) {
+                    this.$userAddons.remove();
+                }
+                var $wrapper = this.$userAddons = $('<div class="input-field col s12">');
                 $('<i class="material-icons prefix">&#xE8EF;</i>').appendTo($wrapper);
                 var $input = $('<input data-target="quickBillModal" class="" readonly="true" data-activates="select-user-pref" value="Choisissez des participants..." type="text" />').appendTo($wrapper);
                 var $modalWrapper = $('<div id="quickBillModal" class="modal bottom-sheet">').appendTo($wrapper);
                 var $modalContent = $('<div class="modal-content">').appendTo($modalWrapper);
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
+                var $li = $();
                 $.each(bar.store.users, function(idUser, oUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul);
+                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul)
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
-                                $('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo($ul);
+                                $li.push($('<li class="optgroup-option"><span><input type="checkbox" name="user['+ idUser +']" value="'+ pref +'"><label></label>'+ bar.store.articles[pref].label +'</span></li>').appendTo($ul)[0]);
                             }
                         });
                     }
                 });
                 $wrapper.append('<label class="active">QuickBill</label>');
-                var $li = $ul.find('li');
                 $li.on('click', function(e) {
                     var $this = $(this);
                     e.stopPropagation();
