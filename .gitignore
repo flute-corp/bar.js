@@ -41,3 +41,6 @@ coverage
 clover
 _SpecRunner.html
 index_dev.html
+
+# API REST
+api/

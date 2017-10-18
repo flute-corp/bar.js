@@ -4,6 +4,6 @@
      */
     O2.createObject('bar.config', {
         STORAGE_KEY: 'bar',
-        API_URL: (window.location.hostname === 'localhost' ? 'http://localhost/bar.php/web/app_dev.php/' : 'http://bar.nexk.fr/api/')
+        API_URL: (window.location.hostname === 'localhost' ? 'api/web/app_dev.php/' : 'api/web/')
     });
 })(jQuery, O2);
