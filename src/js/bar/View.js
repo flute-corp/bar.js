@@ -21,23 +21,23 @@
             $.each(bar.store.articles, function(i, oArt) {
                 $('<div class="col s6 m3 artCard">' +
                     '<div class="card">' +
-                    '<div class="card-image">' +
-                    '<img class="activator" src="src/img/'+ ( oArt.img || '404.jpg') +'">' +
-                    '<div class="floatingArea">' +
-                    '<a class="btn-floating waves-effect waves-light orange"><i class="material-icons">&#xE15B;</i></a>' +
-                    '<input type="number" name="cmd['+ oArt.id +']" min="0" value="0"/>' +
-                    '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
-                    '</div>' +
-                    '</div>' +
-
-                    '<div class="card-content not-too-large">' +
-                    '<span class="card-title activator black-text truncate">'+ oArt.label +'</span>' +
-                    '<p>'+ oArt.prix +'€<i class="material-icons activator right">more_vert</i></p>' +
-                    '</div>' +
-                    '<div class="card-reveal">' +
-                    '<span class="card-title grey-text text-darken-4">'+ oArt.label +'<i class="material-icons right">close</i></span>' +
-                    '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
-                    '</div>' +
+                        '<div class="card-image">' +
+                            '<img class="activator" src="src/img/'+ oArt.id +'.jpg">' +
+                            '<div class="floatingArea">' +
+                                '<a class="btn-floating waves-effect waves-light orange"><i class="material-icons">&#xE15B;</i></a>' +
+                                '<input type="number" name="cmd['+ oArt.id +']" min="0" value="0"/>' +
+                                '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
+                            '</div>' +
+                            '<div class="starswitch"><label class="btn-floating waves-effect white"><input type="checkbox" '+ (bar.store.login && bar.store.login.pref.indexOf(oArt.id) !== -1 ? 'checked="checked"': '') +' name="fav[]" value="'+ oArt.id +'"><i class="material-icons blue-text star">&#xE838;</i><i class="material-icons black-text">&#xE83A;</i></label></div>' +
+                        '</div>' +
+                        '<div class="card-content not-too-large">' +
+                            '<span class="card-title activator black-text truncate">'+ oArt.label +'</span>' +
+                            '<p>'+ oArt.prix +'€<i class="material-icons activator right">more_vert</i></p>' +
+                        '</div>' +
+                        '<div class="card-reveal">' +
+                            '<span class="card-title grey-text text-darken-4">'+ oArt.label +'<i class="material-icons right">close</i></span>' +
+                            '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
+                        '</div>' +
                     '</div>' +
                     '</div>')
                     .appendTo($aCat[oArt.cat]);
@@ -61,8 +61,13 @@
             $accordion.collapsible();
         },
         makeUserAddons : function() {
+            var oldVal = null;
             if ($.isPlainObject(bar.store.users)) {
                 if (this.$userAddons) {
+                    var oUser = this.$contentWrapper.serializeObject()['user'];
+                    if (oUser) {
+                        oldVal = {user: this.$contentWrapper.serializeObject()['user']};
+                    }
                     this.$userAddons.remove();
                 }
                 var $wrapper = this.$userAddons = $('<div class="input-field col s12">');
@@ -138,6 +143,9 @@
                         $modalWrapper.modal('close');
                     }
                 });
+                if (oldVal) {
+                    this.$contentWrapper.deserializeObject(oldVal);
+                }
             }
         },
         _get$tab : function(title, oCommande) {

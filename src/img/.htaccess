@@ -1,0 +1,5 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+    RewriteRule \.(gif|jpe?g|png|bmp) 404.jpg [NC,L]
+</IfModule>

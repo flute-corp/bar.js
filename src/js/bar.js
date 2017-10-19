@@ -607,23 +607,28 @@
                 .on('click', function() {
                     var $modalContent = $('<div class="col s12">');
                     if (bar.store.login) {
+                        // Modify
                         $('<form class="col s12 active"><div class="row">' +
-                            '<div class="input-field col s6"><input id="m-label" name="label" value="'+ bar.store.login.label +'" type="text"><label for="m-label" class="active">Label</label></div>' +
+                            '<div class="input-field col s6"><input id="m-username" name="username" value="'+ bar.store.login.username +'" type="text"><label for="m-username" class="active">Username</label></div>' +
                             '<div class="input-field col s6"><input id="m-password" name="password" value="" type="password"><label for="m-password">Password (vide = pas de modification)</label></div>' +
+                            '<div class="input-field col s6"><input id="m-label" name="label" value="'+ bar.store.login.label +'" type="text"><label for="m-label" class="active">Label</label></div>' +
+                            '<div class="input-field col s6"><input id="m-password2" value="" type="password"><label for="m-password2">Confirmez password</label></div>' +
                             '<input class="hide" type="submit" />' +
                             '</div></form>')
                             .on('submit', function (e) {
                                 e.preventDefault();
-                                var data = $(this).serializeObject();
+                                var $this = $(this);
+                                var data = $this.serializeObject();
+                                if ($this.find("#m-password2").val() !== data.password) {
+                                    Materialize.toast('Les mots de passe ne sont pas identique',2000);
+                                    return;
+                                }
                                 data.id = bar.store.login.id;
-                                Materializer.ajax({
-                                    url: bar.config.API_URL + 'user',
-                                    method: 'POST',
-                                    data: JSON.stringify(data),
-                                    contentType: 'application/json'
-                                })
-                                    .done(function (data) {
-                                        $.extend(bar.store.login,data);
+                                if (!data.password) {
+                                    delete data.password;
+                                }
+                                self.flushProfile(data)
+                                    .done(function () {
                                         Materialize.toast('Votre profil à été mis à jour', 2000);
                                         self.oView.makeUserAddons();
                                         $modal.modal('close');
@@ -666,14 +671,8 @@
                             .on('submit', function (e) {
                                 e.preventDefault();
                                 var data = $(this).serializeObject();
-                                Materializer.ajax({
-                                    url: bar.config.API_URL + 'user',
-                                    method: 'POST',
-                                    data: JSON.stringify(data),
-                                    contentType: 'application/json'
-                                })
+                                self.flushProfile(data)
                                     .done(function (data) {
-                                        bar.store.users[data.id] = bar.store.login = data;
                                         Materialize.toast('Bienvenue ' + data.label, 2000);
                                         self.oView.makeUserAddons();
                                         $modal.modal('close');
@@ -699,6 +698,7 @@
                 e.preventDefault();
                 self.discover();
             });
+            var favTimeout = null;
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
                 if (oForm.cmd) {
@@ -707,12 +707,34 @@
                         delete oForm.cmd;
                     }
                 }
+                var fav = [];
+                if (oForm.fav) {
+                    fav = oForm.fav;
+                    delete oForm.fav;
+                }
+                if (bar.store.login) {
+                    if (favTimeout) {
+                        clearTimeout(favTimeout);
+                    }
+                    favTimeout = setTimeout(function () {
+                        if (JSON.stringify(bar.store.login.pref) !== JSON.stringify(fav.map(function (v) { return +v; }))) {
+                            self.flushProfile({
+                                id: bar.store.login.id,
+                                pref: fav.map(function (v) {
+                                    return {"id": v};
+                                })
+                            }).done(function () {
+                                Materialize.toast('Vos favoris ont été persistés', 2000);
+                                self.oView.makeUserAddons();
+                            });
+                        }
+                    }, 2000);
+                }
                 if ($.isEmptyObject(oForm)) {
                     self.$diviser.removeClass('scale-in').addClass('scale-out');
                     self.$reset.removeClass('scale-in').addClass('scale-out');
 
                     self.$restore.removeClass('scale-out').addClass('scale-in');
-                    self.$login.removeClass('scale-out').addClass('scale-in');
 
                     bar.helper.storage.export({'tmp': null });
                 } else {
@@ -720,7 +742,6 @@
                     self.$reset.removeClass('scale-out').addClass('scale-in');
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
-                    self.$login.removeClass('scale-in').addClass('scale-out');
 
                     bar.helper.storage.export({'tmp': self._serializeForm() });
                 }
@@ -737,44 +758,70 @@
                         .done(function (data) {
                             if (data) {
                                 bar.store.login = bar.store.users[data.id];
+                                $.extend(bar.store.login, data);
                                 Materialize.toast('Bonjour '+ data.label, 2000);
                             }
-                        });
-                })
-                .always(function () {
-                    self.oView.showHome();
-                    self.oView.makeUserAddons();
-
-                    $('input[type="number"]')
-                        .on('click', function() {
-                            this.select();
                         })
-                        .on('change', function() {
-                            var $this = $(this);
-                            if (+$this.val() < 0) {
-                                Materialize.toast('Le bar ne fait pas crédit !', 2000);
-                                $this.val(0);
-                            }
-                            var $cBody = $this.closest('.collapsible-body');
-                            var tot = $cBody.find('input').serializeArray().reduce(function(a, v) {
-                                return a + (+v.value);
-                            }, 0);
-                            $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
-                        });
-                    $('select').material_select();
+                        .always(function () {
+                            self.oView.showHome();
+                            self.oView.makeUserAddons();
 
-                    var oStorage = bar.helper.storage.import();
-                    if (oStorage) {
-                        if (oStorage.tmp) {
-                            self.$contentWrapper.deserializeObject(oStorage.tmp);
-                            Materialize.toast('Commande temporaire restaurée', 2000);
-                        }
-                    } else {
-                        this.discover();
-                    }
-                    self.$contentWrapper.materializeLayout();
-                    $('.splash').addClass('disappear');
+                            $('input[type="number"]')
+                                .on('click', function() {
+                                    this.select();
+                                })
+                                .on('change', function() {
+                                    var $this = $(this);
+                                    if (+$this.val() < 0) {
+                                        Materialize.toast('Le bar ne fait pas crédit !', 2000);
+                                        $this.val(0);
+                                    }
+                                    var $cBody = $this.closest('.collapsible-body');
+                                    var tot = $cBody.find('input[type="number"]').serializeArray().reduce(function(a, v) {
+                                        return a + (+v.value);
+                                    }, 0);
+                                    $cBody.siblings('.collapsible-header').find('.badge').text(tot ? tot:'');
+                                });
+                            $('select').material_select();
+
+                            var oStorage = bar.helper.storage.import();
+                            if (oStorage) {
+                                if (oStorage.tmp) {
+                                    self.$contentWrapper.deserializeObject(oStorage.tmp);
+                                    Materialize.toast('Commande temporaire restaurée', 2000);
+                                }
+                            } else {
+                                this.discover();
+                            }
+                            self.$contentWrapper.materializeLayout();
+                            $('.splash').addClass('disappear');
+                        });
                 });
+        },
+        flushProfile: function(data) {
+            if ($.isPlainObject(data)) {
+                var url;
+                if (data.id) {
+                    url = bar.config.API_URL + 'user';
+                } else {
+                    url = bar.config.API_URL + 'register';
+                }
+                return Materializer.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: JSON.stringify(data),
+                    contentType: 'application/json'
+                })
+                    .done(function (data) {
+                        var target = bar.store.users[data.id];
+                        if (target) {
+                            $.extend(target, data);
+                        } else {
+                            bar.store.users[data.id] = bar.store.login = data;
+                        }
+                    });
+            }
+            return null;
         },
         _serializeForm : function() {
             return this.$contentWrapper.serializeObject();
@@ -919,23 +966,23 @@
             $.each(bar.store.articles, function(i, oArt) {
                 $('<div class="col s6 m3 artCard">' +
                     '<div class="card">' +
-                    '<div class="card-image">' +
-                    '<img class="activator" src="src/img/'+ ( oArt.img || '404.jpg') +'">' +
-                    '<div class="floatingArea">' +
-                    '<a class="btn-floating waves-effect waves-light orange"><i class="material-icons">&#xE15B;</i></a>' +
-                    '<input type="number" name="cmd['+ oArt.id +']" min="0" value="0"/>' +
-                    '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
-                    '</div>' +
-                    '</div>' +
-
-                    '<div class="card-content not-too-large">' +
-                    '<span class="card-title activator black-text truncate">'+ oArt.label +'</span>' +
-                    '<p>'+ oArt.prix +'€<i class="material-icons activator right">more_vert</i></p>' +
-                    '</div>' +
-                    '<div class="card-reveal">' +
-                    '<span class="card-title grey-text text-darken-4">'+ oArt.label +'<i class="material-icons right">close</i></span>' +
-                    '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
-                    '</div>' +
+                        '<div class="card-image">' +
+                            '<img class="activator" src="src/img/'+ oArt.id +'.jpg">' +
+                            '<div class="floatingArea">' +
+                                '<a class="btn-floating waves-effect waves-light orange"><i class="material-icons">&#xE15B;</i></a>' +
+                                '<input type="number" name="cmd['+ oArt.id +']" min="0" value="0"/>' +
+                                '<a class="btn-floating waves-effect waves-light blue add"><i class="material-icons">&#xE145;</i></a>' +
+                            '</div>' +
+                            '<div class="starswitch"><label class="btn-floating waves-effect white"><input type="checkbox" '+ (bar.store.login && bar.store.login.pref.indexOf(oArt.id) !== -1 ? 'checked="checked"': '') +' name="fav[]" value="'+ oArt.id +'"><i class="material-icons blue-text star">&#xE838;</i><i class="material-icons black-text">&#xE83A;</i></label></div>' +
+                        '</div>' +
+                        '<div class="card-content not-too-large">' +
+                            '<span class="card-title activator black-text truncate">'+ oArt.label +'</span>' +
+                            '<p>'+ oArt.prix +'€<i class="material-icons activator right">more_vert</i></p>' +
+                        '</div>' +
+                        '<div class="card-reveal">' +
+                            '<span class="card-title grey-text text-darken-4">'+ oArt.label +'<i class="material-icons right">close</i></span>' +
+                            '<p>'+ (oArt.desc || 'Aucune description') +'</p>' +
+                        '</div>' +
                     '</div>' +
                     '</div>')
                     .appendTo($aCat[oArt.cat]);
@@ -959,8 +1006,13 @@
             $accordion.collapsible();
         },
         makeUserAddons : function() {
+            var oldVal = null;
             if ($.isPlainObject(bar.store.users)) {
                 if (this.$userAddons) {
+                    var oUser = this.$contentWrapper.serializeObject()['user'];
+                    if (oUser) {
+                        oldVal = {user: this.$contentWrapper.serializeObject()['user']};
+                    }
                     this.$userAddons.remove();
                 }
                 var $wrapper = this.$userAddons = $('<div class="input-field col s12">');
@@ -1036,6 +1088,9 @@
                         $modalWrapper.modal('close');
                     }
                 });
+                if (oldVal) {
+                    this.$contentWrapper.deserializeObject(oldVal);
+                }
             }
         },
         _get$tab : function(title, oCommande) {

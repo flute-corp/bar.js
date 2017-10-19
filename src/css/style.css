@@ -53,8 +53,14 @@
 
 #resetBtn, #loginBtn {
     right: 94px;
+    top: 44px;
 }
 
+#resetBtn.scale-in + #loginBtn {
+    /*right: 144px;*/
+    right: 68px;
+    top: 2px;
+}
 
 #resetBtn i, #loginBtn i {
     width: inherit;
@@ -257,4 +263,31 @@ input.invalid + label:not(.active):after {
 }
 .toast .btn-flat:hover {
     background: rgba(158,158,158,0.2);
+}
+
+.starswitch, .starswitch * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.starswitch label input[type="checkbox"] ~ i.material-icons.star {
+    transform: scale(0);
+    transition: all .3s ease-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.starswitch label input[type="checkbox"]:checked ~ i.material-icons.star {
+    transform: scale(1.1);
+}
+
+.artCard .starswitch {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-20%, 20%);
 }
