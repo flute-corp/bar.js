@@ -27,7 +27,7 @@
     0%   { opacity: 1}
     60%  { opacity: 1}
     99%  { opacity: 0; right: -100px;}
-    100% { right: auto;}
+    100% { right: auto; width: 0; visibility: hidden;}
 }
 
 .disappear {
