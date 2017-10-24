@@ -160,6 +160,6 @@
         config1.circleThickness = 0.2;
         config1.textVertPosition = 0.2;
         config1.waveAnimateTime = 1000;
-        loadLiquidFillGauge("fillgauge2", 28, config1);
+        loadLiquidFillGauge("glass", 28, config1);
     });
 })(jQuery);

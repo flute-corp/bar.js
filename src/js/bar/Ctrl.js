@@ -7,6 +7,7 @@
         $diviser : null,
         $reset: null,
         $login: null,
+        $glass: null,
         // $algoSelector : null,
         oView : null,
         __construct : function(oView) {
@@ -259,6 +260,9 @@
                             $('.splash').addClass('disappear');
                         });
                 });
+            this.$glass = $('#glass').one('click', function() {
+                self.easterEgg();
+            });
         },
         flushProfile: function(data) {
             if ($.isPlainObject(data)) {
@@ -296,6 +300,47 @@
                 id = 'restore';
             }
             $('.tap-target[data-activates="'+ id +'"]').tapTarget('open');
+        },
+        easterEgg: function() {
+            console.log('game started !');
+            var self = this;
+            var $glass = this.$glass;
+            var gameOver = false;
+            var start = null;
+            var alpha = 0;
+            var cssLeft = $glass.css('left');
+            var left = $glass.offset().left;
+            var borneMin = -250;
+            var borneMax = window.innerWidth;
+            window.addEventListener('deviceorientation', function(e) {
+                var a = +e.alpha;
+                if (a < 180) {
+                    alpha = -a;
+                } else {
+                    alpha = 360 - a;
+                }
+            });
+
+            function moveGlass(timestamp) {
+                if (start === null) start = timestamp;
+                if (left < borneMin || borneMax < left) {
+                    gameOver = true;
+                }
+                if (!gameOver) {
+                    left = left + alpha;
+                    $glass.css('left', left);
+                    requestAnimationFrame(moveGlass);
+                } else {
+                    Materialize.toast('Score : '+ parseInt(timestamp - start) / 1000 +'s', 2000);
+                    start = null;
+                    left = $glass.css('left', cssLeft).offset().left;
+                    gameOver = false;
+                    $glass.one('click', function() {
+                        requestAnimationFrame(moveGlass);
+                    })
+                }
+            }
+            requestAnimationFrame(moveGlass);
         }
     });
 })(jQuery, O2);
