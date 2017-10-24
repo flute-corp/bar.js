@@ -58,6 +58,7 @@
                     if (bar.store.login) {
                         // Modify
                         $('<form class="col s12 active"><div class="row">' +
+                            '<div class="col s12"><a class="btn-floating waves-effect waves-light red right" id="logoutBtn"><i class="material-icons">&#xE2C1;</i></a></div>' +
                             '<div class="input-field col s6"><input id="m-username" name="username" value="'+ bar.store.login.username +'" type="text"><label for="m-username" class="active">Username</label></div>' +
                             '<div class="input-field col s6"><input id="m-password" name="password" value="" type="password"><label for="m-password">Password (vide = pas de modification)</label></div>' +
                             '<div class="input-field col s6"><input id="m-label" name="label" value="'+ bar.store.login.label +'" type="text"><label for="m-label" class="active">Label</label></div>' +
@@ -83,7 +84,16 @@
                                         $modal.modal('close');
                                     });
                             })
-                            .appendTo($modalContent);
+                            .appendTo($modalContent)
+                            .find('#logoutBtn')
+                                .on('click', function() {
+                                    Materializer.ajax(bar.config.API_URL + 'logout')
+                                        .done(function () {
+                                            bar.store.login = null;
+                                            Materialize.toast('Vous êtes déconnecté', 2000);
+                                            $modal.modal('close');
+                                        });
+                                });
                     } else {
                         var $tabsWrapper = $('<ul class="tabs tabs-fixed-width">').appendTo($modalContent);
 
@@ -120,6 +130,9 @@
                             .on('submit', function (e) {
                                 e.preventDefault();
                                 var data = $(this).serializeObject();
+                                if (data.username) {
+                                    data.label = data.username;
+                                }
                                 self.flushProfile(data)
                                     .done(function (data) {
                                         Materialize.toast('Bienvenue ' + data.label, 2000);

@@ -41,8 +41,8 @@ var Materializer = (function($) {
                 $msg.append("<strong>Réponse de serveur :</strong><br/>").append(symfonyException);
             } else {
                 var json = JSON.parse(data);
-                if (typeof json == 'object') {
-                    $msg.append("<br/><strong>Réponse du serveur (JSON) :</strong><br/><p>" + parseException(json.error.exception) + '</p>');
+                if (typeof json === 'object') {
+                    $msg.append("<br/><strong>Réponse du serveur (JSON) :</strong><br/><p>" + json.message + '</p>');
                 } else {
                     $msg.append("<br/><strong>Réponse du serveur :</strong><br/><p>" + data + '</p>');
                 }

@@ -58,6 +58,16 @@
                     }
                     $input.trigger('change');
                 });
+            this.$contentWrapper
+                .find('.starswitch input')
+                .on('change', function() {
+                    var $this = $(this);
+                    if (this.checked) {
+                        $(this).attr('checked','checked');
+                    } else {
+                        $(this).attr('checked',null);
+                    }
+                });
             $accordion.collapsible();
         },
         makeUserAddons : function() {

@@ -1,9 +1,12 @@
 /**********************
         Général
 ***********************/
+footer {
+    position: relative;
+}
 #contentWrapper {
-	margin : 30px 0;
-    min-height: calc(100vh - 272px);
+	margin : 30px 0 250px;
+    min-height: calc(100vh - 272px - 220px);
 }
 @keyframes highlight {
     from    { background: #fff}
