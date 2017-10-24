@@ -302,23 +302,18 @@
             $('.tap-target[data-activates="'+ id +'"]').tapTarget('open');
         },
         easterEgg: function() {
-            console.log('game started !');
             var self = this;
             var $glass = this.$glass;
             var gameOver = false;
             var start = null;
             var alpha = 0;
+            var facteurAcceleration = 1;
             var cssLeft = $glass.css('left');
             var left = $glass.offset().left;
             var borneMin = -250;
             var borneMax = window.innerWidth;
-            window.addEventListener('deviceorientation', function(e) {
-                var a = +e.alpha;
-                if (a < 180) {
-                    alpha = -a;
-                } else {
-                    alpha = 360 - a;
-                }
+            window.addEventListener('devicemotion', function(e) {
+                alpha = - e.accelerationIncludingGravity.x * facteurAcceleration;
             });
 
             function moveGlass(timestamp) {
@@ -326,8 +321,11 @@
                 if (left < borneMin || borneMax < left) {
                     gameOver = true;
                 }
+                if (timestamp - start >= facteurAcceleration * 5000) {
+                    facteurAcceleration++;
+                }
                 if (!gameOver) {
-                    left = left + alpha;
+                    left = left + Math.round(alpha);
                     $glass.css('left', left);
                     requestAnimationFrame(moveGlass);
                 } else {
@@ -335,6 +333,7 @@
                     start = null;
                     left = $glass.css('left', cssLeft).offset().left;
                     gameOver = false;
+                    facteurAcceleration = 1;
                     $glass.one('click', function() {
                         requestAnimationFrame(moveGlass);
                     })
