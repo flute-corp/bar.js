@@ -115,6 +115,7 @@
                                 })
                                     .done(function (data) {
                                         bar.store.login = bar.store.users[data.id];
+                                        $.extend(bar.store.login, data);
                                         Materialize.toast('Bonjour ' + data.label, 2000);
                                         $modal.modal('close');
                                     });
@@ -312,8 +313,8 @@
             var left = $glass.offset().left;
             var borneMin = -250;
             var borneMax = window.innerWidth;
-            window.addEventListener('devicemotion', function(e) {
-                alpha = - e.accelerationIncludingGravity.x * facteurAcceleration;
+            window.addEventListener('deviceorientation', function(e) {
+                alpha = e.gamma * facteurAcceleration;
             });
 
             function moveGlass(timestamp) {
