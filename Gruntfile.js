@@ -174,7 +174,8 @@ module.exports = function(grunt) {
                         'node_modules/jasmine-jquery/lib/jasmine-jquery.js',
                         'lib/materialize/js/materialize.min.js',
                         'src/js/materializer.js',
-                        'lib/o876/o2.js'
+                        'lib/o876/o2.js',
+                        'http://d3js.org/d3.v3.min.js'
                     ],
                     styles: 'src/css/style.css',
                     specs: aSpecFiles,

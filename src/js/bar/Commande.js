@@ -20,7 +20,7 @@
                     $.each(oCommande.cmd, function(i, v) {
                         var val = +v;
                         if (val) {
-                            self.add(i, v);
+                            self.add(i, val);
                         }
                     });
                 }
