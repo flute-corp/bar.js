@@ -95,7 +95,7 @@
             },
             'export': function(oData) {
                 var oStorage = this._getStorage();
-                $.extend(true, oStorage, oData);
+                $.extend(oStorage, oData);
                 for (var k in oStorage) {
                     if (!oStorage[k]) {
                         delete oStorage[k];

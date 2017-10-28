@@ -133,7 +133,11 @@ module.exports = function(grunt) {
                             themeColor: '#1565c0',
                             manifest: {
                                 name: 'Bar.js',
-                                startUrl: 'http://bar.nexk.fr',
+                                shortName: 'Bar.js',
+                                description: "L'application de partage de l'apéro !",
+                                lang: "fr",
+                                scope: "/",
+                                startUrl: '/',
                                 display: 'standalone',
                                 orientation: 'notSet',
                                 onConflict: 'override',

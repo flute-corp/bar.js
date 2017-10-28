@@ -115,6 +115,12 @@
                                 })
                                     .done(function (data) {
                                         bar.store.login = bar.store.users[data.id];
+                                        var pref = bar.store.login.pref;
+                                        if (Array.isArray(pref)) {
+                                            self.$contentWrapper.find('[name="fav[]"]').filter(function() {
+                                                return pref.indexOf(+this.value) !== -1;
+                                            }).prop('checked', true).trigger('change');
+                                        }
                                         Materialize.toast('Bonjour ' + data.label, 2000);
                                         $modal.modal('close');
                                     });
@@ -206,7 +212,7 @@
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
 
-                    bar.helper.storage.export({'tmp': self._serializeForm() });
+                    bar.helper.storage.export({'tmp': oForm });
                 }
             });
 
