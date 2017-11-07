@@ -22,6 +22,7 @@ module.exports = function(config) {
             'lib/materialize/js/materialize.min.js',
             'src/js/materializer.js',
             'lib/o876/o2.js',
+            'lib/d3/d3.v4.min.js',
             // src
             'src/js/bar/store/*.js',
             'src/js/bar/**/*.js',
@@ -75,6 +76,10 @@ module.exports = function(config) {
                     type : 'clover',
                     dir : 'clover/'
                 },
+                // generates ./coverage/lcov.info
+                {type:'lcovonly', subdir: '.'},
+                // generates ./coverage/coverage-final.json
+                {type:'json', subdir: '.'}
             ]
         },
 

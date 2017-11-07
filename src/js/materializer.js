@@ -39,7 +39,7 @@ var Materializer = (function($) {
                     symfonyException = $.parseHTML(data)
                 }
                 $msg.append("<strong>Réponse de serveur :</strong><br/>").append(symfonyException);
-            } else {
+            } else if (data.match(/^[\[|\{]/)) { // JSON ?
                 var json = JSON.parse(data);
                 if (typeof json === 'object') {
                     $msg.append("<br/><strong>Réponse du serveur (JSON) :</strong><br/><p>" + json.message + '</p>');

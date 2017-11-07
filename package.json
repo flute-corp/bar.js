@@ -4,7 +4,8 @@
   "description": "L'application de partage de l'addition du bar",
   "main": "index.html",
   "scripts": {
-    "test": "grunt tests"
+    "test": "grunt tests",
+    "report-coverage": "codecov"
   },
   "repository": {
     "type": "git",
