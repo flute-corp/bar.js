@@ -2,14 +2,14 @@ var Materializer = (function($) {
     var $progress = $('#AjaxInProgress');
     function ajax(url, options) {
         $progress.show();
-        return $.ajax(url, options).error(ajaxError.bind(this)).always(function() {
+        return $.ajax(url, options).fail(ajaxError.bind(this)).always(function() {
             $progress.hide('slow');
         });
     }
 
     function getJSON(url, options, success) {
         $progress.show();
-        return $.getJSON(url, options, success).error(ajaxError.bind(this)).always(function() {
+        return $.getJSON(url, options, success).fail(ajaxError.bind(this)).always(function() {
             $progress.hide('slow');
         });
     }

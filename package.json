@@ -25,6 +25,11 @@
     "url": "https://github.com/DaedalusDev/bar.js/issues"
   },
   "homepage": "https://github.com/DaedalusDev/bar.js#readme",
+  "dependencies": {
+    "d3": "^4.11.0",
+    "jquery": "^3.2.1",
+    "materialize-css": "^0.100.2"
+  },
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-concurrent": "^2.3.1",
