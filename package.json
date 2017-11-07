@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "test": "grunt tests",
-    "report-coverage": "codecov"
+    "report-coverage": "karma start --single-run && codecov"
   },
   "repository": {
     "type": "git",
