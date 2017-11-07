@@ -402,11 +402,11 @@
         var fillPercent = 0.7;
         var waveHeightScale;
         if(config.waveHeightScaling){
-            waveHeightScale = d3.scale.linear()
+            waveHeightScale = d3.scaleLinear()
                 .range([0,config.waveHeight,0])
                 .domain([0,50,100]);
         } else {
-            waveHeightScale = d3.scale.linear()
+            waveHeightScale = d3.scaleLinear()
                 .range([config.waveHeight,config.waveHeight])
                 .domain([0,100]);
         }
@@ -438,21 +438,21 @@
         }
 
         // Scales for drawing the outer circle.
-        d3.scale.linear().range([0,2*Math.PI]).domain([0,1]);
-        d3.scale.linear().range([0,radius]).domain([0,radius]);
+        d3.scaleLinear().range([0,2*Math.PI]).domain([0,1]);
+        d3.scaleLinear().range([0,radius]).domain([0,radius]);
 
         // Scales for controlling the size of the clipping path.
-        var waveScaleX = d3.scale.linear().range([0,waveClipWidth]).domain([0,1]);
-        var waveScaleY = d3.scale.linear().range([0,waveHeight]).domain([0,1]);
+        var waveScaleX = d3.scaleLinear().range([0,waveClipWidth]).domain([0,1]);
+        var waveScaleY = d3.scaleLinear().range([0,waveHeight]).domain([0,1]);
 
         // Scales for controlling the position of the clipping path.
-        var waveRiseScale = d3.scale.linear()
+        var waveRiseScale = d3.scaleLinear()
         // The clipping area size is the height of the fill circle + the wave height, so we position the clip wave
         // such that the it will overlap the fill circle at all when at 0%, and will totally cover the fill
         // circle at 100%.
             .range([(fillCircleMargin+fillCircleRadius*2+waveHeight),(fillCircleMargin-waveHeight)])
             .domain([0,1]);
-        var waveAnimateScale = d3.scale.linear()
+        var waveAnimateScale = d3.scaleLinear()
             .range([0, waveClipWidth-fillCircleRadius*2]) // Push the clip area one full wave then snap back.
             .domain([0,1]);
 
@@ -461,10 +461,11 @@
             .attr('transform','translate('+locationX+','+locationY+')');
 
         // The clipping wave area.
-        var clipArea = d3.svg.area()
+        var clipArea = d3.area()
             .x(function(d) { return waveScaleX(d.x); } )
             .y0(function(d) { return waveScaleY(Math.sin(Math.PI*2*config.waveOffset*-1 + Math.PI*2*(1-config.waveCount) + d.y*2*Math.PI));} )
             .y1(function(d) { return (fillCircleRadius*2 + waveHeight); } );
+
         var waveGroup = gaugeGroup.append("defs")
             .append("clipPath")
             .attr("id", "clipWave" + elementId);
@@ -472,7 +473,6 @@
             .datum(data)
             .attr("d", clipArea)
             .attr("T", 0);
-
         // Make the wave rise. wave and waveGroup are separate so that horizontal and vertical movement can be controlled independently.
         var waveGroupXPosition = fillCircleMargin+fillCircleRadius*2-waveClipWidth;
         if(config.waveRise){
@@ -480,7 +480,9 @@
                 .transition()
                 .duration(config.waveRiseTime)
                 .attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')')
-                .each("start", function(){ wave.attr('transform','translate(1,0)'); }); // This transform is necessary to get the clip wave positioned correctly when waveRise=true and waveAnimate=false. The wave will not position correctly without this, but it's not clear why this is actually necessary.
+                .on('start', function(){
+                    wave.attr('transform','translate(1,0)');
+                }); // This transform is necessary to get the clip wave positioned correctly when waveRise=true and waveAnimate=false. The wave will not position correctly without this, but it's not clear why this is actually necessary.
         } else {
             waveGroup.attr('transform','translate('+waveGroupXPosition+','+waveRiseScale(fillPercent)+')');
         }
@@ -488,33 +490,35 @@
         if(config.waveAnimate) animateWave();
 
         function animateWave() {
-            wave.attr('transform','translate('+waveAnimateScale(wave.attr('T'))+',0)');
-            wave.transition()
-                .duration(config.waveAnimateTime * (1-wave.attr('T')))
-                .ease('linear')
-                .attr('transform','translate('+waveAnimateScale(1)+',0)')
-                .attr('T', 1)
-                .each('end', function(){
-                    wave.attr('T', 0);
-                    animateWave(config.waveAnimateTime);
-                });
+            if (!wave.empty()) {
+                wave.attr('transform', 'translate(' + waveAnimateScale(wave.attr('T')) + ',0)');
+                wave.transition()
+                    .duration(config.waveAnimateTime * (1 - wave.attr('T')))
+                    .ease(d3.easeLinear)
+                    .attr('transform', 'translate(' + waveAnimateScale(1) + ',0)')
+                    .attr('T', 1)
+                    .on('end', function () {
+                        wave.attr('T', 0);
+                        animateWave(config.waveAnimateTime);
+                    });
+            }
         }
         function GaugeUpdater(){
             this.update = function(value){
                 var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value))/config.maxValue;
                 var waveHeight = fillCircleRadius*waveHeightScale(fillPercent*100);
-                var waveRiseScale = d3.scale.linear()
+                var waveRiseScale = d3.scaleLinear()
                 // The clipping area size is the height of the fill circle + the wave height, so we position the clip wave
                 // such that the it will overlap the fill circle at all when at 0%, and will totally cover the fill
                 // circle at 100%.
                     .range([(fillCircleMargin+fillCircleRadius*2+waveHeight),(fillCircleMargin-waveHeight)])
                     .domain([0,1]);
                 var newHeight = waveRiseScale(fillPercent);
-                var waveScaleX = d3.scale.linear().range([0,waveClipWidth]).domain([0,1]);
-                var waveScaleY = d3.scale.linear().range([0,waveHeight]).domain([0,1]);
+                var waveScaleX = d3.scaleLinear().range([0,waveClipWidth]).domain([0,1]);
+                var waveScaleY = d3.scaleLinear().range([0,waveHeight]).domain([0,1]);
                 var newClipArea;
                 if(config.waveHeightScaling){
-                    newClipArea = d3.svg.area()
+                    newClipArea = d3.area()
                         .x(function(d) { return waveScaleX(d.x); } )
                         .y0(function(d) { return waveScaleY(Math.sin(Math.PI*2*config.waveOffset*-1 + Math.PI*2*(1-config.waveCount) + d.y*2*Math.PI));} )
                         .y1(function(d) { return (fillCircleRadius*2 + waveHeight); } );
@@ -527,11 +531,11 @@
                     .duration(0)
                     .transition()
                     .duration(config.waveAnimate?(config.waveAnimateTime * (1-wave.attr('T'))):(config.waveRiseTime))
-                    .ease('linear')
+                    .ease(d3.easeLinear)
                     .attr('d', newClipArea)
                     .attr('transform','translate('+newWavePosition+',0)')
                     .attr('T','1')
-                    .each("end", function(){
+                    .on("end", function(){
                         if(config.waveAnimate){
                             wave.attr('transform','translate('+waveAnimateScale(0)+',0)');
                             animateWave(config.waveAnimateTime);

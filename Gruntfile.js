@@ -175,7 +175,7 @@ module.exports = function(grunt) {
                         'lib/materialize/js/materialize.min.js',
                         'src/js/materializer.js',
                         'lib/o876/o2.js',
-                        'http://d3js.org/d3.v3.min.js'
+                        'lib/d3/d3.v4.min.js'
                     ],
                     styles: 'src/css/style.css',
                     specs: aSpecFiles,

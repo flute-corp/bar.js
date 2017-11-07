@@ -1,4 +1,138 @@
-<!DOCTYPE html><html lang="fr"><head>    <meta charset="utf-8">    <meta http-equiv="X-UA-Compatible" content="IE=edge">    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">    <meta name="description" content="">    <meta name="author" content="">    <title>Bar.js</title>    <link href="./lib/materialize/css/materialize.min.css" rel="stylesheet">    <link href="./lib/materialize/css/material-icon.css" rel="stylesheet">    <link href="./src/css/style.css" rel="stylesheet">    <meta name="apple-mobile-web-app-title" content="Bar.js">    <meta name="application-name" content="Bar.js">    <link rel="apple-touch-icon" sizes="57x57" href="./src/img/favicon/apple-touch-icon-57x57.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="60x60" href="./src/img/favicon/apple-touch-icon-60x60.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="72x72" href="./src/img/favicon/apple-touch-icon-72x72.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="76x76" href="./src/img/favicon/apple-touch-icon-76x76.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="114x114" href="./src/img/favicon/apple-touch-icon-114x114.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="120x120" href="./src/img/favicon/apple-touch-icon-120x120.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="144x144" href="./src/img/favicon/apple-touch-icon-144x144.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="152x152" href="./src/img/favicon/apple-touch-icon-152x152.png?v=WGa5Pq7KMj">    <link rel="apple-touch-icon" sizes="180x180" href="./src/img/favicon/apple-touch-icon-180x180.png?v=WGa5Pq7KMj">    <link rel="icon" type="image/png" sizes="32x32" href="./src/img/favicon/favicon-32x32.png?v=WGa5Pq7KMj">    <link rel="icon" type="image/png" sizes="194x194" href="./src/img/favicon/favicon-194x194.png?v=WGa5Pq7KMj">    <link rel="icon" type="image/png" sizes="192x192" href="./src/img/favicon/android-chrome-192x192.png?v=WGa5Pq7KMj">    <link rel="icon" type="image/png" sizes="16x16" href="./src/img/favicon/favicon-16x16.png?v=WGa5Pq7KMj">    <link rel="manifest" href="./src/img/favicon/manifest.json?v=WGa5Pq7KMj">    <link rel="mask-icon" href="./src/img/favicon/safari-pinned-tab.svg?v=WGa5Pq7KMj" color="#5bbad5">    <link rel="shortcut icon" href="./src/img/favicon/favicon.ico?v=WGa5Pq7KMj">    <meta name="apple-mobile-web-app-title" content="Bar.js">    <meta name="application-name" content="Bar.js">    <meta name="msapplication-TileColor" content="#cccccc">    <meta name="msapplication-TileImage" content="./src/img/favicon/mstile-144x144.png?v=WGa5Pq7KMj">    <meta name="msapplication-config" content="./src/img/favicon/browserconfig.xml?v=WGa5Pq7KMj">    <meta name="theme-color" content="#1565c0"></head><body>    <div class="navbar-fixed">        <nav class="blue darken-3">            <div class="nav-wrapper">                <a class="left brand-logo"><img src="./src/img/favicon/bar.svg" alt=""> <span class="hide-on-small-only">Bar</span></a>                <div class="container">                    <div class="row">                        <div class="input-field col offset-l3 l6 offset-m3 m6 offset-s2 s6">                            <input type="number" placeholder="Cartes ?" min="1" max="10" required value="2" class="blue darken-2" id="nbCarte">                            <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>                        </div>                        <!--<div class="input-field col l2 m3 s4">-->                        <!--<select id="algoSelector">-->                        <!--<option value="" disabled>Algo</option>-->                        <!--<option value="auPlusEquitable">Token ring</option>-->                        <!--<option value="auPlusSimple">Grouping</option>-->                        <!--</select>-->                        <!--</div>-->                        <a class="btn-floating scale-transition scale-out halfway-fab waves-effect waves-light red" id="resetBtn"><i class="material-icons">&#xE928;</i></a>                        <a class="btn-floating halfway-fab waves-effect waves-light green" id="loginBtn"><i class="material-icons">&#xE853;</i></a>                        <a class="btn-floating btn-large scale-transition scale-out halfway-fab waves-effect waves-light blue" id="diviserBtn">                            <i class="material-icons">receipt</i>                            <!-- code précédent : &#xE8EC; -->                            <!-- autre code pas mal : "receip, done_all" -->                        </a>                        <a class="btn-floating btn-large scale-transition scale-in halfway-fab waves-effect waves-light orange" id="restoreBtn">                            <i class="material-icons">restore</i>                            <!-- code précédent : &#xE8EC; -->                            <!-- autre code pas mal : "receip, done_all" -->                        </a>                    </div>                </div>            </div>        </nav>    </div>    <div class="container-fluid">        <form id="contentWrapper" class="row"></form>    </div>    <footer class="page-footer blue darken-3">        <div style="position:absolute; height:250px; width: 100%; top: -250px; overflow: hidden;">        <svg style="position:absolute;left: calc(50% - 125px);" xmlns="http://www.w3.org/2000/svg" fill="#000000" height="250" viewbox="0 0 23 23" width="250" id="glass" version="1.1">            <path d="M0 0h24v24H0z" fill="none" id="path6"/>            <g id="g4157">                <circle style="fill:#ffeb3b;fill-opacity:1;stroke:#fff176;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" id="path5361" cx="17.5" cy="6.5" r="4.5"/>                <path id="path4139" d="m 17.5,2 0,9" style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>                <path style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 22,6.5 -9,0" id="path4151"/>                <path id="path4153" d="M 20.681981,9.6819805 14.318019,3.3180195" style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>                <path style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 14.31802,9.681981 20.681981,3.318019" id="path4155"/>            </g>            <path id="path5395" d="M 12,12 0.04964804,3" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>            <path id="liquid" d="m 3,7 14,0 -7,7 z" style="opacity:0.98999999;fill:#d27001;fill-opacity:0.78431373;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>            <path id="path4" d="m 19,7 0,-2 -18,0 0,2 8,9 0,5 -5,0 0,2 12,0 0,-2 -5,0 0,-5 z M 10,14 3.66,7 16.35,7 Z"/>        </svg>    </div>        <div class="container">            <div class="row">                <div class="col s6">                    <h5 class="white-text">Contribuez !</h5>                </div>                <div class="col s6">                    <a class="btn waves-effect waves-light" target="_blank" href="https://github.com/DaedalusDev/bar.js">GitHub</a>                </div>            </div>        </div>        <div class="footer-copyright">            <div class="container">                © 2017 Flûte corporation                <a class="grey-text text-lighten-4 right help" href="#!">Besoin d'aide ?</a>            </div>        </div>    </footer>    <div class="splash center-align"><h1>Bar.js</h1></div>    <!-- Tap Target Structure -->    <div class="tap-target cyan" data-activates="diviser">        <div class="tap-target-content">            <h5>Vous y êtes presque !</h5>            <p>Choisissez un nombre de carte et cliquez-ici pour afficher l'addition</p>        </div>    </div>    <div class="tap-target orange" data-activates="restore">        <div class="tap-target-content">            <h5>Vous manquez d'inspiration ?</h5>            <p>Cliquez-ici pour accéder à l'historique</p>        </div>    </div>    <script src="./lib/jquery/jquery.js"></script>    <script src="./lib/materialize/js/materialize.min.js"></script>    <script src="./lib/o876/o2.js"></script>    <script src="./src/js/materializer.js"></script>    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>    <!-- injector:js -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Bar.js</title>
+
+    <link href="./lib/materialize/css/materialize.min.css" rel="stylesheet">
+    <link href="./lib/materialize/css/material-icon.css" rel="stylesheet">
+    <link href="./src/css/style.css" rel="stylesheet">
+
+    <meta name="apple-mobile-web-app-title" content="Bar.js">
+    <meta name="application-name" content="Bar.js">
+    <link rel="apple-touch-icon" sizes="57x57" href="./src/img/favicon/apple-touch-icon-57x57.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="60x60" href="./src/img/favicon/apple-touch-icon-60x60.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="72x72" href="./src/img/favicon/apple-touch-icon-72x72.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="76x76" href="./src/img/favicon/apple-touch-icon-76x76.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="114x114" href="./src/img/favicon/apple-touch-icon-114x114.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="120x120" href="./src/img/favicon/apple-touch-icon-120x120.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="144x144" href="./src/img/favicon/apple-touch-icon-144x144.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="152x152" href="./src/img/favicon/apple-touch-icon-152x152.png?v=WGa5Pq7KMj">
+    <link rel="apple-touch-icon" sizes="180x180" href="./src/img/favicon/apple-touch-icon-180x180.png?v=WGa5Pq7KMj">
+    <link rel="icon" type="image/png" sizes="32x32" href="./src/img/favicon/favicon-32x32.png?v=WGa5Pq7KMj">
+    <link rel="icon" type="image/png" sizes="194x194" href="./src/img/favicon/favicon-194x194.png?v=WGa5Pq7KMj">
+    <link rel="icon" type="image/png" sizes="192x192" href="./src/img/favicon/android-chrome-192x192.png?v=WGa5Pq7KMj">
+    <link rel="icon" type="image/png" sizes="16x16" href="./src/img/favicon/favicon-16x16.png?v=WGa5Pq7KMj">
+    <link rel="manifest" href="./src/img/favicon/manifest.json?v=WGa5Pq7KMj">
+    <link rel="mask-icon" href="./src/img/favicon/safari-pinned-tab.svg?v=WGa5Pq7KMj" color="#5bbad5">
+    <link rel="shortcut icon" href="./src/img/favicon/favicon.ico?v=WGa5Pq7KMj">
+    <meta name="apple-mobile-web-app-title" content="Bar.js">
+    <meta name="application-name" content="Bar.js">
+    <meta name="msapplication-TileColor" content="#cccccc">
+    <meta name="msapplication-TileImage" content="./src/img/favicon/mstile-144x144.png?v=WGa5Pq7KMj">
+    <meta name="msapplication-config" content="./src/img/favicon/browserconfig.xml?v=WGa5Pq7KMj">
+    <meta name="theme-color" content="#1565c0">
+
+</head>
+<body>
+    <div class="navbar-fixed">
+        <nav class="blue darken-3">
+            <div class="nav-wrapper">
+                <a class="left brand-logo"><img src="./src/img/favicon/bar.svg" alt=""> <span class="hide-on-small-only">Bar</span></a>
+                <div class="container">
+                    <div class="row">
+                        <div class="input-field col offset-l3 l6 offset-m3 m6 offset-s2 s6">
+                            <input type="number" placeholder="Cartes ?" min="1" max="10" required value="2" class="blue darken-2" id="nbCarte">
+                            <label for="nbCarte" class="label-icon active"><i class="material-icons">&#xE870;</i></label>
+                        </div>
+                        <!--<div class="input-field col l2 m3 s4">-->
+                        <!--<select id="algoSelector">-->
+                        <!--<option value="" disabled>Algo</option>-->
+                        <!--<option value="auPlusEquitable">Token ring</option>-->
+                        <!--<option value="auPlusSimple">Grouping</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <a class="btn-floating scale-transition scale-out halfway-fab waves-effect waves-light red" id="resetBtn"><i class="material-icons">&#xE928;</i></a>
+                        <a class="btn-floating halfway-fab waves-effect waves-light green" id="loginBtn"><i class="material-icons">&#xE853;</i></a>
+                        <a class="btn-floating btn-large scale-transition scale-out halfway-fab waves-effect waves-light blue" id="diviserBtn">
+                            <i class="material-icons">receipt</i>
+                            <!-- code précédent : &#xE8EC; -->
+                            <!-- autre code pas mal : "receip, done_all" -->
+                        </a>
+
+                        <a class="btn-floating btn-large scale-transition scale-in halfway-fab waves-effect waves-light orange" id="restoreBtn">
+                            <i class="material-icons">restore</i>
+                            <!-- code précédent : &#xE8EC; -->
+                            <!-- autre code pas mal : "receip, done_all" -->
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <form id="contentWrapper" class="row"></form>
+    </div>
+    <footer class="page-footer blue darken-3">
+        <div style="position:absolute; height:250px; width: 100%; top: -250px; overflow: hidden;">
+        <svg style="position:absolute;left: calc(50% - 125px);" xmlns="http://www.w3.org/2000/svg" fill="#000000" height="250" viewbox="0 0 23 23" width="250" id="glass" version="1.1">
+            <path d="M0 0h24v24H0z" fill="none" id="path6"/>
+            <g id="g4157">
+                <circle style="fill:#ffeb3b;fill-opacity:1;stroke:#fff176;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" id="path5361" cx="17.5" cy="6.5" r="4.5"/>
+                <path id="path4139" d="m 17.5,2 0,9" style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+                <path style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="m 22,6.5 -9,0" id="path4151"/>
+                <path id="path4153" d="M 20.681981,9.6819805 14.318019,3.3180195" style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+                <path style="fill:none;fill-rule:evenodd;stroke:#fff176;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" d="M 14.31802,9.681981 20.681981,3.318019" id="path4155"/>
+            </g>
+            <path id="path5395" d="M 12,12 0.5,3.5" style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+            <path id="liquid" d="m 3,7 14,0 -7,7 z" style="opacity:0.98999999;fill:#d27001;fill-opacity:0.78431373;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
+            <path id="path4" d="m 19,7 0,-2 -18,0 0,2 8,9 0,5 -5,0 0,2 12,0 0,-2 -5,0 0,-5 z M 10,14 3.66,7 16.35,7 Z"/>
+        </svg>
+    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col s6">
+                    <h5 class="white-text">Contribuez !</h5>
+                </div>
+                <div class="col s6">
+                    <a class="btn waves-effect waves-light" target="_blank" href="https://github.com/DaedalusDev/bar.js">GitHub</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2017 Flûte corporation
+                <a class="grey-text text-lighten-4 right help" href="#!">Besoin d'aide ?</a>
+            </div>
+        </div>
+    </footer>
+    <div class="splash center-align"><h1>Bar.js</h1></div>
+
+    <!-- Tap Target Structure -->
+    <div class="tap-target cyan" data-activates="diviser">
+        <div class="tap-target-content">
+            <h5>Vous y êtes presque !</h5>
+            <p>Choisissez un nombre de carte et cliquez-ici pour afficher l'addition</p>
+        </div>
+    </div>
+    <div class="tap-target orange" data-activates="restore">
+        <div class="tap-target-content">
+            <h5>Vous manquez d'inspiration ?</h5>
+            <p>Cliquez-ici pour accéder à l'historique</p>
+        </div>
+    </div>
+    <script src="./lib/jquery/jquery.js"></script>
+    <script src="./lib/materialize/js/materialize.min.js"></script>
+    <script src="./lib/o876/o2.js"></script>
+    <script src="./src/js/materializer.js"></script>
+    <script src="./lib/d3/d3.v4.min.js"></script>
+    <!-- injector:js -->
     <script src="./src/js/bar/store/articles.js"></script>
     <script src="./src/js/bar/store/categories.js"></script>
     <script src="./src/js/bar/store/users.js"></script>
@@ -8,4 +142,8 @@
     <script src="./src/js/bar/Ctrl.js"></script>
     <script src="./src/js/bar/helper.js"></script>
     <script src="./src/js/bar/View.js"></script>
-    <!-- endinjector -->    <script src="./src/js/main.js"></script></body></html>
+    <!-- endinjector -->
+    <script src="./src/js/main.js"></script>
+
+</body>
+</html>

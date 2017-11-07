@@ -4,7 +4,7 @@
   "description": "L'application de partage de l'addition du bar",
   "main": "index.html",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "grunt tests"
   },
   "repository": {
     "type": "git",
