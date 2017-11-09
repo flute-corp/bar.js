@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/github/package-json/v/DaedalusDev/bar.js.svg" alt="Version">
   <a href="https://github.com/DaedalusDev/bar.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/DaedalusDev/bar.js.svg" alt="License"></a>
   <img src="https://img.shields.io/github/languages/top/DaedalusDev/bar.js.svg" alt="Top language">
-  <img src="https://img.shields.io/github/commits/DaedalusDev/bar.js/last.svg" alt="Last commit">
+  <img src="https://img.shields.io/github/last-commit/DaedalusDev/bar.js.svg" alt="Last commit">
   <br>
   <a href="https://travis-ci.org/DaedalusDev/bar.js" target="_blank"><img src="https://travis-ci.org/DaedalusDev/bar.js.svg?branch=master" alt="Build Status"></a>
   <a href="https://github.com/DaedalusDev/bar.js/issues"><img src="https://img.shields.io/github/issues/DaedalusDev/bar.js.svg" alt="Issues Status"></a>
