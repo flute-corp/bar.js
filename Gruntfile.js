@@ -74,7 +74,7 @@ module.exports = function(grunt) {
                 // the files to concatenate
                 src: aBarFiles,
                 // the location of the resulting JS file
-                dest: 'src/js/bar.js'
+                dest: 'dist/js/bar.js'
             }
         },
         //  Uglify
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 files: {
-                    'src/js/bar.min.js': ['src/js/bar.js']
+                    'dist/js/bar.min.js': ['dist/js/bar.js']
                 }
             }
         },
@@ -210,6 +210,14 @@ module.exports = function(grunt) {
                     interrupt: false,
                     spawn: false
                 }
+            },
+            html: {
+                files: 'index.html',
+                tasks: ['dev-start'],
+                options: {
+                    interrupt: false,
+                    spawn: false
+                }
             }
         },
         //  Concurrent
@@ -219,7 +227,7 @@ module.exports = function(grunt) {
                 limit: 10
             },
             monitor: {
-                tasks: ["watch:favicon", "watch:js", "watch:tests"]
+                tasks: ["watch:html", "watch:favicon", "watch:js", "watch:tests"]
             }
         }
     });
@@ -243,16 +251,18 @@ module.exports = function(grunt) {
     ]);
     grunt.registerTask('dev-start', [
         "copy:index",
+
         "replace:index_dev",
-        "injector:index_dev"
+        "injector:index_dev",
+
+        "copy:fixture",
+        "replace:fixture"
     ]);
     grunt.registerTask('dev', [
         "concat:js",
         "tests"
     ]);
     grunt.registerTask('tests', [
-        "copy:fixture",
-        "replace:fixture",
         "jasmine"
     ]);
 };

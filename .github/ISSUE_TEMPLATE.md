@@ -1,19 +1,19 @@
-###Version
+### Version
 
 <!-- 1.0.0 -->
 
-###Reproduction link
+### Reproduction link
 
 <!-- https://jsfiddle.net/smyv26u2/ -->
 
-###Steps to reproduce
+### Steps to reproduce
 
 <!-- Press the bill button -->
 
-###What is expected?
+### What is expected?
 
 <!-- Share the bill ! -->
 
-###What is actually happening?
+### What is actually happening?
 
 <!-- BSOD ! -->

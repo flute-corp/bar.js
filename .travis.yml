@@ -4,4 +4,5 @@ node_js:
 before_install:
   - npm install -g grunt-cli karma codecov
 script:
-  - karma start --single-run --browsers PhantomJS && codecov
+  - karma start --single-run --browsers PhantomJS
+  - codecov
