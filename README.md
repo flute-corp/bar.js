@@ -21,4 +21,4 @@
 
 # Contribuer
 
-Pour contribuez suivez le [Contributing Guide](https://github.com/DaedalusDev/bar.js/blob/master/.github/CONTRIBUTING.md)
+Pour contribuer, suivez le [Contributing Guide](https://github.com/DaedalusDev/bar.js/blob/master/.github/CONTRIBUTING.md)
