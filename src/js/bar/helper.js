@@ -12,55 +12,20 @@
             }
             return +el > 1 ? 's' : '';
         },
-        "delete": {
-            "null": function (v, i, a) {
-                if (v === null) {
-                    delete a[i];
-                }
-            },
-            "zero": function (v, i, a) {
-                if (v === null || v === undefined) {
-                    return;
-                }
-                if (v.toString() === '0') {
-                    delete a[i];
-                }
-            },
-            "empty": function (v, i, a) {
-                if (!+v) {
-                    delete a[i];
-                }
-            }
-        },
-        "filter": {
-            "null" : function (v) {
-                return v !== null;
-            },
-            "zero" : function (v) {
-                return v.toString() !== '0';
-            },
-            "empty" : function (v) {
-                return +v;
-            }
-        },
         "sort": {
-            byKey : function(k) {
+            byKey : function(k, desc) {
+                desc = desc | false;
                 return function(a, b) {
-                    if (a[k] > b[k])
-                        return -1;
                     if (a[k] < b[k])
-                        return 1;
+                        return desc ? 1 : -1;
+                    if (a[k] > b[k])
+                        return desc ? -1 : 1;
                     // a doit être égal à b
                     return 0;
                 }
             }
         },
         "reduce": {
-            byMethod : function(mth) {
-                return function(a, b) {
-                    return a[mth]() <= b[mth]() ? a : b;
-                }
-            },
             byKey : function(k) {
                 return function(a, b) {
                     return a[k] <= b[k] ? a : b;
@@ -76,26 +41,37 @@
                 localStorage.setItem(bar.config.STORAGE_KEY, JSON.stringify(o));
             },
             'import': function() {
-                var oJson = this._getStorage();
-                var oCur;
-                if (oJson) {
-                    for (var date in oJson) {
-                        if (oJson.hasOwnProperty(date) && oJson.date) {
-                            oCur = oJson[date];
-                            if (oCur.hasOwnProperty('user')) {
-                                oCur.user.forEach(bar.helper.delete.null);
-                            }
-                            if (oCur.hasOwnProperty('cmd')) {
-                                oCur.cmd.forEach(bar.helper.delete.empty);
-                            }
+                // var oCur;
+                // if (oJson) {
+                //     for (var date in oJson) {
+                //         if (oJson.hasOwnProperty(date) && oJson.date) {
+                //             oCur = oJson[date];
+                //             if (oCur.hasOwnProperty('user')) {
+                //                 oCur.user.forEach(bar.helper.delete.null);
+                //             }
+                //             if (oCur.hasOwnProperty('cmd')) {
+                //                 oCur.cmd.forEach(bar.helper.delete.empty);
+                //             }
+                //         }
+                //     }
+                // }
+                return this._getStorage();
+            },
+            'export': function(oData) {
+                var copy = $.extend(true, {}, oData);
+                for(var key in copy) {
+                    if (copy[key]) {
+                        if (copy[key].hasOwnProperty('user')) {
+                            copy[key]['user'] = $.extend({}, copy[key]['user']);
+                        }
+                        if (copy[key].hasOwnProperty('cmd')) {
+                            copy[key]['cmd'] = $.extend({}, copy[key]['cmd']);
                         }
                     }
                 }
-                return oJson;
-            },
-            'export': function(oData) {
+
                 var oStorage = this._getStorage();
-                $.extend(oStorage, oData);
+                $.extend(oStorage, copy);
                 for (var k in oStorage) {
                     if (!oStorage[k]) {
                         delete oStorage[k];
@@ -105,4 +81,15 @@
             }
         }
     });
+
+    Date.prototype.toFrench = function () {
+        var months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        function zeroInitial(n) {
+            if (+n < 10) {
+                return "0"+ n;
+            }
+            return n;
+        }
+        return zeroInitial(this.getDate()) + " " + months[this.getMonth()] + " " + this.getFullYear() +" à "+ zeroInitial(this.getHours()) +":"+ zeroInitial(this.getMinutes()) +":"+ zeroInitial(this.getSeconds());
+    };
 })(jQuery, O2);

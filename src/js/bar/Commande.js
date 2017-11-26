@@ -37,7 +37,9 @@
             } else {
                 this._commande[idArticle] = qt;
             }
-            this.prix += bar.store.articles[idArticle].prix * qt;
+            if (bar.store.articles[idArticle]) {
+                this.prix += bar.store.articles[idArticle].prix * qt;
+            }
             return this;
         },
         getCommande : function() {
@@ -47,7 +49,6 @@
                     art['qt'] = v;
                     return art;
                 }
-                return null;
             });
         },
         getPrix : function() {
@@ -103,7 +104,7 @@
             // Calcul
             var aCommande = this.getCommande();
             // Tri par prix
-            aCommande = aCommande.sort(bar.helper.sort.byKey('prix'));
+            aCommande = aCommande.sort(bar.helper.sort.byKey('prix', true));
             this._tokenRing(aCommande, _aCommandes);
             return _aCommandes;
         }

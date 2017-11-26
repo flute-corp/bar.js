@@ -115,7 +115,7 @@
                                 })
                                     .done(function (data) {
                                         bar.store.login = bar.store.users[data.id];
-                                        $.extend(bar.store.login, data);
+                                        bar.store.login = $.extend(bar.store.login, data);
                                         var pref = bar.store.login.pref;
                                         if (Array.isArray(pref)) {
                                             self.$contentWrapper.find('[name="fav[]"]').filter(function() {
@@ -171,11 +171,8 @@
             var favTimeout = null;
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
-                if (oForm.cmd) {
-                    oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
-                    if (!oForm.cmd.length) {
-                        delete oForm.cmd;
-                    }
+                if ($.isEmptyObject(oForm.cmd)) {
+                    delete oForm.cmd;
                 }
                 var fav = [];
                 if (oForm.fav) {
@@ -183,13 +180,14 @@
                     delete oForm.fav;
                 }
                 if (bar.store.login) {
+                    var login = bar.store.login;
                     if (favTimeout) {
                         clearTimeout(favTimeout);
                     }
                     favTimeout = setTimeout(function () {
-                        if (JSON.stringify(bar.store.login.pref) !== JSON.stringify(fav.map(function (v) { return +v; }))) {
+                        if (JSON.stringify(login.pref) !== JSON.stringify(fav.map(function (v) { return +v; }))) {
                             self.flushProfile({
-                                id: bar.store.login.id,
+                                id: login.id,
                                 pref: fav.map(function (v) {
                                     return {"id": v};
                                 })
@@ -212,7 +210,6 @@
                     self.$reset.removeClass('scale-out').addClass('scale-in');
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
-
                     bar.helper.storage.export({'tmp': oForm });
                 }
             });
@@ -292,10 +289,20 @@
                         }
                     });
             }
-            return null;
+            return $.Deferred().reject({error:'Aucune données'}).promise();
         },
         _serializeForm : function() {
-            return this.$contentWrapper.serializeObject();
+            var json = this.$contentWrapper.serializeObject();
+            var cmd = {};
+            if (json.cmd) {
+                json.cmd.forEach(function(v, i) { // Clean '0'
+                    if (v !== '0') {
+                        cmd[i] = v;
+                    }
+                });
+                json.cmd = cmd;
+            }
+            return json;
         },
         discover: function() {
             var id;

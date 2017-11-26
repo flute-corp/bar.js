@@ -177,7 +177,11 @@ module.exports = function(grunt) {
                         'lib/o876/o2.js',
                         'lib/d3/d3.v4.min.js'
                     ],
-                    styles: 'src/css/style.css',
+                    styles: [
+                        'lib/materialize/css/materialize.min.css',
+                        'lib/materialize/css/material-icon.css',
+                        'src/css/style.css'
+                    ],
                     specs: aSpecFiles,
                     helpers: 'tests/helper.js',
                     keepRunner : true

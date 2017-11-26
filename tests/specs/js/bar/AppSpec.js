@@ -1,6 +1,8 @@
 describe('bar.App', function() {
-    var oApp = new bar.App();
     describe('__construct :', function() {
+        mockUrl(bar.config.API_URL, null);
+        mockUrl(bar.config.API_URL + 'login', false);
+        var oApp = new bar.App();
         it('Create bar.View', function() {
             expect(oApp.oView).toBeDefined();
         });

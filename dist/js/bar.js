@@ -5,7 +5,7 @@
     O2.createObject('bar.store.articles', {
         1: {
             "id": 1,
-            "cat": 0,
+            "cat": 1,
             "label": "Coca-cola",
             "desc": "Attention aux bulles !",
             "prix": 1,
@@ -13,7 +13,7 @@
         },
         2: {
             "id": 2,
-            "cat": 0,
+            "cat": 1,
             "label": "Coca zero",
             "desc": "Les bulles sont sans sucre !",
             "prix": 1,
@@ -21,7 +21,7 @@
         },
         3: {
             "id": 3,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus d'orange",
             "desc": "Quand c'est trop c'est tropico.",
             "prix": 1,
@@ -29,7 +29,7 @@
         },
         4: {
             "id": 4,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus de pomme",
             "desc": "C'est trognon comme boisson.",
             "prix": 1,
@@ -37,7 +37,7 @@
         },
         5: {
             "id": 5,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus d'abricot",
             "desc": "Sans noyau.",
             "prix": 1,
@@ -45,7 +45,7 @@
         },
         6: {
             "id": 6,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus d'ananas",
             "desc": "Les ananas de la belle...",
             "prix": 1,
@@ -53,7 +53,7 @@
         },
         7: {
             "id": 7,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus de pamplemousse",
             "desc": "Meilleur avec du vin blanc.",
             "prix": 1,
@@ -61,7 +61,7 @@
         },
         8: {
             "id": 8,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus de tomate",
             "desc": "La tomate est un fruit, c'est un fait.",
             "prix": 1,
@@ -69,7 +69,7 @@
         },
         9: {
             "id": 9,
-            "cat": 0,
+            "cat": 1,
             "label": "Jus de fraise",
             "desc": "La boisson de charlotte.",
             "prix": 1,
@@ -77,7 +77,7 @@
         },
         10: {
             "id": 10,
-            "cat": 0,
+            "cat": 1,
             "label": "Orangina",
             "desc": "Secouez, sinon la pulpe, elle reste en bas.",
             "prix": 1,
@@ -85,7 +85,7 @@
         },
         11: {
             "id": 11,
-            "cat": 0,
+            "cat": 1,
             "label": "Schweppes agrum",
             "desc": "What did you expect.",
             "prix": 1,
@@ -93,7 +93,7 @@
         },
         12: {
             "id": 12,
-            "cat": 0,
+            "cat": 1,
             "label": "Limonade",
             "desc": "Bulle + citron + eau.",
             "prix": 1,
@@ -101,7 +101,7 @@
         },
         13: {
             "id": 13,
-            "cat": 0,
+            "cat": 1,
             "label": "Perrier",
             "desc": "Un sirop dedans ?",
             "prix": 1,
@@ -109,7 +109,7 @@
         },
         14: {
             "id": 14,
-            "cat": 0,
+            "cat": 1,
             "label": "Evian",
             "desc": "(De quel massif montagneux ca vient çà déjà ?)",
             "prix": 1,
@@ -117,7 +117,7 @@
         },
         15: {
             "id": 15,
-            "cat": 0,
+            "cat": 1,
             "label": "Cristaline",
             "desc": "C'est clair",
             "prix": 0.5,
@@ -125,7 +125,7 @@
         },
         16: {
             "id": 16,
-            "cat": 0,
+            "cat": 1,
             "label": "la Seinoise",
             "desc": "Riche en urinium, et en oligo-excréments.",
             "prix": 0.5,
@@ -133,7 +133,7 @@
         },
         17: {
             "id": 17,
-            "cat": 1,
+            "cat": 2,
             "label": "Grim (bouteille)",
             "desc": "La bière des hommes",
             "prix": 1.5,
@@ -141,7 +141,7 @@
         },
         18: {
             "id": 18,
-            "cat": 1,
+            "cat": 2,
             "label": "Grim Rouge",
             "desc": "La bière des femmes",
             "prix": 1.5,
@@ -149,7 +149,7 @@
         },
         19: {
             "id": 19,
-            "cat": 1,
+            "cat": 2,
             "label": "1664",
             "desc": "Idéal avant de retourner sur le chantier",
             "prix": 1.3,
@@ -157,7 +157,7 @@
         },
         20: {
             "id": 20,
-            "cat": 1,
+            "cat": 2,
             "label": "1664 (bouteille)",
             "desc": "Idéal avant de retourner sur le chantier",
             "prix": 1.5,
@@ -165,7 +165,7 @@
         },
         21: {
             "id": 21,
-            "cat": 1,
+            "cat": 2,
             "label": "Panaché",
             "desc": "Servi avec panache !",
             "prix": 1.3,
@@ -173,7 +173,7 @@
         },
         22: {
             "id": 22,
-            "cat": 1,
+            "cat": 2,
             "label": "Monaco",
             "desc": "Une peu de fruit pour les vitamines !",
             "prix": 1.3,
@@ -181,7 +181,7 @@
         },
         23: {
             "id": 23,
-            "cat": 1,
+            "cat": 2,
             "label": "PCB",
             "desc": "Un picon ch'tit biloute !",
             "prix": 1.8,
@@ -189,7 +189,7 @@
         },
         24: {
             "id": 24,
-            "cat": 1,
+            "cat": 2,
             "label": "Bière du mois",
             "desc": "Selon arrivages",
             "prix": 1.5,
@@ -197,7 +197,7 @@
         },
         25: {
             "id": 25,
-            "cat": 2,
+            "cat": 3,
             "label": "Martini",
             "desc": "Martini dry... Avec ou sans olives ?",
             "prix": 1.5,
@@ -205,47 +205,47 @@
         },
         26: {
             "id": 26,
-            "cat": 2,
+            "cat": 3,
             "label": "Muscat",
             "desc": "Une velle robe dorée",
             "prix": 1.5,
             "img": "muscat.jpg"
         },
         27: {
-            "id": 27, "cat": 2, "label": "Pineau", "desc": "À commander en charentaises", "prix": 1.5
+            "id": 27, "cat": 3, "label": "Pineau", "desc": "À commander en charentaises", "prix": 1.5
         },
         28: {
             "id": 28,
-            "cat": 2,
+            "cat": 3,
             "label": "Rosé pamplemousse",
             "desc": "Teneur en fruit non garantie",
             "prix": 1.4
         },
         29: {
-            "id": 29, "cat": 2, "label": "Vin blanc", "desc": "Belle robe dorée", "prix": 1.4
+            "id": 29, "cat": 3, "label": "Vin blanc", "desc": "Belle robe dorée", "prix": 1.4
         },
         30: {
             "id": 30,
-            "cat": 2,
+            "cat": 3,
             "label": "Vin mousseux",
             "desc": "Le vin qui pique !",
             "prix": 1.4
         },
         31: {
-            "id": 31, "cat": 2, "label": "Cidre (75cl)", "desc": "Mangez des pommes !", "prix": 5
+            "id": 31, "cat": 3, "label": "Cidre (75cl)", "desc": "Mangez des pommes !", "prix": 5
         },
         32: {
             "id": 32,
-            "cat": 2,
+            "cat": 3,
             "label": "Kir vin blanc",
             "prix": 1.5
         },
         33: {
-            "id": 33, "cat": 2, "label": "Kir royal", "desc": "Mure ou cassis ?", "prix": 1.5
+            "id": 33, "cat": 3, "label": "Kir royal", "desc": "Mure ou cassis ?", "prix": 1.5
         },
         34: {
             "id": 34,
-            "cat": 3,
+            "cat": 4,
             "label": "Chips",
             "desc": "Le roi de la pomme de terre",
             "prix": 2,
@@ -253,32 +253,32 @@
         },
         35: {
             "id": 35,
-            "cat": 3,
+            "cat": 4,
             "label": "Saucisson",
             "desc": "Préciser \"A l'ail\" si possible",
             "prix": 2.9,
             "img": "saucisson.jpg"
         },
         36: {
-            "id": 36, "cat": 3, "label": "Chorizo", "desc": "Aux épices", "prix": 2.9
+            "id": 36, "cat": 4, "label": "Chorizo", "desc": "Aux épices", "prix": 2.9
         },
         37: {
             "id": 37,
-            "cat": 3,
+            "cat": 4,
             "label": "Olives",
             "desc": "Fraichement cueillies dans le bocal",
             "prix": 2
         },
         38: {
             "id": 38,
-            "cat": 3,
+            "cat": 4,
             "label": "Carre filet",
             "desc": "Aucune idée mais c'est sur la carte....",
             "prix": 3.5
         },
         39: {
             "id": 39,
-            "cat": 4,
+            "cat": 5,
             "label": "Espresso",
             "desc": "Du bon nectar.",
             "prix": 0.5,
@@ -286,7 +286,7 @@
         },
         40: {
             "id": 40,
-            "cat": 4,
+            "cat": 5,
             "label": "Double Espresso",
             "desc": "Que j'aime ta couleur...",
             "prix": 1,
@@ -294,7 +294,7 @@
         },
         41: {
             "id": 41,
-            "cat": 4,
+            "cat": 5,
             "label": "Décaféiné",
             "desc": "C'est pas du café en gros ?",
             "prix": 0.5,
@@ -302,7 +302,7 @@
         },
         42: {
             "id": 42,
-            "cat": 4,
+            "cat": 5,
             "label": "Chocolat",
             "desc": "Le meilleurs c'est choky !",
             "prix": 0.5,
@@ -310,7 +310,7 @@
         },
         43: {
             "id": 43,
-            "cat": 4,
+            "cat": 5,
             "label": "Capuccino",
             "desc": "À l'italienne",
             "prix": 0.5,
@@ -318,7 +318,7 @@
         },
         44: {
             "id": 44,
-            "cat": 4,
+            "cat": 5,
             "label": "Thé",
             "desc": "Tea time",
             "prix": 0.5,
@@ -331,22 +331,27 @@
      */
     O2.createObject('bar.store.categories', {
         1: {
+            "id" : 1,
             "label": "Soft",
             "icon": "&#xEB41;"
         },
         2: {
+            "id" : 2,
             "label": "Binouzes",
             "icon": "&#xE544;"
         },
         3: {
+            "id" : 3,
             "label": "Boissons alcoolisées",
             "icon": "&#xE540;"
         },
         4: {
+            "id" : 4,
             "label": "Miam-miam",
             "icon": "&#xE552;"
         },
         5: {
+            "id" : 5,
             "label": "Boissons Chaudes",
             "icon": "&#xE541;"
         }
@@ -356,19 +361,19 @@
      * @property bar.store.users
      */
     O2.createObject('bar.store.users', {
-        1: {label: 'Daedalus', pref: [17]},
-        2: {label: 'Neo', pref: [17, 1, 9]},
-        3: {label: 'Priguns', pref: [17, 1]},
-        4: {label: 'Reebox', pref: [2]},
-        5: {label: 'Ralphy', pref: [17, 1]},
-        6: {label: 'Briscoto', pref: [17, 1]},
-        7: {label: 'Alex', pref: [17, 1]},
-        8: {label: 'Max', pref: [12]},
-        9: {label: 'Sam', pref: [17, 1]},
-        10: {label: 'Loïc', pref: [17, 1]},
-        11: {label: 'Damien', pref: [17, 1]},
-        12: {label: 'Laurent F.', pref: [17, 1]},
-        13: {label: 'Rémi F.', pref: [17, 1]}
+        1: {id: 1, label: 'Daedalus', pref: [17]},
+        2: {id: 2, label: 'Neo', pref: [17, 1, 9]},
+        3: {id: 3, label: 'Priguns', pref: [17, 1]},
+        4: {id: 4, label: 'Reebox', pref: [2]},
+        5: {id: 5, label: 'Ralphy', pref: [17, 1]},
+        6: {id: 6, label: 'Briscoto', pref: [17, 1]},
+        7: {id: 7, label: 'Alex', pref: [17, 1]},
+        8: {id: 8, label: 'Max', pref: [12]},
+        9: {id: 9, label: 'Sam', pref: [17, 1]},
+        10: {id: 10, label: 'Loïc', pref: [17, 1]},
+        11: {id: 11, label: 'Damien', pref: [17, 1]},
+        12: {id: 12, label: 'Laurent F.', pref: [17, 1]},
+        13: {id: 13, label: 'Rémi F.', pref: [17, 1]}
     });
 })(O2);
 ;(function ($, O2) {
@@ -423,7 +428,9 @@
             } else {
                 this._commande[idArticle] = qt;
             }
-            this.prix += bar.store.articles[idArticle].prix * qt;
+            if (bar.store.articles[idArticle]) {
+                this.prix += bar.store.articles[idArticle].prix * qt;
+            }
             return this;
         },
         getCommande : function() {
@@ -433,7 +440,6 @@
                     art['qt'] = v;
                     return art;
                 }
-                return null;
             });
         },
         getPrix : function() {
@@ -489,7 +495,7 @@
             // Calcul
             var aCommande = this.getCommande();
             // Tri par prix
-            aCommande = aCommande.sort(bar.helper.sort.byKey('prix'));
+            aCommande = aCommande.sort(bar.helper.sort.byKey('prix', true));
             this._tokenRing(aCommande, _aCommandes);
             return _aCommandes;
         }
@@ -666,7 +672,7 @@
                                 })
                                     .done(function (data) {
                                         bar.store.login = bar.store.users[data.id];
-                                        $.extend(bar.store.login, data);
+                                        bar.store.login = $.extend(bar.store.login, data);
                                         var pref = bar.store.login.pref;
                                         if (Array.isArray(pref)) {
                                             self.$contentWrapper.find('[name="fav[]"]').filter(function() {
@@ -722,11 +728,8 @@
             var favTimeout = null;
             this.$contentWrapper.on('change', function() {
                 var oForm = self._serializeForm();
-                if (oForm.cmd) {
-                    oForm.cmd = oForm.cmd.filter(bar.helper.filter.empty);
-                    if (!oForm.cmd.length) {
-                        delete oForm.cmd;
-                    }
+                if ($.isEmptyObject(oForm.cmd)) {
+                    delete oForm.cmd;
                 }
                 var fav = [];
                 if (oForm.fav) {
@@ -734,13 +737,14 @@
                     delete oForm.fav;
                 }
                 if (bar.store.login) {
+                    var login = bar.store.login;
                     if (favTimeout) {
                         clearTimeout(favTimeout);
                     }
                     favTimeout = setTimeout(function () {
-                        if (JSON.stringify(bar.store.login.pref) !== JSON.stringify(fav.map(function (v) { return +v; }))) {
+                        if (JSON.stringify(login.pref) !== JSON.stringify(fav.map(function (v) { return +v; }))) {
                             self.flushProfile({
-                                id: bar.store.login.id,
+                                id: login.id,
                                 pref: fav.map(function (v) {
                                     return {"id": v};
                                 })
@@ -763,7 +767,6 @@
                     self.$reset.removeClass('scale-out').addClass('scale-in');
 
                     self.$restore.removeClass('scale-in').addClass('scale-out');
-
                     bar.helper.storage.export({'tmp': oForm });
                 }
             });
@@ -843,10 +846,20 @@
                         }
                     });
             }
-            return null;
+            return $.Deferred().reject({error:'Aucune données'}).promise();
         },
         _serializeForm : function() {
-            return this.$contentWrapper.serializeObject();
+            var json = this.$contentWrapper.serializeObject();
+            var cmd = {};
+            if (json.cmd) {
+                json.cmd.forEach(function(v, i) { // Clean '0'
+                    if (v !== '0') {
+                        cmd[i] = v;
+                    }
+                });
+                json.cmd = cmd;
+            }
+            return json;
         },
         discover: function() {
             var id;
@@ -1114,55 +1127,20 @@
             }
             return +el > 1 ? 's' : '';
         },
-        "delete": {
-            "null": function (v, i, a) {
-                if (v === null) {
-                    delete a[i];
-                }
-            },
-            "zero": function (v, i, a) {
-                if (v === null || v === undefined) {
-                    return;
-                }
-                if (v.toString() === '0') {
-                    delete a[i];
-                }
-            },
-            "empty": function (v, i, a) {
-                if (!+v) {
-                    delete a[i];
-                }
-            }
-        },
-        "filter": {
-            "null" : function (v) {
-                return v !== null;
-            },
-            "zero" : function (v) {
-                return v.toString() !== '0';
-            },
-            "empty" : function (v) {
-                return +v;
-            }
-        },
         "sort": {
-            byKey : function(k) {
+            byKey : function(k, desc) {
+                desc = desc | false;
                 return function(a, b) {
-                    if (a[k] > b[k])
-                        return -1;
                     if (a[k] < b[k])
-                        return 1;
+                        return desc ? 1 : -1;
+                    if (a[k] > b[k])
+                        return desc ? -1 : 1;
                     // a doit être égal à b
                     return 0;
                 }
             }
         },
         "reduce": {
-            byMethod : function(mth) {
-                return function(a, b) {
-                    return a[mth]() <= b[mth]() ? a : b;
-                }
-            },
             byKey : function(k) {
                 return function(a, b) {
                     return a[k] <= b[k] ? a : b;
@@ -1178,26 +1156,37 @@
                 localStorage.setItem(bar.config.STORAGE_KEY, JSON.stringify(o));
             },
             'import': function() {
-                var oJson = this._getStorage();
-                var oCur;
-                if (oJson) {
-                    for (var date in oJson) {
-                        if (oJson.hasOwnProperty(date) && oJson.date) {
-                            oCur = oJson[date];
-                            if (oCur.hasOwnProperty('user')) {
-                                oCur.user.forEach(bar.helper.delete.null);
-                            }
-                            if (oCur.hasOwnProperty('cmd')) {
-                                oCur.cmd.forEach(bar.helper.delete.empty);
-                            }
+                // var oCur;
+                // if (oJson) {
+                //     for (var date in oJson) {
+                //         if (oJson.hasOwnProperty(date) && oJson.date) {
+                //             oCur = oJson[date];
+                //             if (oCur.hasOwnProperty('user')) {
+                //                 oCur.user.forEach(bar.helper.delete.null);
+                //             }
+                //             if (oCur.hasOwnProperty('cmd')) {
+                //                 oCur.cmd.forEach(bar.helper.delete.empty);
+                //             }
+                //         }
+                //     }
+                // }
+                return this._getStorage();
+            },
+            'export': function(oData) {
+                var copy = $.extend(true, {}, oData);
+                for(var key in copy) {
+                    if (copy[key]) {
+                        if (copy[key].hasOwnProperty('user')) {
+                            copy[key]['user'] = $.extend({}, copy[key]['user']);
+                        }
+                        if (copy[key].hasOwnProperty('cmd')) {
+                            copy[key]['cmd'] = $.extend({}, copy[key]['cmd']);
                         }
                     }
                 }
-                return oJson;
-            },
-            'export': function(oData) {
+
                 var oStorage = this._getStorage();
-                $.extend(oStorage, oData);
+                $.extend(oStorage, copy);
                 for (var k in oStorage) {
                     if (!oStorage[k]) {
                         delete oStorage[k];
@@ -1207,6 +1196,17 @@
             }
         }
     });
+
+    Date.prototype.toFrench = function () {
+        var months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+        function zeroInitial(n) {
+            if (+n < 10) {
+                return "0"+ n;
+            }
+            return n;
+        }
+        return zeroInitial(this.getDate()) + " " + months[this.getMonth()] + " " + this.getFullYear() +" à "+ zeroInitial(this.getHours()) +":"+ zeroInitial(this.getMinutes()) +":"+ zeroInitial(this.getSeconds());
+    };
 })(jQuery, O2);;(function ($, O2) {
     /**
      * @property bar.View
@@ -1297,7 +1297,7 @@
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
                 var $li = $();
                 $.each(bar.store.users, function(idUser, oUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul)
+                    $('<li class="optgroup"><span>'+ oUser.label +'</span></li>').appendTo($ul)
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
@@ -1317,8 +1317,6 @@
                             return !v;
                         });
                         $checkbox.trigger('change');
-                    } else if ($this.is('.optgroup-option.disabled')) {
-                        $input.dropdown('close');
                     }
                 })
                     .find('input[type="checkbox"]')
@@ -1420,7 +1418,7 @@
                 Materialize.toast('Votre commande est vide', 2000);
                 return;
             }
-            Materializer.createModal({
+            return Materializer.createModal({
                 content : $modalContent,
                 type : "modal-fixed-footer",
                 footer: {
@@ -1431,7 +1429,7 @@
                         'callback' : function(modal, button) {
                             button.on('click', function() {
                                 oCommande.toLocalStorage();
-                                $('#reset').trigger('click');
+                                $('#resetBtn').trigger('click');
                                 modal.modal('close');
                             });
                         }
@@ -1458,7 +1456,7 @@
             for (var date in oHistory) {
                 $accordion.prepend(this._get$accordion(date, oHistory[date]));
             }
-            Materializer.createModal({
+            var $modal = Materializer.createModal({
                 content : $modalContent,
                 type : "modal-fixed-footer",
                 header: "Historique",
@@ -1469,6 +1467,7 @@
                 }
             });
             $accordion.collapsible();
+            return $modal;
         },
         _get$accordion : function (date, oForm) {
             var self = this;
@@ -1476,31 +1475,29 @@
             var sDate = new Date(date);
             sDate = sDate.toFrench();
             var headerText = sDate;
-            if (oForm.user && oForm.user.length) {
-                var filteredUser = oForm.user.filter(bar.helper.filter.null);
-                if (filteredUser.length) {
-                    headerText += ' - '+ filteredUser.length +' habitué'+ bar.helper.pluralize(filteredUser);
-                    var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
-                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
-                    oForm.user.forEach(function(v, i) {
-                        if (v !== null) {
-                            $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
-                        }
-                    });
-                }
+            if (!$.isEmptyObject(oForm.user)) {
+                var nbUser = 0;
+                var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
+                $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
+                $.each(oForm.user, function(i, v) {
+                    if (v !== null) {
+                        $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
+                        nbUser++;
+                    }
+                });
+                headerText += ' - '+ nbUser +' habitué'+ bar.helper.pluralize(nbUser);
             }
-            if (oForm.cmd && oForm.cmd.length) {
-                var filteredCmd = oForm.cmd.filter(bar.helper.filter.empty);
-                if (filteredCmd.length) {
-                    headerText += ' - ' + filteredCmd.length + ' complément' + bar.helper.pluralize(filteredCmd);
-                    var $complement = $('<table class="striped bordered highlight">').appendTo($body);
-                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
-                    filteredCmd.forEach(function (v, i) {
-                        if (bar.store.articles[i]) {
-                            $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
-                        }
-                    });
-                }
+            if (!$.isEmptyObject(oForm.cmd)) {
+                var nbCommande = 0;
+                var $complement = $('<table class="striped bordered highlight">').appendTo($body);
+                $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
+                $.each(oForm.cmd, function (i, v) {
+                    if (bar.store.articles[i]) {
+                        $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
+                        nbCommande++;
+                    }
+                });
+                headerText += ' - ' + nbCommande + ' complément' + bar.helper.pluralize(nbCommande);
             }
             var $footer = $('<div class="right-align">').prependTo($body);
             // Supprimer

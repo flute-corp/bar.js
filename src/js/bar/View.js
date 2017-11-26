@@ -88,7 +88,7 @@
                 var $ul = $('<ul class="modal-list">').appendTo($modalContent);
                 var $li = $();
                 $.each(bar.store.users, function(idUser, oUser) {
-                    $('<li class="optgroup"><span>'+ (oUser.label || '???') +'</span></li>').appendTo($ul)
+                    $('<li class="optgroup"><span>'+ oUser.label +'</span></li>').appendTo($ul)
                     if (Array.isArray(oUser.pref)) {
                         oUser.pref.forEach(function(pref) {
                             if (bar.store.articles[pref]) {
@@ -108,8 +108,6 @@
                             return !v;
                         });
                         $checkbox.trigger('change');
-                    } else if ($this.is('.optgroup-option.disabled')) {
-                        $input.dropdown('close');
                     }
                 })
                     .find('input[type="checkbox"]')
@@ -211,7 +209,7 @@
                 Materialize.toast('Votre commande est vide', 2000);
                 return;
             }
-            Materializer.createModal({
+            return Materializer.createModal({
                 content : $modalContent,
                 type : "modal-fixed-footer",
                 footer: {
@@ -222,7 +220,7 @@
                         'callback' : function(modal, button) {
                             button.on('click', function() {
                                 oCommande.toLocalStorage();
-                                $('#reset').trigger('click');
+                                $('#resetBtn').trigger('click');
                                 modal.modal('close');
                             });
                         }
@@ -249,7 +247,7 @@
             for (var date in oHistory) {
                 $accordion.prepend(this._get$accordion(date, oHistory[date]));
             }
-            Materializer.createModal({
+            var $modal = Materializer.createModal({
                 content : $modalContent,
                 type : "modal-fixed-footer",
                 header: "Historique",
@@ -260,6 +258,7 @@
                 }
             });
             $accordion.collapsible();
+            return $modal;
         },
         _get$accordion : function (date, oForm) {
             var self = this;
@@ -267,31 +266,29 @@
             var sDate = new Date(date);
             sDate = sDate.toFrench();
             var headerText = sDate;
-            if (oForm.user && oForm.user.length) {
-                var filteredUser = oForm.user.filter(bar.helper.filter.null);
-                if (filteredUser.length) {
-                    headerText += ' - '+ filteredUser.length +' habitué'+ bar.helper.pluralize(filteredUser);
-                    var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
-                    $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
-                    oForm.user.forEach(function(v, i) {
-                        if (v !== null) {
-                            $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
-                        }
-                    });
-                }
+            if (!$.isEmptyObject(oForm.user)) {
+                var nbUser = 0;
+                var $habitue = $('<table class="striped bordered highlight">').appendTo($body);
+                $habitue.append('<tr><th style="width: 50%;">Habitué</th><th>Boisson</th></tr>');
+                $.each(oForm.user, function(i, v) {
+                    if (v !== null) {
+                        $habitue.append('<tr><td>' + bar.store.users[i].label + '</td><td>' + bar.store.articles[v].label + '</td></tr>');
+                        nbUser++;
+                    }
+                });
+                headerText += ' - '+ nbUser +' habitué'+ bar.helper.pluralize(nbUser);
             }
-            if (oForm.cmd && oForm.cmd.length) {
-                var filteredCmd = oForm.cmd.filter(bar.helper.filter.empty);
-                if (filteredCmd.length) {
-                    headerText += ' - ' + filteredCmd.length + ' complément' + bar.helper.pluralize(filteredCmd);
-                    var $complement = $('<table class="striped bordered highlight">').appendTo($body);
-                    $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
-                    filteredCmd.forEach(function (v, i) {
-                        if (bar.store.articles[i]) {
-                            $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
-                        }
-                    });
-                }
+            if (!$.isEmptyObject(oForm.cmd)) {
+                var nbCommande = 0;
+                var $complement = $('<table class="striped bordered highlight">').appendTo($body);
+                $complement.append('<tr><th style="width: 50%;">Article</th><th>Quantité</th></tr>');
+                $.each(oForm.cmd, function (i, v) {
+                    if (bar.store.articles[i]) {
+                        $complement.append('<tr><td>' + bar.store.articles[i].label + '</td><td>' + v + '</td></tr>');
+                        nbCommande++;
+                    }
+                });
+                headerText += ' - ' + nbCommande + ' complément' + bar.helper.pluralize(nbCommande);
             }
             var $footer = $('<div class="right-align">').prependTo($body);
             // Supprimer
