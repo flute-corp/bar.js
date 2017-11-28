@@ -555,7 +555,8 @@
         STORAGE_KEY: 'bar',
         API_URL: (window.location.hostname === 'localhost' ? 'api/web/app_dev.php/' : 'api/web/')
     });
-})(jQuery, O2);;(function ($, O2) {
+})(jQuery, O2);;var applicationServerPublicKey = 'BGuXIbVqIJus84UH-TlLZv2hwaN7gpPhTZUGJJzGSBV2J0Qjt0cYvoswh8V-NMTQIoApscm2Fc0C5gVmRjBIGp8';
+(function ($, O2) {
     /**
      * @property bar.Ctrl
      */
@@ -567,6 +568,9 @@
         $glass: null,
         // $algoSelector : null,
         oView : null,
+
+        swRegistration: null,
+
         __construct : function(oView) {
             var self = this;
             if (!oView) { return; }
@@ -821,6 +825,7 @@
                             $('.splash').addClass('disappear');
                         });
                 });
+            self.notificationSetup();
             self.easterEgg();
         },
         flushProfile: function(data) {
@@ -860,6 +865,123 @@
                 json.cmd = cmd;
             }
             return json;
+        },
+        notificationSetup: function() {
+            var self = this;
+            var $swButton = $('#swStatus');
+            function updateBtn() {
+                if (Notification.permission === 'denied') {
+                    $swButton.prop('disabled', true);
+                    updateSubscriptionOnServer(null);
+                    return;
+                }
+                $swButton.prop('disabled', false);
+            }
+
+            function sendSubscriptionToBackEnd(subscription) {
+                var json = subscription.toJSON();
+                var mappedJson = {
+                    "endpoint": json.endpoint,
+                    "auth": json.keys.auth,
+                    "p256dh": json.keys.p256dh
+                };
+                return fetch('./api/web/app_dev.php/notifications/subscription', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(mappedJson)
+                })
+                    .then(function(response) {
+                        if (!response.ok) {
+                            Materialize.toast('Echec de la souscription...', 2000);
+                            $swButton.prop('checked', false);
+                            throw new Error('Echec de la souscription...');
+                        }
+                        return response.json();
+                    })
+                    .then(function(responseData) {
+                        if (responseData.id !== +localStorage.getItem('swSubscription')) {
+                            Materialize.toast('Notifications activées', 2000);
+                        }
+                        localStorage.setItem('swSubscription', responseData.id);
+                    });
+            }
+
+            function updateSubscriptionOnServer(subscription) {
+                if (subscription) {
+                    sendSubscriptionToBackEnd(subscription);
+                } else {
+                    Materialize.toast('Notifications désactivées', 2000);
+                }
+            }
+
+            function subscribeUser() {
+                var applicationServerKey = bar.helper.urlB64ToUint8Array(applicationServerPublicKey);
+                self.swRegistration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: applicationServerKey
+                })
+                    .then(function(subscription) {
+
+                        updateSubscriptionOnServer(subscription);
+
+                        updateBtn();
+                    })
+                    .catch(function() {
+                        Materialize.toast('Echec de la souscription...', 2000);
+                        updateBtn();
+                    });
+            }
+
+            function unsubscribeUser() {
+                self.swRegistration.pushManager.getSubscription()
+                    .then(function(subscription) {
+                        if (subscription) {
+                            return subscription.unsubscribe();
+                        }
+                    })
+                    .catch(function() {
+                        Materialize.toast('Echec de la désinscription...', 2000);
+                    })
+                    .then(function() {
+                        updateSubscriptionOnServer(null);
+                        updateBtn();
+                    });
+            }
+
+            function initializeUI() {
+                $swButton.on('change', function() {
+                    if (this.checked) {
+                        subscribeUser();
+                    } else {
+                        unsubscribeUser();
+                    }
+                });
+
+                // Set the initial subscription value
+                self.swRegistration.pushManager.getSubscription()
+                    .then(function(subscription) {
+                        $swButton.prop('checked', !(subscription === null));
+
+                        updateSubscriptionOnServer(subscription);
+
+                        updateBtn();
+                    });
+            }
+
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                navigator.serviceWorker.register('sw.js')
+                    .then(function(swReg) {
+                        self.swRegistration = swReg;
+                        initializeUI();
+                    })
+                    .catch(function() {
+                        Materialize.toast('Echec de l\'initialisation du service de notifivations...', 2000);
+                    });
+            } else {
+                $swButton.prop('disabled', true);
+            }
         },
         discover: function() {
             var id;
@@ -953,7 +1075,6 @@
             waveTextColor: "#A4DBf8" // The color of the value text when the wave overlaps it.
         };
     }
-
     function loadLiquidFillGauge(elementId, value, config) {
         if(config === null) config = liquidFillGaugeDefaultSettings();
 
@@ -1194,6 +1315,20 @@
                 }
                 this._setStorage(oStorage);
             }
+        },
+        "urlB64ToUint8Array": function (base64String) {
+            var padding = '='.repeat((4 - base64String.length % 4) % 4);
+            var base64 = (base64String + padding)
+                .replace(/\-/g, '+')
+                .replace(/_/g, '/');
+
+            var rawData = window.atob(base64);
+            var outputArray = new Uint8Array(rawData.length);
+
+            for (var i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
         }
     });
 

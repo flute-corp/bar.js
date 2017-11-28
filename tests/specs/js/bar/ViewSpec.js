@@ -183,7 +183,9 @@ describe('bar.View', function () {
         it('Show the history', function() {
             var $m = oView.showHistory(historyFixture);
             expect($m).toBeInDOM('Must show history modal');
-            expect($m.find('.collapsible-header:contains("12 novembre 2017 à 00:30:26 - 1 habitué - 4 compléments")')).toBeInDOM('Got one accordion element');
+            var $acc = $m.find('.collapsible-header');
+            expect($acc).toBeInDOM('Got one accordion element');
+            expect($acc.length).toBe(1);
             var $table = $m.find('table');
             expect($table.length).toBe(2, 'Show 2 table');
 
