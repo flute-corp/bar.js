@@ -885,7 +885,7 @@
                     "auth": json.keys.auth,
                     "p256dh": json.keys.p256dh
                 };
-                return fetch('./api/web/app_dev.php/notifications/subscription', {
+                return fetch(bar.config.API_URL +'notifications/subscription', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
