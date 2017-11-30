@@ -1,3 +1,3 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule \.jpg$ http://bar.nexk.fr/src/img/404.jpg
+RewriteRule \.jpg$ https://bar.nexk.fr/src/img/404.jpg
