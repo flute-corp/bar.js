@@ -80,3 +80,14 @@ self.addEventListener('pushsubscriptionchange', function(event) {
             })
     );
 });
+
+self.addEventListener('install', function(event) {
+    event.waitUntil(skipWaiting());
+});
+
+self.addEventListener('activate', function(event) {
+    event.waitUntil(clients.claim());
+});
+
+// Marks the website as being installable in Chrome.
+self.addEventListener('fetch', function(event) {});
