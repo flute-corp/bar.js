@@ -19,8 +19,8 @@ function urlB64ToUint8Array(base64String) {
 self.addEventListener('push', function(event) {
     const opt = {
         "body": "C'est l'heure de la binouze !",
-        "icon": "src/img/favicon/android-chrome-256x256.png",
-        "badge": "src/img/favicon/android-chrome-256x256.png",
+        "icon": "public/img/icons/android-chrome-256x256.png",
+        "badge": "public/img/icons/android-chrome-256x256.png",
         "vibrate": [100,200,100,100,75,25,100,200,100,500,100,200,100,500],
         "tag": "request",
         "actions": [
@@ -80,14 +80,3 @@ self.addEventListener('pushsubscriptionchange', function(event) {
             })
     );
 });
-
-self.addEventListener('install', function(event) {
-    event.waitUntil(skipWaiting());
-});
-
-self.addEventListener('activate', function(event) {
-    event.waitUntil(clients.claim());
-});
-
-// Marks the website as being installable in Chrome.
-self.addEventListener('fetch', function(event) {});
