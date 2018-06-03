@@ -1,0 +1,23 @@
+{
+  "name": "Bar.js",
+  "short_name": "Bar.js",
+  "description": "L'application officielle du partage de l'apéro !",
+  "lang": "fr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#1565c0",
+  "theme_color": "#1565c0",
+}

@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - "7.2"
 before_install:
-  - npm install -g grunt-cli karma codecov
+  - npm install
 script:
-  - karma start --single-run --browsers PhantomJS
-  - codecov
+  - npm run test:unit
+  - npm run test:e2e
