@@ -1,7 +1,7 @@
-import ui from './ui'
+import user from './user'
 
 const modules = {
-  ui
+  user
 }
 
 export default modules
