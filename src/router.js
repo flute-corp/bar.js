@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Commande from './views/Commande.vue'
+import Carte from './views/Carte.vue'
 import Stats from './views/Stats.vue'
 
 Vue.use(Router)
@@ -9,8 +9,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Commande',
-      component: Commande,
+      name: 'Carte',
+      component: Carte,
       icon: 'local_bar'
     },
     {

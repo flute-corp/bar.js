@@ -9,6 +9,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "lodash": "^4.17.10",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",

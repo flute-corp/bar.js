@@ -1,5 +1,5 @@
 // import * as types from './mutation-types'
 
-const actions = {}
+const mutations = {}
 
-export default actions
+export default mutations

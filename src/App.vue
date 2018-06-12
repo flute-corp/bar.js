@@ -77,12 +77,12 @@
           </v-tab>
           <v-tab-item>
             <v-card-text>
-              <form-login :value="user" />
+              <form-login :value="user" style="height: 300px" />
             </v-card-text>
           </v-tab-item>
           <v-tab-item>
             <v-card-text>
-              <form-profile />
+              <form-profile style="height: 300px" />
             </v-card-text>
           </v-tab-item>
         </v-tabs>
