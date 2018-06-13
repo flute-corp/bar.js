@@ -3,16 +3,20 @@
     <v-slide-y-transition mode="out-in">
       <v-layout column align-center>
         <v-expansion-panel expand>
-          <v-expansion-panel-content v-for="category in carte" :key="category.id">
+          <v-expansion-panel-content v-for="(category, i) in carte" :key="category.id"
+                                     hide-actions>
             <div slot="header">
               <v-icon class="pr-1">{{ category.icon }}</v-icon>
               {{ category.label }}
+              <div class="grey--text" style="float: right">
+                {{ totauxParCategories[i] }}
+              </div>
             </div>
             <v-card class="grey lighten-3">
               <v-container fluid grid-list-md>
                 <v-layout row wrap>
                   <v-flex xs6 sm3 v-for="article in category.articles" :key="article.id">
-                    <article-card :article="article"/>
+                    <article-card :value="current.cmd[article.id]" :article="article"/>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -25,8 +29,9 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, createNamespacedHelpers} from 'vuex'
 import ArticleCard from '../components/ArticleCard'
+const storeCommande = createNamespacedHelpers('commandes')
 
 export default {
   components: {ArticleCard},
@@ -35,7 +40,11 @@ export default {
       {
         carte: 'getCarte'
       }
-    )
+    ),
+    ...storeCommande.mapState(['current']),
+    totauxParCategories () {
+      return this.carte.map((c) => c.articles.reduce((a, b) => a + (this.current.cmd[b.id] || 0), 0))
+    }
   }
 }
 </script>

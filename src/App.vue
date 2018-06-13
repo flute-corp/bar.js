@@ -75,12 +75,12 @@
           <v-tab>
             Enregistrement
           </v-tab>
-          <v-tab-item>
+          <v-tab-item class="overflow-auto">
             <v-card-text>
               <form-login :value="user" style="height: 300px" />
             </v-card-text>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item class="overflow-auto">
             <v-card-text>
               <form-profile style="height: 300px" />
             </v-card-text>
@@ -93,6 +93,14 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <v-snackbar
+        v-for="toast in ui.toast"
+        v-bind="toast"
+        :key="toast.key"
+    >
+      {{ toast.text }}
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -145,7 +153,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'user'
+      'user',
+      'ui'
     ])
   }
 }

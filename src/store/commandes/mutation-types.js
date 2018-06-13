@@ -1,1 +1,1 @@
-export const COMMANDE_CURRENT_ADD_ARTICLE = 'addArticle'
+export const COMMANDE_CURRENT_SET_ARTICLE = 'commandeCurrentSetArticle'

@@ -4,3 +4,23 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.p-relative {
+    position: relative;
+}
+
+.p-absolute {
+    position: absolute;
+}
+
+.text-xs-center input {
+    text-align: center;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.reveal {
+    transition: .3s ease-in-out;
+}

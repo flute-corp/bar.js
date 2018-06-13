@@ -1,30 +1,31 @@
 <template>
-  <div>
-    <div>
-      <img
-          :src="imageUrl"
-          ref="imageUrl"
-          height="150"
-          @click="onPickFile"
-          style="cursor: pointer;"
-      >
-    </div>
-    <div>
-      <v-btn raised @click="onPickFile" v-if="!imageUrl">
-        {{ selectLabel }}
-      </v-btn>
-      <v-btn raised class="error" @click="removeFile" v-else>
-        {{ removeLabel }}
-      </v-btn>
-      <input
-          type="file"
-          ref="image"
-          name="image"
-          :accept="accept"
-          @change="onFilePicked"
-      >
-    </div>
-  </div>
+  <v-container fluid grid-list-md>
+    <v-layout wrap align-center>
+      <v-flex xs6 sm6>
+        <v-btn raised @click="onPickFile" v-if="!imageUrl">
+          {{ selectLabel }}
+        </v-btn>
+        <v-btn raised class="error" @click="removeFile" v-else>
+          {{ removeLabel }}
+        </v-btn>
+        <input
+            type="file"
+            ref="image"
+            name="image"
+            :accept="accept"
+            @change="onFilePicked"
+        >
+      </v-flex>
+      <v-flex xs6 sm6>
+        <img
+            :src="imageUrl"
+            ref="imageUrl"
+            @click="onPickFile"
+            style="cursor: pointer; width: 100%"
+        >
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

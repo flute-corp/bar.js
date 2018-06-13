@@ -1,6 +1,6 @@
 import * as types from './mutation-types'
 
-const storeToSave = ['ui']
+const storeToSave = ['commandes']
 const localStoragePlugin = store => {
   store.subscribe((mutation, state) => {
     const backup = {}

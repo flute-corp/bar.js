@@ -1,5 +1,5 @@
 <template>
-  <v-avatar @click.stop="$emit('click', $event)" :size="size" :color="user.id ? 'green' :'red'">
+  <v-avatar @click.stop="$emit('click', $event)" :size="size" :color="user.id ? 'green' :'orange'">
     <template v-if="user.id">
       <img v-if="user.avatar" :src="user.avatar" :alt="user.name[0]" />
       <span v-else>{{ user.name[0] }}</span>

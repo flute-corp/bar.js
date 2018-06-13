@@ -2,13 +2,13 @@
   <v-form>
     <v-container grid-list-md>
       <v-layout wrap>
-        <v-flex xs12 sm6>
+        <v-flex xs6 sm6>
           <v-text-field v-model="_value.user" label="Nom d'utilisateur" />
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex xs6 sm6>
           <v-text-field label="Nom public" hint="Nom qui apparaitra publiquement" />
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex xs6 sm6>
           <v-text-field
               v-model="_value.password"
               :append-icon="hidePassword[0] ? 'visibility' : 'visibility_off'"
@@ -17,7 +17,7 @@
               label="Mot de passe"
           />
         </v-flex>
-        <v-flex xs12 sm6>
+        <v-flex xs6 sm6>
           <v-text-field
               v-model="_value.passwordConfirm"
               :append-icon="hidePassword[1]? 'visibility' : 'visibility_off'"
