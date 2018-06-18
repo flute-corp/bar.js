@@ -2,14 +2,56 @@
   <v-app>
     <v-toolbar
         app
-        dense
         dark
-        color="blue darken-2"
+        color="blue darken-3"
     >
       <img width="42" height="42" src="@/assets/img/bar.svg" alt="">
       <v-toolbar-title>{{$route.name}}</v-toolbar-title>
-      <v-spacer/>
-      <avatar :size="40" @click="toggle"/>
+      <v-spacer />
+      <div class="fab-right">
+        <v-scale-transition origin="center center">
+          <v-btn
+              v-show="articlesCommande.nbArt"
+              absolute
+              dark
+              fab
+              top
+              small
+              color="red"
+              class="cmd-clear"
+          >
+            <v-icon>remove_shopping_cart</v-icon>
+          </v-btn>
+        </v-scale-transition>
+        <v-scale-transition origin="center center">
+          <v-btn
+              v-show="articlesCommande.nbArt"
+              absolute
+              dark
+              fab
+              top
+              right
+              color="blue"
+          >
+            <v-icon>receipt</v-icon>
+          </v-btn>
+        </v-scale-transition>
+
+        <v-scale-transition origin="center center">
+          <v-btn
+              v-show="!articlesCommande.nbArt"
+              absolute
+              dark
+              fab
+              top
+              right
+              color="orange"
+          >
+            <v-icon>restore</v-icon>
+          </v-btn>
+        </v-scale-transition>
+      </div>
+      <avatar :size="40" @click="toggle" class="avt" />
     </v-toolbar>
     <v-content>
       <v-slide-x-transition mode="out-in">
@@ -77,12 +119,12 @@
           </v-tab>
           <v-tab-item class="overflow-auto">
             <v-card-text>
-              <form-login :value="user" style="height: 300px" />
+              <form-login :value="user" style="height: 300px"/>
             </v-card-text>
           </v-tab-item>
           <v-tab-item class="overflow-auto">
             <v-card-text>
-              <form-profile style="height: 300px" />
+              <form-profile style="height: 300px"/>
             </v-card-text>
           </v-tab-item>
         </v-tabs>
@@ -105,7 +147,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapGetters} from 'vuex'
 import Avatar from './components/core/Avatar'
 import FormLogin from './components/forms/FormLogin'
 import FormProfile from './components/forms/FormProfile'
@@ -155,7 +197,10 @@ export default {
     ...mapState([
       'user',
       'ui'
-    ])
+    ]),
+    ...mapGetters({
+      articlesCommande: 'commandes/articlesCommande'
+    })
   }
 }
 </script>
@@ -166,5 +211,27 @@ export default {
     background-size: 15rem;
     padding: 32px 32px 0;
     width: 100%;
+  }
+  .fab-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 35px !important;
+  }
+
+  @media only screen and (max-width: 599px) {
+    .fab-right {
+      margin-right: 43px !important;
+    }
+  }
+
+  .fab-right .avt {
+    position: absolute;
+    top: -50px;
+    right: -20px;
+    transition: .3s ease-out;
+  }
+  .fab-right .cmd-clear {
+    right: 78px;
   }
 </style>

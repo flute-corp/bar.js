@@ -1,7 +1,7 @@
 <template>
   <v-card class="elevation-2 overflow-hidden">
     <div class="d-block p-relative">
-      <img  @click="reveal = true" :src="'/img/'+ article.id +'.jpg'" style="width: 100%;"/>
+      <img @click="reveal = true" :src="'/img/'+ article.id +'.jpg'" style="width: 100%;"/>
       <div class="floatingArea">
         <div class="d-block input-add-remove">
           <v-text-field
@@ -31,10 +31,10 @@
       <div v-if="reveal" @click="reveal = false" class="p-absolute reveal" style="top: 0; left: 0; bottom: 0; right: 0; z-index: 1;">
       <v-card style="height: 100%">
         <v-card-title primary-title class="d-block">
-          <div class="headline truncate">{{article.label}}</div>
+          <div class="headline truncate mr-4">{{article.label}}</div>
           <p>{{article.desc || 'Aucune description'}}</p>
         </v-card-title>
-        <v-btn class="p-absolute" style="top: 16px; right: 16px;" flat icon>
+        <v-btn class="p-absolute" style="top: 6px; right: 0;" flat icon>
           <v-icon>close</v-icon>
         </v-btn>
       </v-card>
