@@ -12,7 +12,7 @@
           <v-text-field
               v-model="_value.password"
               :append-icon="hidePassword[0] ? 'visibility' : 'visibility_off'"
-              :append-icon-cb="() => (hidePassword[0] = !hidePassword[0])"
+              @click:append="() => (hidePassword[0] = !hidePassword[0])"
               :type="hidePassword[0] ? 'password' : 'text'"
               label="Mot de passe"
           />
@@ -21,7 +21,7 @@
           <v-text-field
               v-model="_value.passwordConfirm"
               :append-icon="hidePassword[1]? 'visibility' : 'visibility_off'"
-              :append-icon-cb="() => (hidePassword[1] = !hidePassword[1])"
+              @click:append="() => (hidePassword[1] = !hidePassword[1])"
               :type="hidePassword[1] ? 'password' : 'text'"
               label="Confirmer le passe"
           />

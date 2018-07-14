@@ -143,7 +143,9 @@
     >
       {{ toast.text }}
     </v-snackbar>
+    <div id="fb-root"></div>
   </v-app>
+
 </template>
 
 <script>
