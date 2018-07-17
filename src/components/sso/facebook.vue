@@ -51,7 +51,7 @@
           });
         });
       },
-      onSignInFError(error) {
+      onSignInError(error) {
         console.error('Erreur de connexion Facebook', error)
       }
     }

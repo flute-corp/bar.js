@@ -52,12 +52,11 @@
         console.info('Nom : ' + user.name);
         console.info('Mail : ' + user.mail);
         console.info('Avatar : ' + user.avatar);
+      },
+      onSignInError(error) {
+        console.error('Erreur de connexion avec Google', error)
       }
-    },
-    onSignInError(error) {
-      console.error('Erreur de connexion avec Google', error)
-    },
-
+    }
   }
 </script>
 
