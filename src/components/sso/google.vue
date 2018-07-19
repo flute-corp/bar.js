@@ -46,6 +46,11 @@
           avatar: auth.getImageUrl()
         };
         window.USER = user;
+        // console.log(this);
+
+        this.$store.hotUpdate('user/setUser', user);
+        window.store = this.$store;
+        // this.$store.dispatch('user/setUser', user);
         console.info('Connexion réussi avec Google');
         console.info('ID : ' + user.id);
         console.info("Token : " + user.token);
@@ -56,47 +61,51 @@
       onSignInError(error) {
         console.error('Erreur de connexion avec Google', error)
       }
-    }
+    },
   }
 </script>
 
 <style scoped>
   .g-signin-button {
-    margin-left:    10px;
-    margin-right:   10px;
-    margin-top:     20px;
-    display:        inline-block;
-    height:         36px;
-    width:          120px;
-    padding:        4px 8px;
-    border-radius:  3px;
-    cursor:         pointer;
-    outline:        none;
-    overflow:       hidden;
-    position:       relative;
-    text-align:     center;
-    vertical-align: middle;
-    white-space:    nowrap;
-    transition:     background-color .218s, border-color .218s, box-shadow .218s;
-    box-sizing:     border-box;
+    margin-left:      10px;
+    margin-right:     10px;
+    margin-top:       20px;
+    display:          inline-block;
+    height:           36px;
+    width:            120px;
+    padding:          4px 8px;
+    border-radius:    3px;
+    cursor:           pointer;
+    outline:          none;
+    overflow:         hidden;
+    position:         relative;
+    text-align:       center;
+    vertical-align:   middle;
+    white-space:      nowrap;
+    transition:       background-color .218s, border-color .218s, box-shadow .218s;
+    box-sizing:       border-box;
     /* Personnalisation Google */
     background-color: #fff;
     color:            #757575;
     box-shadow:       0 2px 4px 0 rgba(0, 0, 0, .25);
 
   }
+
   .g-signin-button span {
     font-size:      14px;
     line-height:    32px;
     letter-spacing: 0.21px;
   }
+
   .g-signin-button div {
     padding: 5px;
     float:   left;
   }
+
   .g-signin-button:hover {
     box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
   }
+
   .g-signin-button:active {
     background-color: #eee;
     color:            #6d6d6d;
