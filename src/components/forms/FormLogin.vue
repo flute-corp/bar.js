@@ -13,7 +13,7 @@
     />
     <p class="text-xs-center font-weight-bold">ou</p>
     <p class="text-xs-center">
-      <sso-google></sso-google>
+      <sso-google ref="loginGoogle"></sso-google>
       <sso-facebook></sso-facebook>
     </p>
   </v-form>
@@ -32,6 +32,13 @@
       return {
         hidePassword: true,
       }
+    },
+    mounted: function() {
+        this.$refs.loginGoogle.$on('success', () => {
+            console.log('success !!!');
+            let user = this.$store.getters['user/getUser'];
+            console.log(user);
+        });
     }
   }
 </script>
