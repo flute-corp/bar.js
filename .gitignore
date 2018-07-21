@@ -25,3 +25,5 @@ yarn-error.log*
 
 # API REST
 api
+
+package-lock.json
