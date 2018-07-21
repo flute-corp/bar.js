@@ -36,7 +36,7 @@
       }
     },
     methods: {
-      onSignInSuccess: function (googleUser) {
+      onSignInSuccess: async function (googleUser) {
         let auth = googleUser.getBasicProfile();
         let user = {
           id: auth.getId(),
@@ -45,18 +45,15 @@
           name: auth.getName(),
           avatar: auth.getImageUrl()
         };
-        window.USER = user;
+        ///window.USER = user;
         // console.log(this);
 
-        this.$store.hotUpdate('user/setUser', user);
-        window.store = this.$store;
+        //this.$store.hotUpdate('user/setUser', user);
+        //window.store = this.$store;
         // this.$store.dispatch('user/setUser', user);
-        console.info('Connexion réussi avec Google');
-        console.info('ID : ' + user.id);
-        console.info("Token : " + user.token);
-        console.info('Nom : ' + user.name);
-        console.info('Mail : ' + user.mail);
-        console.info('Avatar : ' + user.avatar);
+
+        await this.$store.dispatch('user/setUser', {user});
+        this.$emit('success');
       },
       onSignInError(error) {
         console.error('Erreur de connexion avec Google', error)
