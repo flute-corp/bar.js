@@ -51,7 +51,7 @@
           </v-btn>
         </v-scale-transition>
       </div>
-      <avatar :size="40" @click="toggle" class="avt" />
+      <avatar :size="40" @click="toggle" class="avt" :user="user"/>
     </v-toolbar>
     <v-content>
       <v-slide-x-transition mode="out-in">
@@ -68,7 +68,7 @@
       <div class="user-area">
         <div>
           <div>
-            <avatar :size="64"/>
+            <avatar :size="64" :user="user"/>
             <div class="pa-2 body-2 white--text">
               {{ user.name }}
             </div>

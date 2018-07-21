@@ -1,7 +1,7 @@
 <template>
-  <v-avatar @click.stop="$emit('click', $event)" :size="size" :color="user.id ? 'green' :'green'">
+  <v-avatar @click.stop="$emit('click', $event)" :size="size" :color="user.id ? 'green' : 'red'">
     <template v-if="user.id">
-      <img v-if="user.avatar" :src="user.avatar" :alt="user.name[0]" />
+      <img v-if="user.avatar" :src="user.avatar" :alt="user.id" />
       <span v-else>{{ user.name[0] }}</span>
     </template>
     <v-icon v-else>account_circle</v-icon>

@@ -30,7 +30,8 @@
       }
     },
     methods: {
-      onSignInSuccess(response) {
+      onSignInSuccess: async function (response) {
+        let that = this;
         FB.api('/me', {local: 'fr_FR', fields: 'name, email'}, u => {
           let auth = response.authResponse;
           let user = {
@@ -39,15 +40,11 @@
             mail: u.email,
             name: u.name,
           };
-          FB.api('/' + user.id + '/picture?height=200&width=200&redirect=false', 'GET', function (avatar) {
-            user.avatar = avatar.data.url
-            window.USER = user;
+          FB.api('/' + user.id + '/picture?height=200&width=200&redirect=false', 'GET', async avatar => {
+            user.avatar = avatar.data.url;
+            await this.$store.dispatch('user/setUser', {user});
+            this.$emit('success');
             console.info('Connexion réussi avec Facebook');
-            console.info('ID : ' + user.id);
-            console.info("Token : " + user.token);
-            console.info('Nom : ' + user.name);
-            console.info('Mail : ' + user.mail);
-            console.info('Avatar : ' + user.avatar);
           });
         });
       },

@@ -45,15 +45,10 @@
           name: auth.getName(),
           avatar: auth.getImageUrl()
         };
-        ///window.USER = user;
-        // console.log(this);
-
-        //this.$store.hotUpdate('user/setUser', user);
-        //window.store = this.$store;
-        // this.$store.dispatch('user/setUser', user);
 
         await this.$store.dispatch('user/setUser', {user});
         this.$emit('success');
+        console.info('Connexion réussi avec Google');
       },
       onSignInError(error) {
         console.error('Erreur de connexion avec Google', error)
