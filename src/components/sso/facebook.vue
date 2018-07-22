@@ -30,8 +30,14 @@
       }
     },
     methods: {
+      /**
+       * Récupère les informations de l'api Facebook
+       *
+       * @param response
+       * @returns {Promise<void>}
+       */
       onSignInSuccess: async function (response) {
-        let that = this;
+        // Récupération des éléments principaux
         FB.api('/me', {local: 'fr_FR', fields: 'name, email'}, u => {
           let auth = response.authResponse;
           let user = {
@@ -40,16 +46,25 @@
             mail: u.email,
             name: u.name,
           };
+          // Récupération de l'avatar
           FB.api('/' + user.id + '/picture?height=200&width=200&redirect=false', 'GET', async avatar => {
             user.avatar = avatar.data.url;
             await this.$store.dispatch('user/setUser', {user});
+            await this.$store.dispatch('ui/addToast', {text: 'Connexion réussi avec Facebook'});
             this.$emit('success');
-            console.info('Connexion réussi avec Facebook');
           });
         });
       },
-      onSignInError(error) {
-        console.error('Erreur de connexion Facebook', error)
+
+      /**
+       * En cas d'erreur
+       *
+       * @param error
+       * @returns {Promise<void>}
+       */
+      onSignInError: async function (error) {
+        await this.$store.dispatch('ui/addToast', {text: 'Erreur de connexion Facebook'});
+        console.error('Erreur de connexion Facebook', error);
       }
     }
   }

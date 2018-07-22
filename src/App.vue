@@ -1,37 +1,37 @@
 <template>
   <v-app>
     <v-toolbar
-        app
-        dark
-        color="blue darken-3"
+            app
+            dark
+            color="blue darken-3"
     >
       <img width="42" height="42" src="@/assets/img/bar.svg" alt="">
       <v-toolbar-title>{{$route.name}}</v-toolbar-title>
-      <v-spacer />
+      <v-spacer/>
       <div class="fab-right">
         <v-scale-transition origin="center center">
           <v-btn
-              v-show="articlesCommande.nbArt"
-              absolute
-              dark
-              fab
-              top
-              small
-              color="red"
-              class="cmd-clear"
+                  v-show="articlesCommande.nbArt"
+                  absolute
+                  dark
+                  fab
+                  top
+                  small
+                  color="red"
+                  class="cmd-clear"
           >
             <v-icon>remove_shopping_cart</v-icon>
           </v-btn>
         </v-scale-transition>
         <v-scale-transition origin="center center">
           <v-btn
-              v-show="articlesCommande.nbArt"
-              absolute
-              dark
-              fab
-              top
-              right
-              color="blue"
+                  v-show="articlesCommande.nbArt"
+                  absolute
+                  dark
+                  fab
+                  top
+                  right
+                  color="blue"
           >
             <v-icon>receipt</v-icon>
           </v-btn>
@@ -39,13 +39,13 @@
 
         <v-scale-transition origin="center center">
           <v-btn
-              v-show="!articlesCommande.nbArt"
-              absolute
-              dark
-              fab
-              top
-              right
-              color="orange"
+                  v-show="!articlesCommande.nbArt"
+                  absolute
+                  dark
+                  fab
+                  top
+                  right
+                  color="orange"
           >
             <v-icon>restore</v-icon>
           </v-btn>
@@ -59,11 +59,11 @@
       </v-slide-x-transition>
     </v-content>
     <v-navigation-drawer
-        temporary
-        right
-        v-model="rightDrawer"
-        fixed
-        app
+            temporary
+            right
+            v-model="rightDrawer"
+            fixed
+            app
     >
       <div class="user-area">
         <div>
@@ -88,7 +88,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer
-        app
+            app
     >
       <v-toolbar>
         <v-toolbar-items class="d-flex flex">
@@ -104,11 +104,11 @@
       </v-toolbar>
     </v-footer>
 
-    <v-dialog v-model="loginModal" max-width="500px">
+    <v-dialog v-model="ui.etatModalLogin" max-width="500px">
       <v-card flat>
         <v-tabs
-            grow
-            v-model="activeTab"
+                grow
+                v-model="activeTab"
         >
           <v-tabs-slider/>
           <v-tab>
@@ -130,16 +130,16 @@
         </v-tabs>
         <v-card-actions>
           <v-spacer/>
-          <v-btn flat @click.native="loginModal = false">Annuler</v-btn>
-          <v-btn flat @click.native="loginModal = false">Envoyer</v-btn>
+          <v-btn flat @click.native="showModalLogin(false)">Annuler</v-btn>
+          <v-btn flat @click.native="showModalLogin(false)">Envoyer</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-snackbar
-        v-for="toast in ui.toast"
-        v-bind="toast"
-        :key="toast.key"
+            v-for="toast in ui.toast"
+            v-bind="toast"
+            :key="toast.key"
     >
       {{ toast.text }}
     </v-snackbar>
@@ -149,75 +149,79 @@
 </template>
 
 <script>
-import {mapState, mapGetters} from 'vuex'
-import Avatar from './components/core/Avatar'
-import FormLogin from './components/forms/FormLogin'
-import FormProfile from './components/forms/FormProfile'
+  import {mapState, mapGetters} from 'vuex'
+  import Avatar from './components/core/Avatar'
+  import FormLogin from './components/forms/FormLogin'
+  import FormProfile from './components/forms/FormProfile'
 
-export default {
-  name: 'App',
-  components: {
-    Avatar,
-    FormLogin,
-    FormProfile
-  },
-  created () {
-    this.$router.options.routes.forEach(route => {
-      this.items.push(route)
-    })
-  },
-  data () {
-    return {
-      items: [],
-      rightDrawer: false,
-      loginModal: false,
-      activeTab: 0,
-      login: {
-        user: '',
-        password: '',
-        _hidePassword: true,
-        _valid: false
+  export default {
+    name: 'App',
+    components: {
+      Avatar,
+      FormLogin,
+      FormProfile
+    },
+    created() {
+      this.$router.options.routes.forEach(route => {
+        this.items.push(route)
+      })
+    },
+    data() {
+      return {
+        items: [],
+        rightDrawer: false,
+        activeTab: 0,
+        etatModalLogin: false,
+        login: {
+          user: '',
+          password: '',
+          _hidePassword: true,
+          _valid: false
+        },
+        register: {
+          user: '',
+          password: '',
+          _hidePassword: true,
+          _valid: false
+        }
+      }
+    },
+    methods: {
+      showModalLogin: async function ($bEtat) {
+        await this.$store.dispatch('ui/setEtatModal', $bEtat);
       },
-      register: {
-        user: '',
-        password: '',
-        _hidePassword: true,
-        _valid: false
+      toggle: async function () {
+        if (this.user.id) {
+          this.rightDrawer = !this.rightDrawer
+        } else {
+          this.showModalLogin(true);
+        }
       }
+    },
+    computed: {
+      ...mapState([
+        'user',
+        'ui'
+      ]),
+      ...mapGetters({
+        articlesCommande: 'commandes/articlesCommande'
+      })
     }
-  },
-  methods: {
-    toggle () {
-      if (this.user.id) {
-        this.rightDrawer = !this.rightDrawer
-      } else {
-        this.loginModal = true
-      }
-    }
-  },
-  computed: {
-    ...mapState([
-      'user',
-      'ui'
-    ]),
-    ...mapGetters({
-      articlesCommande: 'commandes/articlesCommande'
-    })
   }
-}
 </script>
 
 <style scoped>
   .user-area {
-    background: #cccccc url("./assets/img/bar.svg") no-repeat 50% 25%;
+    background:      #cccccc url("./assets/img/bar.svg") no-repeat 50% 25%;
     background-size: 15rem;
-    padding: 32px 32px 0;
-    width: 100%;
+    padding:         32px 32px 0;
+    width:           100%;
   }
+
   .fab-right {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    position:     absolute;
+    right:        0;
+    bottom:       0;
     margin-right: 35px !important;
   }
 
@@ -228,11 +232,12 @@ export default {
   }
 
   .fab-right .avt {
-    position: absolute;
-    top: -50px;
-    right: -20px;
+    position:   absolute;
+    top:        -50px;
+    right:      -20px;
     transition: .3s ease-out;
   }
+
   .fab-right .cmd-clear {
     right: 78px;
   }

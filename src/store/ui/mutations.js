@@ -1,9 +1,10 @@
-import * as types from './mutation-types'
+import * as types from './mutation-types';
 
-let toastId = 0
+let toastId = 0;
 const baseToast = {
   timeout: 6000
-}
+};
+
 const mutations = {
   /**
    * Ajoute dans la pile des toast a afficher
@@ -16,8 +17,18 @@ const mutations = {
       ...toast,
       value: true,
       key: ++toastId
-    })
-  }
-}
+    });
+  },
 
-export default mutations
+  /**
+   * Change l'etat de la modal login open/close
+   * @param state
+   * @param etat : open = true, close = false
+   */
+  [types.UI_SET_ETAT_MODAL_LOGIN]: function (state, etat) {
+    state.etatModalLogin = etat;
+  }
+
+};
+
+export default mutations;

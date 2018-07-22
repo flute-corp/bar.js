@@ -1,3 +1,4 @@
 export default {
-  toast: []
-}
+  toast: [],
+  etatModalLogin: false
+};

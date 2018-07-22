@@ -36,6 +36,12 @@
       }
     },
     methods: {
+      /**
+       * Récupère les informations de l'api Google
+       *
+       * @param googleUser
+       * @returns {Promise<void>}
+       */
       onSignInSuccess: async function (googleUser) {
         let auth = googleUser.getBasicProfile();
         let user = {
@@ -45,13 +51,19 @@
           name: auth.getName(),
           avatar: auth.getImageUrl()
         };
-
         await this.$store.dispatch('user/setUser', {user});
+        await this.$store.dispatch('ui/addToast', {text: 'Connexion réussi avec Google'});
         this.$emit('success');
-        console.info('Connexion réussi avec Google');
       },
-      onSignInError(error) {
-        console.error('Erreur de connexion avec Google', error)
+      /**
+       * En cas d'erreur
+       *
+       * @param error
+       * @returns {Promise<void>}
+       */
+      onSignInError: async function (error) {
+        await this.$store.dispatch('ui/addToast', {text: 'Erreur de connexion Google'});
+        console.error('Erreur de connexion avec Google', error);
       }
     },
   }
