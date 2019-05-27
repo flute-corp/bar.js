@@ -36,21 +36,21 @@
 </template>
 
 <script>
-  import formMixin from '../mixins/formMixin'
-  import FileUploader from '../fields/FileUploader'
+import formMixin from '../mixins/formMixin'
+import FileUploader from '../fields/FileUploader'
 
-  export default {
-    name: 'form-profile',
-    components: {
-      FileUploader
-    },
-    mixins: [formMixin],
-    data() {
-      return {
-        hidePassword: [true, true]
-      }
+export default {
+  name: 'form-profile',
+  components: {
+    FileUploader
+  },
+  mixins: [formMixin],
+  data () {
+    return {
+      hidePassword: [true, true]
     }
   }
+}
 </script>
 
 <style scoped>

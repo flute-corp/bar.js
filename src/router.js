@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Carte from './views/Carte.vue'
-import Stats from './views/Stats.vue'
+import DefaultLayout from './layouts/Default.vue'
+import Home from './views/Home.vue'
+import About from './views/About.vue'
 
 Vue.use(Router)
 
@@ -9,15 +10,19 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Carte',
-      component: Carte,
-      icon: 'local_bar'
-    },
-    {
-      path: '/stats',
-      name: 'Stats',
-      component: Stats,
-      icon: 'poll'
+      component: DefaultLayout,
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: Home
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: About
+        }
+      ]
     }
   ]
 })

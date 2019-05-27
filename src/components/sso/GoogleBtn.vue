@@ -25,48 +25,48 @@
 </template>
 
 <script>
-  export default {
-    name: "sso-google",
-    data() {
-      return {
-        hidePassword: true,
-        googleSignInParams: {
-          client_id: '798783669611-0gsh6nnviqsgii3cdqtp0rp0os4alnq5.apps.googleusercontent.com'
-        },
+export default {
+  name: 'GoogleBtn',
+  data () {
+    return {
+      hidePassword: true,
+      googleSignInParams: {
+        client_id: '798783669611-0gsh6nnviqsgii3cdqtp0rp0os4alnq5.apps.googleusercontent.com'
       }
-    },
-    methods: {
-      /**
+    }
+  },
+  methods: {
+    /**
        * Récupère les informations de l'api Google
        *
        * @param googleUser
        * @returns {Promise<void>}
        */
-      onSignInSuccess: async function (googleUser) {
-        let auth = googleUser.getBasicProfile();
-        let user = {
-          id: auth.getId(),
-          token: googleUser.getAuthResponse().id_token,
-          mail: auth.getEmail(),
-          name: auth.getName(),
-          avatar: auth.getImageUrl()
-        };
-        await this.$store.dispatch('user/setUser', {user});
-        await this.$store.dispatch('ui/addToast', {text: 'Connexion réussi avec Google'});
-        this.$emit('success');
-      },
-      /**
+    onSignInSuccess: async function (googleUser) {
+      let auth = googleUser.getBasicProfile()
+      let user = {
+        id: auth.getId(),
+        token: googleUser.getAuthResponse().id_token,
+        mail: auth.getEmail(),
+        name: auth.getName(),
+        avatar: auth.getImageUrl()
+      }
+      await this.$store.dispatch('user/setUser', { user })
+      await this.$store.dispatch('ui/addToast', { text: 'Connexion réussi avec Google' })
+      this.$emit('success')
+    },
+    /**
        * En cas d'erreur
        *
        * @param error
        * @returns {Promise<void>}
        */
-      onSignInError: async function (error) {
-        await this.$store.dispatch('ui/addToast', {text: 'Erreur de connexion Google'});
-        console.error('Erreur de connexion avec Google', error);
-      }
-    },
+    onSignInError: async function (error) {
+      await this.$store.dispatch('ui/addToast', { text: 'Erreur de connexion Google' })
+      console.error('Erreur de connexion avec Google', error)
+    }
   }
+}
 </script>
 
 <style scoped>

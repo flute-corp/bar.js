@@ -1,9 +1,9 @@
-import * as types from './mutation-types';
+import * as types from './mutation-types'
 
-let toastId = 0;
+let toastId = 0
 const baseToast = {
   timeout: 6000
-};
+}
 
 const mutations = {
   /**
@@ -17,7 +17,7 @@ const mutations = {
       ...toast,
       value: true,
       key: ++toastId
-    });
+    })
   },
 
   /**
@@ -26,9 +26,9 @@ const mutations = {
    * @param etat : open = true, close = false
    */
   [types.UI_SET_ETAT_MODAL_LOGIN]: function (state, etat) {
-    state.etatModalLogin = etat;
+    state.etatModalLogin = etat
   }
 
-};
+}
 
-export default mutations;
+export default mutations

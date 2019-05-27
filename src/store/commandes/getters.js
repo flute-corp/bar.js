@@ -1,6 +1,6 @@
 const getters = {
   articlesCommande: (state) => {
-    const {current} = state
+    const { current } = state
     const oCommande = {}
     let nbArt = 0
     for (let k in current.fav) {

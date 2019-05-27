@@ -1,4 +1,3 @@
-
 const getters = {
   /**
    * Récupère la carte

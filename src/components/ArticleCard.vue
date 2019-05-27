@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import {createNamespacedHelpers} from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import * as commandeTypes from '../store/commandes/mutation-types'
 
 const storeCommande = createNamespacedHelpers('commandes')

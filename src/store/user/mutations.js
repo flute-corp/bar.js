@@ -7,12 +7,12 @@ const mutations = {
    * @param user L'utilisateur connecté
    */
   [types.USER_SET_USER]: function (state, { id, name, token, mail, avatar }) {
-      state.id = id;
-      state.name = name;
-      state.token = token;
-      state.mail = mail;
-      state.avatar = avatar;
+    state.id = id
+    state.name = name
+    state.token = token
+    state.mail = mail
+    state.avatar = avatar
   }
-};
+}
 
-export default mutations;
+export default mutations
