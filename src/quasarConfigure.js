@@ -30,6 +30,8 @@ import {
   QPopupProxy,
   QColor,
   QTooltip,
+  QExpansionItem,
+  QSeparator,
   // Plugins
   Dialog,
   Notify
@@ -61,7 +63,9 @@ Vue.use(Quasar, {
     QDialog,
     QPopupProxy,
     QColor,
-    QTooltip
+    QTooltip,
+    QExpansionItem,
+    QSeparator
   },
   directives: {},
   plugins: {
