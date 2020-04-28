@@ -2,11 +2,11 @@
   <q-page>
     <q-list bordered>
       <template v-for="(category, i) in carte">
-        <q-separator :key="'separator-' +category.id"/>
+        <q-separator :key="'separator-' +category.id" />
         <q-expansion-item :key="category.id">
           <template #header>
             <q-item-section avatar>
-              <q-icon :name="category.icon"/>
+              <q-icon :name="category.icon" />
             </q-item-section>
             <q-item-section>
               {{ category.label }}
@@ -19,7 +19,7 @@
             <q-card-section>
               <div class="row q-col-gutter-md">
                 <article-card v-for="article in category.articles" :key="article.id"
-                              :value="current.cmd[article.id]" :article="article"/>
+                              :value="current.cmd[article.id]" :article="article" />
               </div>
             </q-card-section>
           </q-card>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapGetters, createNamespacedHelpers } from 'vuex'
+import { createNamespacedHelpers, mapGetters } from 'vuex'
 import ArticleCard from '../components/ArticleCard'
 
 const storeCommande = createNamespacedHelpers('commandes')

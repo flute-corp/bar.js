@@ -1,8 +1,8 @@
 <template>
   <g-signin-button
-          :params="googleSignInParams"
-          @success="onSignInSuccess"
-          @error="onSignInError">
+      :params="googleSignInParams"
+      @success="onSignInSuccess"
+      @error="onSignInError">
     <div>
       <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
            width="18px" height="18px" viewBox="0 0 48 48"
@@ -37,11 +37,11 @@ export default {
   },
   methods: {
     /**
-       * Récupère les informations de l'api Google
-       *
-       * @param googleUser
-       * @returns {Promise<void>}
-       */
+     * Récupère les informations de l'api Google
+     *
+     * @param googleUser
+     * @returns {Promise<void>}
+     */
     onSignInSuccess: async function (googleUser) {
       let auth = googleUser.getBasicProfile()
       let user = {
@@ -56,11 +56,11 @@ export default {
       this.$emit('success')
     },
     /**
-       * En cas d'erreur
-       *
-       * @param error
-       * @returns {Promise<void>}
-       */
+     * En cas d'erreur
+     *
+     * @param error
+     * @returns {Promise<void>}
+     */
     onSignInError: async function (error) {
       await this.$store.dispatch('ui/addToast', { text: 'Erreur de connexion Google' })
       console.error('Erreur de connexion avec Google', error)
@@ -70,48 +70,48 @@ export default {
 </script>
 
 <style scoped>
-  .g-signin-button {
-    margin-left:      10px;
-    margin-right:     10px;
-    margin-top:       20px;
-    display:          inline-block;
-    height:           36px;
-    width:            120px;
-    padding:          4px 8px;
-    border-radius:    3px;
-    cursor:           pointer;
-    outline:          none;
-    overflow:         hidden;
-    position:         relative;
-    text-align:       center;
-    vertical-align:   middle;
-    white-space:      nowrap;
-    transition:       background-color .218s, border-color .218s, box-shadow .218s;
-    box-sizing:       border-box;
-    /* Personnalisation Google */
-    background-color: #fff;
-    color:            #757575;
-    box-shadow:       0 2px 4px 0 rgba(0, 0, 0, .25);
+.g-signin-button {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  height: 36px;
+  width: 120px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  box-sizing: border-box;
+  /* Personnalisation Google */
+  background-color: #fff;
+  color: #757575;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .25);
 
-  }
+}
 
-  .g-signin-button span {
-    font-size:      14px;
-    line-height:    32px;
-    letter-spacing: 0.21px;
-  }
+.g-signin-button span {
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0.21px;
+}
 
-  .g-signin-button div {
-    padding: 5px;
-    float:   left;
-  }
+.g-signin-button div {
+  padding: 5px;
+  float: left;
+}
 
-  .g-signin-button:hover {
-    box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
-  }
+.g-signin-button:hover {
+  box-shadow: 0 0 3px 3px rgba(66, 133, 244, .3);
+}
 
-  .g-signin-button:active {
-    background-color: #eee;
-    color:            #6d6d6d;
-  }
+.g-signin-button:active {
+  background-color: #eee;
+  color: #6d6d6d;
+}
 </style>

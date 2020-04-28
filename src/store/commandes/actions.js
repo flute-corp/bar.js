@@ -17,6 +17,7 @@ const actions = {
       qt = 0
     }
     commit(types.COMMANDE_CURRENT_SET_ARTICLE, { idArticle, qt })
-  } }
+  }
+}
 
 export default actions

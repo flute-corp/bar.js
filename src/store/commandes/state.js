@@ -1,11 +1,7 @@
 export default {
   current: {
-    fav: {
-
-    },
-    cmd: {
-
-    }
+    fav: {},
+    cmd: {}
   },
   commandes: []
 }

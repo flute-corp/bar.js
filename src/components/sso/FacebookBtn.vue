@@ -1,8 +1,8 @@
 <template>
   <fb-signin-button
-          :params="fbSignInParams"
-          @success="onSignInSuccess"
-          @error="onSignInError">
+      :params="fbSignInParams"
+      @success="onSignInSuccess"
+      @error="onSignInError">
     <div>
       <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 216 216" class="_5h0m"
            color="#FFFFFF">
@@ -32,11 +32,11 @@ export default {
   },
   methods: {
     /**
-       * Récupère les informations de l'api Facebook
-       *
-       * @param response
-       * @returns {Promise<void>}
-       */
+     * Récupère les informations de l'api Facebook
+     *
+     * @param response
+     * @returns {Promise<void>}
+     */
     onSignInSuccess: async function (response) {
       // Récupération des éléments principaux
       FB.api('/me', { local: 'fr_FR', fields: 'name, email' }, u => {
@@ -58,11 +58,11 @@ export default {
     },
 
     /**
-       * En cas d'erreur
-       *
-       * @param error
-       * @returns {Promise<void>}
-       */
+     * En cas d'erreur
+     *
+     * @param error
+     * @returns {Promise<void>}
+     */
     onSignInError: async function (error) {
       await this.$store.dispatch('ui/addToast', { text: 'Erreur de connexion Facebook' })
       console.error('Erreur de connexion Facebook', error)
@@ -72,36 +72,38 @@ export default {
 </script>
 
 <style scoped>
-  .fb-signin-button {
-    margin-left:      10px;
-    margin-right:     10px;
-    margin-top:       20px;
-    display:          inline-block;
-    height:           36px;
-    width:            120px;
-    padding:          4px 8px;
-    border-radius:    3px;
-    cursor:           pointer;
-    outline:          none;
-    overflow:         hidden;
-    position:         relative;
-    text-align:       center;
-    vertical-align:   middle;
-    white-space:      nowrap;
-    transition:       background-color .218s, border-color .218s, box-shadow .218s;
-    box-sizing:       border-box;
-    /* Personnalisation Facebook */
-    background-color: #4267b2;
-    color:            #fff;
-  }
-  .fb-signin-button span {
-    font-size:      14px;
-    line-height:    32px;
-    letter-spacing: 0.21px;
-  }
-  .fb-signin-button div {
-    padding: 5px;
-    float:   left;
-  }
+.fb-signin-button {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+  display: inline-block;
+  height: 36px;
+  width: 120px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: background-color .218s, border-color .218s, box-shadow .218s;
+  box-sizing: border-box;
+  /* Personnalisation Facebook */
+  background-color: #4267b2;
+  color: #fff;
+}
+
+.fb-signin-button span {
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0.21px;
+}
+
+.fb-signin-button div {
+  padding: 5px;
+  float: left;
+}
 
 </style>
