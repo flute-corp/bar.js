@@ -1,24 +1,31 @@
 <template>
   <div class="col-12 col-md-4 col-lg-3">
     <q-card class="shadow-2">
-      <img @click="reveal = true" :src="'/img/'+ article.id +'.jpg'" style="width: 100%;" />
-      <q-card-section>
-        <div class="floatingArea">
-          <div class="d-block input-add-remove">
-            <q-input
-                :value="value"
-                type="number"
-                @input="setQt({idArticle: article.id, qt: +$event})"
-                class="text-xs-center"
-            />
-            <q-btn fab-mini color="orange" icon="fa fa-minus" class="btn-moins"
+      <q-img @click="reveal = true" :src="'/img/'+ article.id +'.jpg'"
+             height="250px">
+        <template #error>
+          <q-img src="/img/404.jpg" />
+        </template>
+      </q-img>
+      <q-card-section class="row justify-end">
+        <q-input
+            :value="value || 0"
+            type="number"
+            @input="setQt({idArticle: article.id, qt: +$event})"
+            class="col-6"
+            input-class="text-center textfield"
+        >
+          <template #prepend>
+            <q-btn fab-mini color="orange" icon="fa fa-minus"
                    @click="setQt({idArticle: article.id, qt: ((value || 0) - 1)})"
             />
-            <q-btn fab-mini color="blue" icon="fa fa-plus" class="btn-plus"
+          </template>
+          <template #append>
+            <q-btn fab-mini color="blue" icon="fa fa-plus"
                    @click="setQt({idArticle: article.id, qt: ((value || 0) + 1)})"
             />
-          </div>
-        </div>
+          </template>
+        </q-input>
       </q-card-section>
       <q-card-section>
         <div class="text-h6">{{article.label}}</div>
