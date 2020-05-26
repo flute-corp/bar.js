@@ -17,7 +17,8 @@
 
       </q-toolbar>
       <div class="absolute z-fab" style="top: 20px; right: 30px;">
-        <q-btn color="positive" fab icon="fa fa-receipt" />
+        <q-btn color="positive" fab icon="fa fa-receipt"
+               @click="showReceipt = true" />
       </div>
     </q-header>
 
@@ -42,16 +43,46 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-dialog v-model="showReceipt">
+      <q-card>
+        <q-tabs v-model="tabs">
+          <q-tab name="total">Total</q-tab>
+        </q-tabs>
+        <q-tab-panels v-model="tabs">
+          <q-tab-panel name="total" class="q-pa-none">
+            <table-commande :commande="articlesCommande.articles" />
+          </q-tab-panel>
+        </q-tab-panels>
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+import TableCommande from '@/components/table/TableCommande'
+
+const storeCommande = createNamespacedHelpers('commandes')
 export default {
   name: 'LayoutDefault',
-
+  components: { TableCommande },
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      showReceipt: false,
+      tabs: 'total'
+    }
+  },
+  computed: {
+    ...storeCommande.mapGetters({
+      articlesCommande: 'articlesCommande'
+    })
+  },
+  methods: {
+    onShowReceipt () {
+      this.tabs = 'total'
+      this.showReceipt = true
     }
   }
 }

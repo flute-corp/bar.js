@@ -19,6 +19,7 @@ import {
   QFooter,
   QHeader,
   QIcon,
+  QImg,
   QInput,
   QItem,
   QItemLabel,
@@ -30,10 +31,16 @@ import {
   QPageSticky,
   QPopupProxy,
   QSeparator,
+  QTabs,
+  QTab,
+  QTabPanels,
+  QTabPanel,
   QToolbar,
   QToolbarTitle,
   QTooltip,
-  QImg,
+  QTable,
+  QTd,
+  QAvatar,
   Quasar
 } from 'quasar'
 
@@ -66,7 +73,14 @@ Vue.use(Quasar, {
     QTooltip,
     QExpansionItem,
     QSeparator,
-    QImg
+    QImg,
+    QTabs,
+    QTab,
+    QTabPanels,
+    QTabPanel,
+    QTable,
+    QTd,
+    QAvatar
   },
   directives: {},
   plugins: {
