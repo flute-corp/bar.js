@@ -8,7 +8,7 @@ const mutations = {
    * @param idArticle
    * @param qt
    */
-  [types.COMMANDE_CURRENT_SET_ARTICLE] (state, {idArticle, qt}) {
+  [types.COMMANDE_CURRENT_SET_ARTICLE] (state, { idArticle, qt }) {
     Vue.set(state.current.cmd, idArticle, qt)
   }
 }

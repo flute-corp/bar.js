@@ -20,28 +20,27 @@
 </template>
 
 <script>
-  import formMixin from '../mixins/formMixin'
-  import SsoGoogle from '../sso/google'
-  import SsoFacebook from '../sso/facebook'
+import formMixin from '../mixins/formMixin'
+import SsoGoogle from '../sso/GoogleBtn'
+import SsoFacebook from '../sso/FacebookBtn'
 
-  export default {
-    name: 'form-login',
-    components: {SsoGoogle, SsoFacebook},
-    mixins: [formMixin],
-    data() {
-      return {
-        hidePassword: true,
-      }
-    },
-    mounted: function () {
-      function closeModal() {
-        this.$store.dispatch('ui/setEtatModal', false);
-      }
-      this.$refs.loginGoogle.$on('success', closeModal);
-      this.$refs.loginFacebook.$on('success', closeModal);
-
+export default {
+  name: 'form-login',
+  components: { SsoGoogle, SsoFacebook },
+  mixins: [formMixin],
+  data () {
+    return {
+      hidePassword: true
     }
+  },
+  mounted: function () {
+    function closeModal () {
+      this.$store.dispatch('ui/setEtatModal', false)
+    }
+    this.$refs.loginGoogle.$on('success', closeModal)
+    this.$refs.loginFacebook.$on('success', closeModal)
   }
+}
 </script>
 
 <style scoped>

@@ -29,12 +29,12 @@
 </template>
 
 <script>
-import {mapGetters, createNamespacedHelpers} from 'vuex'
+import { mapGetters, createNamespacedHelpers } from 'vuex'
 import ArticleCard from '../components/ArticleCard'
 const storeCommande = createNamespacedHelpers('commandes')
 
 export default {
-  components: {ArticleCard},
+  components: { ArticleCard },
   computed: {
     ...mapGetters(
       {
