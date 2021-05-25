@@ -1,36 +1,38 @@
 <template>
-  <v-container fluid class="pa-2">
-    <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-        <v-expansion-panel expand>
-          <v-expansion-panel-content v-for="(category, i) in carte" :key="category.id"
-                                     hide-actions>
-            <div slot="header">
-              <v-icon class="pr-1">{{ category.icon }}</v-icon>
+  <q-page>
+    <q-list bordered>
+      <template v-for="(category, i) in carte">
+        <q-separator :key="'separator-' +category.id"/>
+        <q-expansion-item :key="category.id">
+          <template #header>
+            <q-item-section avatar>
+              <q-icon :name="category.icon"/>
+            </q-item-section>
+            <q-item-section>
               {{ category.label }}
-              <div class="grey--text" style="float: right">
-                {{ totauxParCategories[i] }}
+            </q-item-section>
+            <q-item-section side>
+              {{ totauxParCategories[i] }}
+            </q-item-section>
+          </template>
+          <q-card>
+            <q-card-section>
+              <div class="row q-col-gutter-md">
+                <article-card v-for="article in category.articles" :key="article.id"
+                              :value="current.cmd[article.id]" :article="article"/>
               </div>
-            </div>
-            <v-card class="grey lighten-3">
-              <v-container fluid grid-list-md>
-                <v-layout row wrap>
-                  <v-flex xs6 sm3 v-for="article in category.articles" :key="article.id">
-                    <article-card :value="current.cmd[article.id]" :article="article"/>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-layout>
-    </v-slide-y-transition>
-  </v-container>
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+      </template>
+    </q-list>
+  </q-page>
 </template>
 
 <script>
 import { mapGetters, createNamespacedHelpers } from 'vuex'
 import ArticleCard from '../components/ArticleCard'
+
 const storeCommande = createNamespacedHelpers('commandes')
 
 export default {
@@ -51,21 +53,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  h1, h2 {
-    font-weight: normal;
-  }
+h1, h2 {
+  font-weight: normal;
+}
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
 
-  a {
-    color: #42b983;
-  }
+a {
+  color: #42b983;
+}
 </style>
