@@ -29,7 +29,7 @@
         <q-item-label header>Navigation</q-item-label>
         <q-item to="/" exact>
           <q-item-section avatar>
-            <q-icon name="fas fa-home"/>
+            <q-icon name="fas fa-home" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Home</q-item-label>
@@ -39,7 +39,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view/>
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>

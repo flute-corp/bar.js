@@ -1,5 +1,5 @@
 (function ($) {
-    $(function() {
-        new bar.App();
-    });
-})(jQuery);
+  $(function () {
+    new bar.App()
+  })
+})(jQuery)

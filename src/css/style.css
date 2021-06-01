@@ -4,16 +4,23 @@
 footer {
     position: relative;
 }
+
 #contentWrapper {
-	margin : 30px 0 250px;
+    margin: 30px 0 250px;
     min-height: calc(100vh - 272px - 220px);
 }
+
 @keyframes highlight {
-    from    { background: #fff}
-    to      { background: #ffa726}
+    from {
+        background: #fff
+    }
+    to {
+        background: #ffa726
+    }
 }
+
 .aHighlight {
-    animation : highlight 1s ease-in-out infinite alternate;
+    animation: highlight 1s ease-in-out infinite alternate;
 }
 
 .splash {
@@ -23,23 +30,34 @@ footer {
     left: -100px;
     bottom: -100px;
     right: -100px;
-    background:  #FAFAFA url("../img/favicon/bar.svg") no-repeat fixed center/50vh;
+    background: #FAFAFA url("../img/favicon/bar.svg") no-repeat fixed center/50vh;
 }
 
 @keyframes disappear {
-    0%   { opacity: 1}
-    60%  { opacity: 1}
-    99%  { opacity: 0; right: -100px;}
-    100% { opacity: 0; visibility: hidden; right: 100%;}
+    0% {
+        opacity: 1
+    }
+    60% {
+        opacity: 1
+    }
+    99% {
+        opacity: 0;
+        right: -100px;
+    }
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        right: 100%;
+    }
 }
 
 .disappear {
-    animation : disappear 1s ease-in forwards;
+    animation: disappear 1s ease-in forwards;
     opacity: 1;
 }
 
 .splash h1 {
-    position:absolute;
+    position: absolute;
     bottom: 20%;
     text-align: center;
     z-index: 9999;
@@ -94,15 +112,17 @@ footer {
     min-width: 140px;
     text-align: right;
 }
-.floatingArea input[type="text"], .floatingArea input[type="number"]{
+
+.floatingArea input[type="text"], .floatingArea input[type="number"] {
     margin: 0 -20px;
     width: 80px;
     height: 39px;
     background: rgba(255, 255, 255, 0.75);
     text-align: center;
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
     -webkit-appearance: none;
 }
+
 .floatingArea .btn-floating {
     margin-top: -1px;
 }
@@ -118,13 +138,16 @@ body > .container-fluid {
 nav {
     height: auto;
 }
+
 nav .input-field.col {
     top: 10px;
     height: 44px;
 }
+
 nav .input-field.col label {
     top: -10px !important;
 }
+
 nav ul.right > li {
     height: 64px;
 }
@@ -132,6 +155,7 @@ nav ul.right > li {
 .nav-wrapper .dropdown-button i {
     float: left;
 }
+
 .nav-wrapper .row {
     height: 64px;
     margin-bottom: 0;
@@ -143,38 +167,42 @@ nav ul.right > li {
     padding-left: 4rem;
     width: calc(100% - 4rem);
 }
+
 nav i, nav [class^="mdi-"], nav [class*="mdi-"], nav i.material-icons {
     height: 64px;
     line-height: 64px;
 }
+
 .input-field input[type="number"] + label {
     left: 1rem;
 }
 
 /* Tabs */
 .tabs .indicator {
-	background: #1565c0;
+    background: #1565c0;
 }
+
 .tabs .tab a:hover, .tabs .tab a.active {
     color: #1565c0;
 }
+
 .tabs .tab a {
     color: rgba(21, 101, 192, 0.7);
 }
 
 input.invalid + label:after {
-    transition-property : all;
-    transition-duration : .2s;
+    transition-property: all;
+    transition-duration: .2s;
     font-size: 0.8rem;
 }
 
 input.invalid + label:not(.active):after {
-    transition-property : none;
-    margin-top : -2em;
+    transition-property: none;
+    margin-top: -2em;
 }
 
 .activator {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 /*
@@ -183,34 +211,41 @@ input.invalid + label:not(.active):after {
 .collapsible-body.row {
     padding: 0;
 }
+
 /*
  * Modal fixed header
  */
 .modal .fixed-tabs-wrapper {
-	padding-top: 10px;
+    padding-top: 10px;
 }
+
 .modal .fixed-tabs-wrapper .tabs {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
 }
+
 .modal.bottom-sheet {
     max-height: 70%;
 }
+
 .modal.bottom-sheet.with-tabs .modal-content, .modal.bottom-sheet.with-tabs .modal-content p {
     padding-top: 0;
     margin-top: 0;
 }
+
 .modal.bottom-sheet.with-tabs .modal-content form {
     height: 50vh;
 }
+
 .modal-list {
     margin: 0;
 }
+
 .modal-list li {
     clear: both;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     cursor: pointer;
     min-height: 50px;
     line-height: 1.5rem;
@@ -218,9 +253,11 @@ input.invalid + label:not(.active):after {
     text-align: left;
     text-transform: none;
 }
+
 .modal-list li:not(.optgroup):hover, .modal-list li.active {
     background-color: #eee;
 }
+
 .modal-list li a, .modal-list li span {
     font-size: 16px;
     color: #26a69a;
@@ -228,24 +265,30 @@ input.invalid + label:not(.active):after {
     line-height: 22px;
     padding: 14px 16px;
 }
+
 .modal-list [type="checkbox"] + label {
     top: 1px;
     left: 0;
     height: 18px;
 }
+
 .modal-list .optgroup {
     border-top: 1px solid #eee;
     background-color: transparent;
 }
+
 .modal-list .optgroup > span {
-    color: rgba(0,0,0,0.4);
+    color: rgba(0, 0, 0, 0.4);
 }
+
 .modal-list li.optgroup ~ li.optgroup-option {
     padding-left: 1rem;
 }
+
 .modal-content .collapsible-body {
     padding: 0.5rem;
 }
+
 .modal-content .collapsible-body .right-align .btn-floating {
     margin-right: 0.5rem;
 }
@@ -254,6 +297,7 @@ input.invalid + label:not(.active):after {
 .toast > div {
     width: 100%;
 }
+
 .toast .btn-flat {
     padding: 0.5rem 0.5rem;
     line-height: 1.5em;
@@ -261,11 +305,13 @@ input.invalid + label:not(.active):after {
     font-weight: bold;
     margin: -5px;
 }
+
 .toast .btn-flat:first-of-type {
     margin-left: 2rem;
 }
+
 .toast .btn-flat:hover {
-    background: rgba(158,158,158,0.2);
+    background: rgba(158, 158, 158, 0.2);
 }
 
 .starswitch, .starswitch * {

@@ -1,7 +1,7 @@
 <template>
   <div class="col-12 col-md-4 col-lg-3">
     <q-card class="shadow-2">
-      <img @click="reveal = true" :src="'/img/'+ article.id +'.jpg'" style="width: 100%;"/>
+      <img @click="reveal = true" :src="'/img/'+ article.id +'.jpg'" style="width: 100%;" />
       <q-card-section>
         <div class="floatingArea">
           <div class="d-block input-add-remove">

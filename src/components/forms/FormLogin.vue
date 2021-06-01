@@ -1,15 +1,15 @@
 <template>
   <v-form>
     <v-text-field
-            v-model="_value.user"
-            label="Utilisateur"
+        v-model="_value.user"
+        label="Utilisateur"
     />
     <v-text-field
-            v-model="_value.password"
-            :append-icon="hidePassword ? 'visibility' : 'visibility_off'"
-            @click:append="() => (hidePassword = !hidePassword)"
-            :type="hidePassword ? 'password' : 'text'"
-            label="Mot de passe"
+        v-model="_value.password"
+        :append-icon="hidePassword ? 'visibility' : 'visibility_off'"
+        @click:append="() => (hidePassword = !hidePassword)"
+        :type="hidePassword ? 'password' : 'text'"
+        label="Mot de passe"
     />
     <p class="text-xs-center font-weight-bold">ou</p>
     <p class="text-xs-center">
@@ -37,6 +37,7 @@ export default {
     function closeModal () {
       this.$store.dispatch('ui/setEtatModal', false)
     }
+
     this.$refs.loginGoogle.$on('success', closeModal)
     this.$refs.loginFacebook.$on('success', closeModal)
   }
