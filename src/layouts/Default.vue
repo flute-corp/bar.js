@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated class="glossy">
+    <q-header elevated>
       <q-toolbar>
         <q-btn
             flat
@@ -15,9 +15,10 @@
           Bar.js
         </q-toolbar-title>
 
-        <div>
-        </div>
       </q-toolbar>
+      <div class="absolute z-fab" style="top: 20px; right: 30px;">
+        <q-btn color="positive" fab icon="fa fa-receipt" />
+      </div>
     </q-header>
 
     <q-drawer

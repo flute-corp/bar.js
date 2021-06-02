@@ -33,6 +33,7 @@ import {
   QToolbar,
   QToolbarTitle,
   QTooltip,
+  QImg,
   Quasar
 } from 'quasar'
 
@@ -64,7 +65,8 @@ Vue.use(Quasar, {
     QColor,
     QTooltip,
     QExpansionItem,
-    QSeparator
+    QSeparator,
+    QImg
   },
   directives: {},
   plugins: {
